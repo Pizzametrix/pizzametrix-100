@@ -2,7 +2,7 @@ import { Sidebar } from "@/components/layouts/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Minus, Plus, Settings, Clock } from "lucide-react";
+import { Minus, Plus, Settings, Clock, ChefHat } from "lucide-react";
 import { useState } from "react";
 
 interface Phase {
@@ -17,6 +17,7 @@ export default function NapolitainCalculator() {
   const [ballWeight, setBallWeight] = useState(260);
   const [hydration, setHydration] = useState(65);
   const [salt, setSalt] = useState(2.5);
+  const [yeast, setYeast] = useState(0.05);
   const [phases, setPhases] = useState<Phase[]>([
     { id: 1, duration: 18, temperature: 5 },
     { id: 2, duration: 6, temperature: 20 },
@@ -59,6 +60,12 @@ export default function NapolitainCalculator() {
   };
 
   const totalDuration = phases.reduce((total, phase) => total + phase.duration, 0);
+
+  const flourWeight = Math.round(totalWeight / (1 + (hydration + salt + yeast) / 100));
+  const waterWeight = Math.round((flourWeight * hydration) / 100);
+  const saltWeight = Number(((flourWeight * salt) / 100).toFixed(1));
+  const yeastWeight = Number(((flourWeight * yeast) / 100).toFixed(2));
+  const ingredientsTotal = flourWeight + waterWeight + saltWeight + yeastWeight;
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate">
@@ -291,6 +298,38 @@ export default function NapolitainCalculator() {
                     </div>
                   </div>
                 ))}
+              </CardContent>
+            </Card>
+
+            <Card className="bg-slate border-cream/10">
+              <CardHeader>
+                <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
+                  <ChefHat className="h-5 w-5 text-terracotta" /> Ingrédients
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <div className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
+                    <span className="text-[#F5E9D7]">Farine</span>
+                    <span className="text-[#F5E9D7] text-right">{flourWeight}g</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
+                    <span className="text-[#F5E9D7]">Eau</span>
+                    <span className="text-[#F5E9D7] text-right">{waterWeight}g</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
+                    <span className="text-[#F5E9D7]">Sel</span>
+                    <span className="text-[#F5E9D7] text-right">{saltWeight}g</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
+                    <span className="text-[#F5E9D7]">Levure</span>
+                    <span className="text-[#F5E9D7] text-right">{yeastWeight}g</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 py-2 font-medium">
+                    <span className="text-[#F5E9D7]">Total</span>
+                    <span className="text-[#F5E9D7] text-right">{ingredientsTotal}g</span>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>

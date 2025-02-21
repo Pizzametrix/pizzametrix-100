@@ -4,17 +4,32 @@ import { Sidebar } from "@/components/layouts/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { ImageUpload } from "@/components/ImageUpload";
 import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 export default function Calculators() {
   const navigate = useNavigate();
   const bucketName = "pizza-images";
+  const [napolitaineUrl, setNapolitaineUrl] = useState<string>("");
+  const [tegliaUrl, setTegliaUrl] = useState<string>("");
   
-  const getImageUrl = (path: string) => {
+  const getImageUrl = async (path: string) => {
     const { data: { publicUrl } } = supabase.storage
       .from(bucketName)
       .getPublicUrl(path);
     return publicUrl;
   };
+
+  useEffect(() => {
+    const loadImages = async () => {
+      const napoUrl = await getImageUrl("napolitaine.jpg");
+      const tegUrl = await getImageUrl("teglia.jpg");
+      setNapolitaineUrl(napoUrl);
+      setTegliaUrl(tegUrl);
+      console.log("URLs des images:", { napoUrl, tegUrl });
+    };
+
+    loadImages();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate">
@@ -36,15 +51,17 @@ export default function Calculators() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <img 
-                  src={getImageUrl("napolitaine.jpg")} 
-                  alt="Pizza Napolitaine" 
-                  className="w-full h-48 object-cover rounded-md"
-                />
+                {napolitaineUrl && (
+                  <img 
+                    src={napolitaineUrl} 
+                    alt="Pizza Napolitaine" 
+                    className="w-full h-48 object-cover rounded-md"
+                  />
+                )}
                 <ImageUpload 
                   bucketName={bucketName}
                   imagePath="napolitaine.jpg"
-                  onUploadComplete={() => {}}
+                  onUploadComplete={(url) => setNapolitaineUrl(url)}
                 />
               </CardContent>
             </Card>
@@ -60,15 +77,17 @@ export default function Calculators() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <img 
-                  src={getImageUrl("teglia.jpg")} 
-                  alt="Pizza Teglia" 
-                  className="w-full h-48 object-cover rounded-md"
-                />
+                {tegliaUrl && (
+                  <img 
+                    src={tegliaUrl} 
+                    alt="Pizza Teglia" 
+                    className="w-full h-48 object-cover rounded-md"
+                  />
+                )}
                 <ImageUpload 
                   bucketName={bucketName}
                   imagePath="teglia.jpg"
-                  onUploadComplete={() => {}}
+                  onUploadComplete={(url) => setTegliaUrl(url)}
                 />
               </CardContent>
             </Card>

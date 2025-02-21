@@ -1,3 +1,4 @@
+
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -83,15 +84,12 @@ export default function NapolitainCalculator() {
                       <Minus className="h-4 w-4" />
                     </Button>
                     <div className="flex-1">
-                      <div className="relative w-full">
-                        <Input
-                          type="number"
-                          value={ballWeight}
-                          onChange={(e) => setBallWeight(Number(e.target.value))}
-                          className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none pl-0 pr-8"
-                        />
-                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/50">g</span>
-                      </div>
+                      <Input
+                        type="text"
+                        value={`${ballWeight}g`}
+                        readOnly
+                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
                     </div>
                     <Button
                       variant="ghost"
@@ -116,15 +114,12 @@ export default function NapolitainCalculator() {
                       <Minus className="h-4 w-4" />
                     </Button>
                     <div className="flex-1">
-                      <div className="relative w-full">
-                        <Input
-                          type="number"
-                          value={hydration}
-                          onChange={(e) => setHydration(Number(e.target.value))}
-                          className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none pl-0 pr-8"
-                        />
-                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/50">%</span>
-                      </div>
+                      <Input
+                        type="text"
+                        value={`${hydration}%`}
+                        readOnly
+                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
                     </div>
                     <Button
                       variant="ghost"
@@ -149,15 +144,12 @@ export default function NapolitainCalculator() {
                       <Minus className="h-4 w-4" />
                     </Button>
                     <div className="flex-1">
-                      <div className="relative w-full">
-                        <Input
-                          type="number"
-                          value={salt.toFixed(1)}
-                          onChange={(e) => setSalt(Number(e.target.value))}
-                          className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none pl-0 pr-8"
-                        />
-                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/50">%</span>
-                      </div>
+                      <Input
+                        type="text"
+                        value={`${salt.toFixed(1)}%`}
+                        readOnly
+                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
                     </div>
                     <Button
                       variant="ghost"

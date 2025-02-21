@@ -10,15 +10,10 @@ import { toast } from "sonner";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      toast.error("Les mots de passe ne correspondent pas");
-      return;
-    }
     setLoading(true);
     
     // Simulons une inscription pour le moment
@@ -53,17 +48,6 @@ export default function Register() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
-            className="bg-white/10 border-cream/20 text-cream"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="confirm-password" className="text-cream">Confirmer le mot de passe</Label>
-          <Input
-            id="confirm-password"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
             required
             className="bg-white/10 border-cream/20 text-cream"
           />

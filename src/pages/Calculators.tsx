@@ -2,7 +2,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { useNavigate } from "react-router-dom";
-import { ImageUpload } from "@/components/ImageUpload";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 
@@ -58,11 +57,6 @@ export default function Calculators() {
                     className="w-full h-48 object-cover rounded-md"
                   />
                 )}
-                <ImageUpload 
-                  bucketName={bucketName}
-                  imagePath="pizza-napolitaine-origine-1024x683.jpeg"
-                  onUploadComplete={(url) => setNapolitaineUrl(url)}
-                />
               </CardContent>
             </Card>
 
@@ -84,11 +78,6 @@ export default function Calculators() {
                     className="w-full h-48 object-cover rounded-md"
                   />
                 )}
-                <ImageUpload 
-                  bucketName={bucketName}
-                  imagePath="pizza-in-teglia-romana.jpg"
-                  onUploadComplete={(url) => setTegliaUrl(url)}
-                />
               </CardContent>
             </Card>
           </div>

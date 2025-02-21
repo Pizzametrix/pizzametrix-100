@@ -2,12 +2,13 @@
 import { Menu, LogOut, X, Calculator, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useSidebarStore } from "@/store/useSidebarStore";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { isOpen, toggle, close } = useSidebarStore();
 
   const handleLogout = async () => {
@@ -22,14 +23,21 @@ export const Sidebar = () => {
 
   const handleNavigation = (path: string) => {
     navigate(path);
-    close(); // Ferme le menu sur mobile après la navigation
+    close();
+  };
+
+  const getTitle = () => {
+    if (location.pathname === "/calculators/napolitaine") {
+      return "Pizza Napolitaine";
+    }
+    return "Pizzametrix";
   };
 
   return (
     <>
       {/* Barre de navigation mobile */}
       <div className="md:hidden w-full bg-slate border-b border-cream/10 p-4 flex justify-between items-center fixed top-0 z-50">
-        <h1 className="font-montserrat font-bold text-xl text-[#F5E9D7]">Pizzametrix</h1>
+        <h1 className="font-montserrat font-bold text-xl text-[#F5E9D7]">{getTitle()}</h1>
         <Button
           variant="ghost"
           size="icon"
@@ -53,7 +61,7 @@ export const Sidebar = () => {
         <div className="flex flex-col h-full justify-between">
           <div>
             <div className="hidden md:block">
-              <h1 className="font-montserrat font-bold text-2xl text-[#F5E9D7] mb-8">Pizzametrix</h1>
+              <h1 className="font-montserrat font-bold text-2xl text-[#F5E9D7] mb-8">{getTitle()}</h1>
             </div>
             <nav className="space-y-2">
               <Button

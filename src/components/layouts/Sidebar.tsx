@@ -1,5 +1,5 @@
 
-import { Menu, LogOut, X, Calculator } from "lucide-react";
+import { Menu, LogOut, X, Calculator, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { useSidebarStore } from "@/store/useSidebarStore";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
-  const { isOpen, toggle } = useSidebarStore();
+  const { isOpen, toggle, close } = useSidebarStore();
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -18,6 +18,11 @@ export const Sidebar = () => {
     }
     toast.success("Déconnexion réussie");
     navigate("/login");
+  };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    close(); // Ferme le menu sur mobile après la navigation
   };
 
   return (
@@ -54,7 +59,15 @@ export const Sidebar = () => {
               <Button
                 variant="ghost"
                 className="w-full justify-start text-cream hover:text-terracotta hover:bg-cream/5"
-                onClick={() => navigate('/calculators')}
+                onClick={() => handleNavigation('/')}
+              >
+                <Home className="mr-2 h-4 w-4" />
+                <span>Accueil</span>
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-cream hover:text-terracotta hover:bg-cream/5"
+                onClick={() => handleNavigation('/calculators')}
               >
                 <Calculator className="mr-2 h-4 w-4" />
                 <span>Calculatrices</span>
@@ -78,7 +91,7 @@ export const Sidebar = () => {
       {isOpen && (
         <div 
           className="md:hidden fixed inset-0 bg-black/50 z-30"
-          onClick={toggle}
+          onClick={close}
         />
       )}
     </>

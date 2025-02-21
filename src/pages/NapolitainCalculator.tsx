@@ -72,10 +72,6 @@ export default function NapolitainCalculator() {
       <Sidebar />
       <main className="flex-1 p-4 md:p-8 mt-16 md:mt-0">
         <div className="max-w-2xl mx-auto">
-          <h1 className="text-2xl md:text-3xl font-bold text-[#F5E9D7] mb-8">
-            Calculatrice Pizza Napolitaine
-          </h1>
-
           <div className="space-y-6">
             <Card className="bg-slate border-cream/10">
               <CardHeader>

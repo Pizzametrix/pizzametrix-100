@@ -8,10 +8,10 @@ import { useState } from "react";
 
 export default function NapolitainCalculator() {
   const [totalWeight, setTotalWeight] = useState(1000);
-  const [pizzaCount, setPizzaCount] = useState(4);
-  const [ballWeight, setBallWeight] = useState(250);
+  const [pizzaCount, setPizzaCount] = useState(1);
+  const [ballWeight, setBallWeight] = useState(260);
   const [hydration, setHydration] = useState(65);
-  const [salt, setSalt] = useState(2.8);
+  const [salt, setSalt] = useState(2.5);
 
   const handleIncrement = (value: number, setValue: (value: number) => void, max: number, step: number = 1) => {
     setValue(Math.min(value + step, max));
@@ -62,7 +62,7 @@ export default function NapolitainCalculator() {
                       variant="ghost"
                       size="icon"
                       className="text-cream hover:text-terracotta hover:bg-cream/5"
-                      onClick={() => handleIncrement(pizzaCount, setPizzaCount, 20)}
+                      onClick={() => handleIncrement(pizzaCount, setPizzaCount, 300)}
                     >
                       <Plus className="h-4 w-4" />
                     </Button>
@@ -92,7 +92,7 @@ export default function NapolitainCalculator() {
                       variant="ghost"
                       size="icon"
                       className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
-                      onClick={() => handleIncrement(ballWeight, setBallWeight, 500, 5)}
+                      onClick={() => handleIncrement(ballWeight, setBallWeight, 600, 5)}
                     >
                       <Plus className="h-4 w-4" />
                     </Button>
@@ -122,7 +122,7 @@ export default function NapolitainCalculator() {
                       variant="ghost"
                       size="icon"
                       className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
-                      onClick={() => handleIncrement(hydration, setHydration, 90)}
+                      onClick={() => handleIncrement(hydration, setHydration, 100)}
                     >
                       <Plus className="h-4 w-4" />
                     </Button>
@@ -136,7 +136,7 @@ export default function NapolitainCalculator() {
                       variant="ghost"
                       size="icon"
                       className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
-                      onClick={() => handleDecrement(salt, setSalt, 1, 0.1)}
+                      onClick={() => handleDecrement(salt, setSalt, 0, 0.1)}
                     >
                       <Minus className="h-4 w-4" />
                     </Button>

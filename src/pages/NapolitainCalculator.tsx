@@ -1,4 +1,3 @@
-
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -50,14 +49,16 @@ export default function NapolitainCalculator() {
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <div className="relative flex-1">
-                      <Input
-                        type="number"
-                        value={pizzaCount}
-                        onChange={(e) => setPizzaCount(Number(e.target.value))}
-                        className="bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                      />
-                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-cream/50 text-sm">unités</span>
+                    <div className="flex-1">
+                      <div className="relative w-full">
+                        <Input
+                          type="number"
+                          value={pizzaCount}
+                          onChange={(e) => setPizzaCount(Number(e.target.value))}
+                          className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none pl-0 pr-12"
+                        />
+                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/50">unités</span>
+                      </div>
                     </div>
                     <Button
                       variant="ghost"
@@ -81,14 +82,16 @@ export default function NapolitainCalculator() {
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <div className="relative flex-1">
-                      <Input
-                        type="number"
-                        value={ballWeight}
-                        onChange={(e) => setBallWeight(Number(e.target.value))}
-                        className="bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                      />
-                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-cream/50 text-sm">g</span>
+                    <div className="flex-1">
+                      <div className="relative w-full">
+                        <Input
+                          type="number"
+                          value={ballWeight}
+                          onChange={(e) => setBallWeight(Number(e.target.value))}
+                          className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none pl-0 pr-8"
+                        />
+                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/50">g</span>
+                      </div>
                     </div>
                     <Button
                       variant="ghost"
@@ -112,14 +115,16 @@ export default function NapolitainCalculator() {
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <div className="relative flex-1">
-                      <Input
-                        type="number"
-                        value={hydration}
-                        onChange={(e) => setHydration(Number(e.target.value))}
-                        className="bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                      />
-                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-cream/50 text-sm">%</span>
+                    <div className="flex-1">
+                      <div className="relative w-full">
+                        <Input
+                          type="number"
+                          value={hydration}
+                          onChange={(e) => setHydration(Number(e.target.value))}
+                          className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none pl-0 pr-8"
+                        />
+                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/50">%</span>
+                      </div>
                     </div>
                     <Button
                       variant="ghost"
@@ -143,14 +148,16 @@ export default function NapolitainCalculator() {
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <div className="relative flex-1">
-                      <Input
-                        type="number"
-                        value={salt.toFixed(1)}
-                        onChange={(e) => setSalt(Number(e.target.value))}
-                        className="bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                      />
-                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-cream/50 text-sm">%</span>
+                    <div className="flex-1">
+                      <div className="relative w-full">
+                        <Input
+                          type="number"
+                          value={salt.toFixed(1)}
+                          onChange={(e) => setSalt(Number(e.target.value))}
+                          className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none pl-0 pr-8"
+                        />
+                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/50">%</span>
+                      </div>
                     </div>
                     <Button
                       variant="ghost"

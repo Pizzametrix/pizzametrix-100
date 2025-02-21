@@ -1,5 +1,5 @@
 
-import { Menu, LogOut, X } from "lucide-react";
+import { Menu, LogOut, X, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -46,8 +46,20 @@ export const Sidebar = () => {
         `}
       >
         <div className="flex flex-col h-full justify-between">
-          <div className="hidden md:block">
-            <h1 className="font-montserrat font-bold text-2xl text-cream mb-8">Pizzametrix</h1>
+          <div>
+            <div className="hidden md:block">
+              <h1 className="font-montserrat font-bold text-2xl text-cream mb-8">Pizzametrix</h1>
+            </div>
+            <nav className="space-y-2">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-cream hover:text-terracotta hover:bg-cream/5"
+                onClick={() => navigate('/calculators')}
+              >
+                <Calculator className="mr-2 h-4 w-4" />
+                <span>Calculatrices</span>
+              </Button>
+            </nav>
           </div>
           <div>
             <Button

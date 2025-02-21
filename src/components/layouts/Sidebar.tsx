@@ -29,11 +29,11 @@ export const Sidebar = () => {
     <>
       {/* Barre de navigation mobile */}
       <div className="md:hidden w-full bg-slate border-b border-cream/10 p-4 flex justify-between items-center fixed top-0 z-50">
-        <h1 className="font-montserrat font-bold text-xl text-cream">Pizzametrix</h1>
+        <h1 className="font-montserrat font-bold text-xl text-[#F5E9D7]">Pizzametrix</h1>
         <Button
           variant="ghost"
           size="icon"
-          className="text-cream hover:text-terracotta hover:bg-cream/5"
+          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
           onClick={toggle}
         >
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -53,31 +53,42 @@ export const Sidebar = () => {
         <div className="flex flex-col h-full justify-between">
           <div>
             <div className="hidden md:block">
-              <h1 className="font-montserrat font-bold text-2xl text-cream mb-8">Pizzametrix</h1>
+              <h1 className="font-montserrat font-bold text-2xl text-[#F5E9D7] mb-8">Pizzametrix</h1>
             </div>
             <nav className="space-y-2">
               <Button
                 variant="ghost"
-                className="w-full justify-start text-cream hover:text-terracotta hover:bg-cream/5"
+                className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
                 onClick={() => handleNavigation('/')}
               >
                 <Home className="mr-2 h-4 w-4" />
                 <span>Accueil</span>
               </Button>
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-cream hover:text-terracotta hover:bg-cream/5"
-                onClick={() => handleNavigation('/calculators')}
-              >
-                <Calculator className="mr-2 h-4 w-4" />
-                <span>Calculatrices</span>
-              </Button>
+              <div className="space-y-1">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
+                  onClick={() => handleNavigation('/calculators')}
+                >
+                  <Calculator className="mr-2 h-4 w-4" />
+                  <span>Calculatrices</span>
+                </Button>
+                <div className="pl-6 space-y-1">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-[#F5E9D7]/80 hover:text-terracotta hover:bg-cream/5 text-sm"
+                    onClick={() => handleNavigation('/calculators/napolitaine')}
+                  >
+                    <span>Pizza Napolitaine</span>
+                  </Button>
+                </div>
+              </div>
             </nav>
           </div>
           <div>
             <Button
               variant="ghost"
-              className="w-full justify-start text-cream hover:text-terracotta hover:bg-cream/5"
+              className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
               onClick={handleLogout}
             >
               <LogOut className="mr-2 h-4 w-4" />

@@ -1,10 +1,20 @@
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { useNavigate } from "react-router-dom";
+import { ImageUpload } from "@/components/ImageUpload";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Calculators() {
   const navigate = useNavigate();
+  const bucketName = "pizza-images";
+  
+  const getImageUrl = (path: string) => {
+    const { data: { publicUrl } } = supabase.storage
+      .from(bucketName)
+      .getPublicUrl(path);
+    return publicUrl;
+  };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate">
@@ -15,7 +25,6 @@ export default function Calculators() {
             Calculatrices
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Carte Pizza Napolitaine */}
             <Card 
               className="bg-slate border-cream/10 cursor-pointer transition-transform hover:scale-105"
               onClick={() => navigate('/calculators/napolitaine')}
@@ -26,16 +35,20 @@ export default function Calculators() {
                   Calculez les proportions pour une authentique pizza napolitaine
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <img 
-                  src="/napolitaine.jpg" 
+                  src={getImageUrl("napolitaine.jpg")} 
                   alt="Pizza Napolitaine" 
                   className="w-full h-48 object-cover rounded-md"
+                />
+                <ImageUpload 
+                  bucketName={bucketName}
+                  imagePath="napolitaine.jpg"
+                  onUploadComplete={() => {}}
                 />
               </CardContent>
             </Card>
 
-            {/* Carte Pizza Teglia */}
             <Card 
               className="bg-slate border-cream/10 cursor-pointer transition-transform hover:scale-105"
               onClick={() => navigate('/calculators/teglia')}
@@ -46,11 +59,16 @@ export default function Calculators() {
                   Calculez les proportions pour une délicieuse pizza teglia
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <img 
-                  src="/teglia.jpg" 
+                  src={getImageUrl("teglia.jpg")} 
                   alt="Pizza Teglia" 
                   className="w-full h-48 object-cover rounded-md"
+                />
+                <ImageUpload 
+                  bucketName={bucketName}
+                  imagePath="teglia.jpg"
+                  onUploadComplete={() => {}}
                 />
               </CardContent>
             </Card>

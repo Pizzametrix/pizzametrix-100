@@ -1,0 +1,22 @@
+
+{
+  "name": "Pizzametrix",
+  "short_name": "Pizzametrix",
+  "description": "Calculateur de pâte à pizza",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2C2C2C",
+  "theme_color": "#2C2C2C",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -11,7 +11,6 @@ import { supabase } from "@/integrations/supabase/client";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [pseudonyme, setPseudonyme] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -23,11 +22,6 @@ export default function Register() {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: {
-            pseudonyme: pseudonyme
-          }
-        }
       });
 
       if (error) {
@@ -35,16 +29,6 @@ export default function Register() {
       }
 
       if (data.user) {
-        // Mise à jour du pseudonyme dans la table utilisateurs
-        const { error: updateError } = await supabase
-          .from('utilisateurs')
-          .update({ pseudonyme: pseudonyme })
-          .eq('id', data.user.id);
-
-        if (updateError) {
-          console.error("Erreur lors de la mise à jour du pseudonyme:", updateError);
-        }
-
         toast.success("Inscription réussie! Vérifiez votre email pour confirmer votre compte.");
         navigate("/login");
       }
@@ -62,18 +46,6 @@ export default function Register() {
       subtitle="Rejoignez Pizzametrix pour créer vos recettes"
     >
       <form onSubmit={handleSubmit} className="space-y-6 mt-8">
-        <div className="space-y-2">
-          <Label htmlFor="pseudonyme" className="text-cream">Pseudonyme</Label>
-          <Input
-            id="pseudonyme"
-            type="text"
-            placeholder="Votre pseudonyme"
-            value={pseudonyme}
-            onChange={(e) => setPseudonyme(e.target.value)}
-            required
-            className="bg-white/10 border-cream/20 text-cream placeholder:text-cream/50"
-          />
-        </div>
         <div className="space-y-2">
           <Label htmlFor="email" className="text-cream">Email</Label>
           <Input

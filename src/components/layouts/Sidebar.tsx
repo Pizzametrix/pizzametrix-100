@@ -19,20 +19,20 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className="w-64 h-screen bg-slate border-r border-cream/10 p-4 flex flex-col justify-between">
+    <div className="w-full md:w-64 h-auto md:h-screen bg-slate border-b md:border-b-0 md:border-r border-cream/10 p-4 flex flex-row md:flex-col justify-between items-center md:items-start">
       <div>
-        <h1 className="font-montserrat font-bold text-2xl text-cream mb-8">Pizzametrix</h1>
+        <h1 className="font-montserrat font-bold text-xl md:text-2xl text-cream mb-0 md:mb-8">Pizzametrix</h1>
       </div>
       <div>
         <Button
           variant="ghost"
-          className="w-full justify-start text-cream hover:text-terracotta hover:bg-cream/5"
+          className="w-auto md:w-full justify-start text-cream hover:text-terracotta hover:bg-cream/5"
           onClick={handleLogout}
         >
-          <LogOut className="mr-2 h-4 w-4" />
-          Déconnexion
+          <LogOut className="h-4 w-4 md:mr-2" />
+          <span className="hidden md:inline">Déconnexion</span>
         </Button>
       </div>
     </div>
   );
-};
+}

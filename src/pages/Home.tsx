@@ -19,14 +19,14 @@ export default function Home() {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen flex bg-slate">
+    <div className="min-h-screen flex flex-col md:flex-row bg-slate">
       <Sidebar />
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-4 md:p-8">
         <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-3xl font-bold text-cream mb-4">
+          <h1 className="text-2xl md:text-3xl font-bold text-cream mb-4">
             Bienvenue sur Pizzametrix
           </h1>
-          <p className="text-cream/80">
+          <p className="text-sm md:text-base text-cream/80">
             Commencez à créer vos délicieuses recettes de pizza
           </p>
         </div>

@@ -58,6 +58,8 @@ export default function NapolitainCalculator() {
     }
   };
 
+  const totalDuration = phases.reduce((total, phase) => total + phase.duration, 0);
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate">
       <Sidebar />
@@ -227,6 +229,7 @@ export default function NapolitainCalculator() {
                     </Button>
                   </div>
                 </div>
+                <p className="text-[#F5E9D7]/80 text-sm mt-1">Durée totale {totalDuration}h</p>
               </CardHeader>
               <CardContent className="space-y-4">
                 {phases.map((phase, index) => (

@@ -53,7 +53,7 @@ export default function NapolitainCalculator() {
                     <div className="flex-1">
                       <Input
                         type="text"
-                        value={`${pizzaCount} unités`}
+                        value={pizzaCount}
                         readOnly
                         className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
                       />

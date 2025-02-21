@@ -3,7 +3,7 @@ import { Sidebar } from "@/components/layouts/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, Settings } from "lucide-react";
 import { useState } from "react";
 
 export default function NapolitainCalculator() {
@@ -13,12 +13,12 @@ export default function NapolitainCalculator() {
   const [hydration, setHydration] = useState(65);
   const [salt, setSalt] = useState(2.8);
 
-  const handleIncrement = (value: number, setValue: (value: number) => void, max: number) => {
-    setValue(Math.min(value + 1, max));
+  const handleIncrement = (value: number, setValue: (value: number) => void, max: number, step: number = 1) => {
+    setValue(Math.min(value + step, max));
   };
 
-  const handleDecrement = (value: number, setValue: (value: number) => void, min: number) => {
-    setValue(Math.max(value - 1, min));
+  const handleDecrement = (value: number, setValue: (value: number) => void, min: number, step: number = 1) => {
+    setValue(Math.max(value - step, min));
   };
 
   return (
@@ -33,15 +33,15 @@ export default function NapolitainCalculator() {
           <Card className="bg-slate border-cream/10">
             <CardHeader>
               <CardTitle className="text-cream flex items-center gap-2">
-                <span className="text-terracotta">🍕</span> Paramètres de la pâte
+                <Settings className="h-5 w-5 text-terracotta" /> Paramètres de la pâte
               </CardTitle>
               <p className="text-cream/80 text-sm mt-1">Poids total {totalWeight}g</p>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm text-cream/80">Nombre de pizzas</label>
-                  <div className="flex items-center bg-white/5 rounded-md">
+                  <label className="text-sm text-cream/80 block text-center">Nombre de pizzas</label>
+                  <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -50,12 +50,15 @@ export default function NapolitainCalculator() {
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <Input
-                      type="number"
-                      value={pizzaCount}
-                      onChange={(e) => setPizzaCount(Number(e.target.value))}
-                      className="bg-transparent border-0 text-center text-cream [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                    />
+                    <div className="relative flex-1">
+                      <Input
+                        type="number"
+                        value={pizzaCount}
+                        onChange={(e) => setPizzaCount(Number(e.target.value))}
+                        className="bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-cream/50 text-sm">unités</span>
+                    </div>
                     <Button
                       variant="ghost"
                       size="icon"
@@ -68,27 +71,30 @@ export default function NapolitainCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm text-cream/80">Poids des pâtons</label>
-                  <div className="flex items-center bg-white/5 rounded-md">
+                  <label className="text-sm text-cream/80 block text-center">Poids des pâtons</label>
+                  <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
                       className="text-cream hover:text-terracotta hover:bg-cream/5"
-                      onClick={() => handleDecrement(ballWeight, setBallWeight, 100)}
+                      onClick={() => handleDecrement(ballWeight, setBallWeight, 100, 5)}
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <Input
-                      type="number"
-                      value={`${ballWeight}`}
-                      onChange={(e) => setBallWeight(Number(e.target.value))}
-                      className="bg-transparent border-0 text-center text-cream [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                    />
+                    <div className="relative flex-1">
+                      <Input
+                        type="number"
+                        value={ballWeight}
+                        onChange={(e) => setBallWeight(Number(e.target.value))}
+                        className="bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-cream/50 text-sm">g</span>
+                    </div>
                     <Button
                       variant="ghost"
                       size="icon"
                       className="text-cream hover:text-terracotta hover:bg-cream/5"
-                      onClick={() => handleIncrement(ballWeight, setBallWeight, 500)}
+                      onClick={() => handleIncrement(ballWeight, setBallWeight, 500, 5)}
                     >
                       <Plus className="h-4 w-4" />
                     </Button>
@@ -96,8 +102,8 @@ export default function NapolitainCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm text-cream/80">Hydratation</label>
-                  <div className="flex items-center bg-white/5 rounded-md">
+                  <label className="text-sm text-cream/80 block text-center">Hydratation</label>
+                  <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -106,12 +112,15 @@ export default function NapolitainCalculator() {
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <Input
-                      type="number"
-                      value={`${hydration}`}
-                      onChange={(e) => setHydration(Number(e.target.value))}
-                      className="bg-transparent border-0 text-center text-cream [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                    />
+                    <div className="relative flex-1">
+                      <Input
+                        type="number"
+                        value={hydration}
+                        onChange={(e) => setHydration(Number(e.target.value))}
+                        className="bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-cream/50 text-sm">%</span>
+                    </div>
                     <Button
                       variant="ghost"
                       size="icon"
@@ -124,27 +133,30 @@ export default function NapolitainCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm text-cream/80">Sel</label>
-                  <div className="flex items-center bg-white/5 rounded-md">
+                  <label className="text-sm text-cream/80 block text-center">Sel</label>
+                  <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
                       className="text-cream hover:text-terracotta hover:bg-cream/5"
-                      onClick={() => handleDecrement(salt, setSalt, 1)}
+                      onClick={() => handleDecrement(salt, setSalt, 1, 0.1)}
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <Input
-                      type="number"
-                      value={`${salt}`}
-                      onChange={(e) => setSalt(Number(e.target.value))}
-                      className="bg-transparent border-0 text-center text-cream [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                    />
+                    <div className="relative flex-1">
+                      <Input
+                        type="number"
+                        value={salt.toFixed(1)}
+                        onChange={(e) => setSalt(Number(e.target.value))}
+                        className="bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-cream/50 text-sm">%</span>
+                    </div>
                     <Button
                       variant="ghost"
                       size="icon"
                       className="text-cream hover:text-terracotta hover:bg-cream/5"
-                      onClick={() => handleIncrement(salt, setSalt, 5)}
+                      onClick={() => handleIncrement(salt, setSalt, 5, 0.1)}
                     >
                       <Plus className="h-4 w-4" />
                     </Button>

@@ -40,7 +40,7 @@ export default function NapolitainCalculator() {
             <CardContent className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm text-cream/80 block text-center">Nombre de pizzas</label>
+                  <label className="text-base text-cream/80 block text-center font-medium">Nombre de pizzas</label>
                   <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
@@ -51,15 +51,12 @@ export default function NapolitainCalculator() {
                       <Minus className="h-4 w-4" />
                     </Button>
                     <div className="flex-1">
-                      <div className="relative w-full">
-                        <Input
-                          type="number"
-                          value={pizzaCount}
-                          onChange={(e) => setPizzaCount(Number(e.target.value))}
-                          className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none pl-0 pr-12"
-                        />
-                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/50">unités</span>
-                      </div>
+                      <Input
+                        type="text"
+                        value={`${pizzaCount} unités`}
+                        readOnly
+                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                      />
                     </div>
                     <Button
                       variant="ghost"
@@ -73,28 +70,28 @@ export default function NapolitainCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm text-cream/80 block text-center">Poids des pâtons</label>
+                  <label className="text-base text-cream/80 block text-center font-medium">Poids des pâtons</label>
                   <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5"
+                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleDecrement(ballWeight, setBallWeight, 100, 5)}
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <Input
                         type="text"
                         value={`${ballWeight}g`}
                         readOnly
-                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
                       />
                     </div>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5"
+                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleIncrement(ballWeight, setBallWeight, 500, 5)}
                     >
                       <Plus className="h-4 w-4" />
@@ -103,28 +100,28 @@ export default function NapolitainCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm text-cream/80 block text-center">Hydratation</label>
+                  <label className="text-base text-cream/80 block text-center font-medium">Hydratation</label>
                   <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5"
+                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleDecrement(hydration, setHydration, 50)}
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <Input
                         type="text"
                         value={`${hydration}%`}
                         readOnly
-                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
                       />
                     </div>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5"
+                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleIncrement(hydration, setHydration, 90)}
                     >
                       <Plus className="h-4 w-4" />
@@ -133,28 +130,28 @@ export default function NapolitainCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm text-cream/80 block text-center">Sel</label>
+                  <label className="text-base text-cream/80 block text-center font-medium">Sel</label>
                   <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5"
+                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleDecrement(salt, setSalt, 1, 0.1)}
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <Input
                         type="text"
                         value={`${salt.toFixed(1)}%`}
                         readOnly
-                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
                       />
                     </div>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5"
+                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleIncrement(salt, setSalt, 5, 0.1)}
                     >
                       <Plus className="h-4 w-4" />

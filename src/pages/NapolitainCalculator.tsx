@@ -26,26 +26,26 @@ export default function NapolitainCalculator() {
       <Sidebar />
       <main className="flex-1 p-4 md:p-8 mt-16 md:mt-0">
         <div className="max-w-2xl mx-auto">
-          <h1 className="text-2xl md:text-3xl font-bold text-cream mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-[#F5E9D7] mb-8">
             Calculatrice Pizza Napolitaine
           </h1>
 
           <Card className="bg-slate border-cream/10">
             <CardHeader>
-              <CardTitle className="text-cream flex items-center gap-2">
+              <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
                 <Settings className="h-5 w-5 text-terracotta" /> Paramètres de la pâte
               </CardTitle>
-              <p className="text-cream/80 text-sm mt-1">Poids total {totalWeight}g</p>
+              <p className="text-[#F5E9D7]/80 text-sm mt-1">Poids total {totalWeight}g</p>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-base text-cream/80 block text-center font-medium">Nombre de pizzas</label>
+                  <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Nombre de pizzas</label>
                   <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5"
+                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
                       onClick={() => handleDecrement(pizzaCount, setPizzaCount, 1)}
                     >
                       <Minus className="h-4 w-4" />
@@ -55,13 +55,13 @@ export default function NapolitainCalculator() {
                         type="text"
                         value={pizzaCount}
                         readOnly
-                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                        className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
                       />
                     </div>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5"
+                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
                       onClick={() => handleIncrement(pizzaCount, setPizzaCount, 300)}
                     >
                       <Plus className="h-4 w-4" />
@@ -70,12 +70,12 @@ export default function NapolitainCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-base text-cream/80 block text-center font-medium">Poids des pâtons</label>
+                  <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Poids des pâtons</label>
                   <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
+                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleDecrement(ballWeight, setBallWeight, 100, 5)}
                     >
                       <Minus className="h-4 w-4" />
@@ -85,13 +85,13 @@ export default function NapolitainCalculator() {
                         type="text"
                         value={`${ballWeight}g`}
                         readOnly
-                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                        className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
                       />
                     </div>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
+                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleIncrement(ballWeight, setBallWeight, 600, 5)}
                     >
                       <Plus className="h-4 w-4" />
@@ -100,12 +100,12 @@ export default function NapolitainCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-base text-cream/80 block text-center font-medium">Hydratation</label>
+                  <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Hydratation</label>
                   <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
+                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleDecrement(hydration, setHydration, 50)}
                     >
                       <Minus className="h-4 w-4" />
@@ -115,13 +115,13 @@ export default function NapolitainCalculator() {
                         type="text"
                         value={`${hydration}%`}
                         readOnly
-                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                        className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
                       />
                     </div>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
+                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleIncrement(hydration, setHydration, 100)}
                     >
                       <Plus className="h-4 w-4" />
@@ -130,12 +130,12 @@ export default function NapolitainCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-base text-cream/80 block text-center font-medium">Sel</label>
+                  <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Sel</label>
                   <div className="flex items-center bg-white/5 rounded-md h-12">
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
+                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleDecrement(salt, setSalt, 0, 0.1)}
                     >
                       <Minus className="h-4 w-4" />
@@ -145,13 +145,13 @@ export default function NapolitainCalculator() {
                         type="text"
                         value={`${salt.toFixed(1)}%`}
                         readOnly
-                        className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                        className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
                       />
                     </div>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-cream hover:text-terracotta hover:bg-cream/5 shrink-0"
+                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
                       onClick={() => handleIncrement(salt, setSalt, 5, 0.1)}
                     >
                       <Plus className="h-4 w-4" />

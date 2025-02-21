@@ -1,26 +1,43 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "@/components/layouts/AuthLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     
-    // Simulons une inscription pour le moment
-    setTimeout(() => {
-      toast.success("Inscription réussie!");
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data.user) {
+        toast.success("Inscription réussie! Vérifiez votre email pour confirmer votre compte.");
+        navigate("/login");
+      }
+    } catch (error: any) {
+      console.error("Erreur d'inscription:", error);
+      toast.error(error.message || "Une erreur est survenue lors de l'inscription");
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (

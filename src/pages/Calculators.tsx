@@ -21,8 +21,8 @@ export default function Calculators() {
 
   useEffect(() => {
     const loadImages = async () => {
-      const napoUrl = await getImageUrl("napolitaine.jpg");
-      const tegUrl = await getImageUrl("teglia.jpg");
+      const napoUrl = await getImageUrl("pizza-napolitaine-origine-1024x683.jpeg");
+      const tegUrl = await getImageUrl("pizza-in-teglia-romana.jpg");
       setNapolitaineUrl(napoUrl);
       setTegliaUrl(tegUrl);
       console.log("URLs des images:", { napoUrl, tegUrl });
@@ -60,7 +60,7 @@ export default function Calculators() {
                 )}
                 <ImageUpload 
                   bucketName={bucketName}
-                  imagePath="napolitaine.jpg"
+                  imagePath="pizza-napolitaine-origine-1024x683.jpeg"
                   onUploadComplete={(url) => setNapolitaineUrl(url)}
                 />
               </CardContent>
@@ -86,7 +86,7 @@ export default function Calculators() {
                 )}
                 <ImageUpload 
                   bucketName={bucketName}
-                  imagePath="teglia.jpg"
+                  imagePath="pizza-in-teglia-romana.jpg"
                   onUploadComplete={(url) => setTegliaUrl(url)}
                 />
               </CardContent>

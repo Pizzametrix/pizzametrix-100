@@ -65,7 +65,7 @@ export default function NapolitainCalculator() {
   const waterWeight = Math.round((flourWeight * hydration) / 100);
   const saltWeight = Number(((flourWeight * salt) / 100).toFixed(1));
   const yeastWeight = Number(((flourWeight * yeast) / 100).toFixed(2));
-  const ingredientsTotal = flourWeight + waterWeight + saltWeight + yeastWeight;
+  const ingredientsTotal = Math.round(flourWeight + waterWeight + saltWeight + yeastWeight);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate">
@@ -323,7 +323,7 @@ export default function NapolitainCalculator() {
                   </div>
                   <div className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
                     <span className="text-[#F5E9D7]">Levure</span>
-                    <span className="text-[#F5E9D7] text-right">{yeastWeight}g</span>
+                    <span className="text-[#F5E9D7] text-right">{yeastWeight.toFixed(2)}g</span>
                   </div>
                   <div className="grid grid-cols-2 gap-4 py-2 font-medium">
                     <span className="text-[#F5E9D7]">Total</span>

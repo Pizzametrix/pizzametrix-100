@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -57,7 +58,8 @@ export function SettingsPanel({
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-end">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl font-medium text-[#F5E9D7]">Réglages</h2>
           <Button variant="ghost" size="icon" className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5" onClick={onClose}>
             <X className="h-5 w-5" />
           </Button>
@@ -65,9 +67,8 @@ export function SettingsPanel({
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-medium text-[#F5E9D7]">Type de levure</h3>
-            <p className="text-sm text-[#F5E9D7]/60">Choisissez le type de levure que vous utilisez.</p>
-            <RadioGroup defaultValue={yeastType} className="pt-2" onValueChange={(value) => setYeastType(value as YeastType)}>
+            <h3 className="text-lg font-medium text-[#F5E9D7] mb-2">Type de levure</h3>
+            <RadioGroup defaultValue={yeastType} onValueChange={(value) => setYeastType(value as YeastType)}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="fraiche" id="yeast-fraiche" className="peer h-5 w-5 rounded-full border-2 border-cream/20 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-terracotta data-[state=checked]:text-terracotta" />
                 <Label htmlFor="yeast-fraiche" className="text-[#F5E9D7]/80">Fraîche</Label>
@@ -84,9 +85,8 @@ export function SettingsPanel({
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-[#F5E9D7]">Type de pâte</h3>
-            <p className="text-sm text-[#F5E9D7]/60">Choisissez le type de pâte que vous souhaitez réaliser.</p>
-            <RadioGroup defaultValue={doughType} className="pt-2" onValueChange={(value) => setDoughType(value as DoughType)}>
+            <h3 className="text-lg font-medium text-[#F5E9D7] mb-2">Type d'empatement</h3>
+            <RadioGroup defaultValue={doughType} onValueChange={(value) => setDoughType(value as DoughType)}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="direct" id="dough-direct" className="peer h-5 w-5 rounded-full border-2 border-cream/20 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-terracotta data-[state=checked]:text-terracotta" />
                 <Label htmlFor="dough-direct" className="text-[#F5E9D7]/80">Direct</Label>
@@ -103,32 +103,22 @@ export function SettingsPanel({
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <h3 className="text-lg font-medium text-[#F5E9D7]">Ajouter de l'huile</h3>
-              <p className="text-sm text-[#F5E9D7]/60">Activer pour inclure l'huile dans la recette.</p>
-            </div>
+            <h3 className="text-lg font-medium text-[#F5E9D7]">Huile</h3>
             <Switch id="oil" checked={isOilEnabled} onCheckedChange={setIsOilEnabled} />
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <h3 className="text-lg font-medium text-[#F5E9D7]">Ajouter du sucre/miel</h3>
-              <p className="text-sm text-[#F5E9D7]/60">Activer pour inclure le sucre ou le miel dans la recette.</p>
-            </div>
+            <h3 className="text-lg font-medium text-[#F5E9D7]">Sucre/miel</h3>
             <Switch id="sugar" checked={isSugarEnabled} onCheckedChange={setIsSugarEnabled} />
           </div>
 
           <div>
             <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <h3 className="text-lg font-medium text-[#F5E9D7]">Levure personnalisée</h3>
-                <p className="text-sm text-[#F5E9D7]/60">Activer pour spécifier un pourcentage de levure personnalisé.</p>
-              </div>
+              <h3 className="text-lg font-medium text-[#F5E9D7]">% de levure</h3>
               <Switch id="custom-yeast" checked={isCustomYeastEnabled} onCheckedChange={setIsCustomYeastEnabled} />
             </div>
             {isCustomYeastEnabled && (
-              <div className="mt-4 space-y-2">
-                <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Pourcentage de levure personnalisé</label>
+              <div className="mt-4">
                 <div className="flex items-center bg-white/5 rounded-md h-12">
                   <Button
                     variant="ghost"

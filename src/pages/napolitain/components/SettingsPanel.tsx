@@ -68,54 +68,66 @@ export function SettingsPanel({
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-medium text-[#F5E9D7] mb-2">Type de levure</h3>
-            <RadioGroup defaultValue={yeastType} onValueChange={(value) => setYeastType(value as YeastType)}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="fraiche" id="yeast-fraiche" className="peer h-5 w-5 rounded-full border-2 border-cream/20 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-terracotta data-[state=checked]:text-terracotta" />
-                <Label htmlFor="yeast-fraiche" className="text-[#F5E9D7]/80">Fraîche</Label>
+            <RadioGroup defaultValue={yeastType} onValueChange={(value) => setYeastType(value as YeastType)} className="flex flex-wrap gap-2">
+              <div className="relative">
+                <RadioGroupItem value="fraiche" id="yeast-fraiche" className="peer absolute w-full h-full opacity-0 cursor-pointer" />
+                <Label htmlFor="yeast-fraiche" className="flex px-4 py-2 rounded-md bg-white/5 border border-cream/10 text-[#F5E9D7]/80 peer-data-[state=checked]:bg-terracotta/20 peer-data-[state=checked]:border-terracotta peer-data-[state=checked]:text-[#F5E9D7] transition-colors">
+                  Fraîche
+                </Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="seche" id="yeast-seche" className="peer h-5 w-5 rounded-full border-2 border-cream/20 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-terracotta data-[state=checked]:text-terracotta" />
-                <Label htmlFor="yeast-seche" className="text-[#F5E9D7]/80">Sèche</Label>
+              <div className="relative">
+                <RadioGroupItem value="seche" id="yeast-seche" className="peer absolute w-full h-full opacity-0 cursor-pointer" />
+                <Label htmlFor="yeast-seche" className="flex px-4 py-2 rounded-md bg-white/5 border border-cream/10 text-[#F5E9D7]/80 peer-data-[state=checked]:bg-terracotta/20 peer-data-[state=checked]:border-terracotta peer-data-[state=checked]:text-[#F5E9D7] transition-colors">
+                  Sèche
+                </Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="saf" id="yeast-saf" className="peer h-5 w-5 rounded-full border-2 border-cream/20 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-terracotta data-[state=checked]:text-terracotta" />
-                <Label htmlFor="yeast-saf" className="text-[#F5E9D7]/80">SAF Instant</Label>
+              <div className="relative">
+                <RadioGroupItem value="saf" id="yeast-saf" className="peer absolute w-full h-full opacity-0 cursor-pointer" />
+                <Label htmlFor="yeast-saf" className="flex px-4 py-2 rounded-md bg-white/5 border border-cream/10 text-[#F5E9D7]/80 peer-data-[state=checked]:bg-terracotta/20 peer-data-[state=checked]:border-terracotta peer-data-[state=checked]:text-[#F5E9D7] transition-colors">
+                  SAF Instant
+                </Label>
               </div>
             </RadioGroup>
           </div>
 
           <div>
             <h3 className="text-lg font-medium text-[#F5E9D7] mb-2">Type d'empatement</h3>
-            <RadioGroup defaultValue={doughType} onValueChange={(value) => setDoughType(value as DoughType)}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="direct" id="dough-direct" className="peer h-5 w-5 rounded-full border-2 border-cream/20 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-terracotta data-[state=checked]:text-terracotta" />
-                <Label htmlFor="dough-direct" className="text-[#F5E9D7]/80">Direct</Label>
+            <RadioGroup defaultValue={doughType} onValueChange={(value) => setDoughType(value as DoughType)} className="flex flex-wrap gap-2">
+              <div className="relative">
+                <RadioGroupItem value="direct" id="dough-direct" className="peer absolute w-full h-full opacity-0 cursor-pointer" />
+                <Label htmlFor="dough-direct" className="flex px-4 py-2 rounded-md bg-white/5 border border-cream/10 text-[#F5E9D7]/80 peer-data-[state=checked]:bg-terracotta/20 peer-data-[state=checked]:border-terracotta peer-data-[state=checked]:text-[#F5E9D7] transition-colors">
+                  Direct
+                </Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="biga" id="dough-biga" className="peer h-5 w-5 rounded-full border-2 border-cream/20 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-terracotta data-[state=checked]:text-terracotta" />
-                <Label htmlFor="dough-biga" className="text-[#F5E9D7]/80">Biga</Label>
+              <div className="relative">
+                <RadioGroupItem value="biga" id="dough-biga" className="peer absolute w-full h-full opacity-0 cursor-pointer" />
+                <Label htmlFor="dough-biga" className="flex px-4 py-2 rounded-md bg-white/5 border border-cream/10 text-[#F5E9D7]/80 peer-data-[state=checked]:bg-terracotta/20 peer-data-[state=checked]:border-terracotta peer-data-[state=checked]:text-[#F5E9D7] transition-colors">
+                  Biga
+                </Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="poolish" id="dough-poolish" className="peer h-5 w-5 rounded-full border-2 border-cream/20 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-terracotta data-[state=checked]:text-terracotta" />
-                <Label htmlFor="dough-poolish" className="text-[#F5E9D7]/80">Poolish</Label>
+              <div className="relative">
+                <RadioGroupItem value="poolish" id="dough-poolish" className="peer absolute w-full h-full opacity-0 cursor-pointer" />
+                <Label htmlFor="dough-poolish" className="flex px-4 py-2 rounded-md bg-white/5 border border-cream/10 text-[#F5E9D7]/80 peer-data-[state=checked]:bg-terracotta/20 peer-data-[state=checked]:border-terracotta peer-data-[state=checked]:text-[#F5E9D7] transition-colors">
+                  Poolish
+                </Label>
               </div>
             </RadioGroup>
           </div>
 
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-medium text-[#F5E9D7]">Huile</h3>
-            <Switch id="oil" checked={isOilEnabled} onCheckedChange={setIsOilEnabled} />
+            <Switch id="oil" checked={isOilEnabled} onCheckedChange={setIsOilEnabled} className="w-14 h-7" />
           </div>
 
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-medium text-[#F5E9D7]">Sucre/miel</h3>
-            <Switch id="sugar" checked={isSugarEnabled} onCheckedChange={setIsSugarEnabled} />
+            <Switch id="sugar" checked={isSugarEnabled} onCheckedChange={setIsSugarEnabled} className="w-14 h-7" />
           </div>
 
           <div>
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-medium text-[#F5E9D7]">% de levure</h3>
-              <Switch id="custom-yeast" checked={isCustomYeastEnabled} onCheckedChange={setIsCustomYeastEnabled} />
+              <Switch id="custom-yeast" checked={isCustomYeastEnabled} onCheckedChange={setIsCustomYeastEnabled} className="w-14 h-7" />
             </div>
             {isCustomYeastEnabled && (
               <div className="mt-4">

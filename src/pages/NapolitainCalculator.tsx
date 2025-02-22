@@ -21,6 +21,8 @@ export default function NapolitainCalculator() {
   const [hydration, setHydration] = useState(65);
   const [salt, setSalt] = useState(2.5);
   const [yeast, setYeast] = useState(0.05);
+  const [customYeast, setCustomYeast] = useState(0.20);
+  const [isCustomYeastEnabled, setIsCustomYeastEnabled] = useState(false);
   const [oil, setOil] = useState(2.5);
   const [sugar, setSugar] = useState(1.0);
   const [isOilEnabled, setIsOilEnabled] = useState(false);
@@ -100,14 +102,15 @@ export default function NapolitainCalculator() {
   const totalDuration = phases.reduce((total, phase) => total + phase.duration, 0);
 
   // Calcul du poids de farine et des autres ingrédients
-  const totalPercentage = 100 + hydration + salt + yeast + 
+  const totalPercentage = 100 + hydration + salt + 
+    (isCustomYeastEnabled ? customYeast : yeast) + 
     (isOilEnabled ? oil : 0) + 
     (isSugarEnabled ? sugar : 0);
   
   const flourWeight = Math.round(totalWeight / (1 + (totalPercentage - 100) / 100));
   const waterWeight = Math.round((flourWeight * hydration) / 100);
   const saltWeight = Number(((flourWeight * salt) / 100).toFixed(1));
-  const yeastWeight = Number(((flourWeight * yeast) / 100).toFixed(2));
+  const yeastWeight = Number(((flourWeight * (isCustomYeastEnabled ? customYeast : yeast)) / 100).toFixed(2));
   const oilWeight = isOilEnabled ? Number(((flourWeight * oil) / 100).toFixed(1)) : 0;
   const sugarWeight = isSugarEnabled ? Number(((flourWeight * sugar) / 100).toFixed(1)) : 0;
 
@@ -472,7 +475,7 @@ export default function NapolitainCalculator() {
             variant="ghost"
             size="icon"
             onClick={() => setIsSettingsOpen(false)}
-            className="text-cream hover:text-terracotta hover:bg-cream/5 z-50"
+            className="text-cream hover:text-terracotta hover:bg-cream/5"
           >
             <X className="h-5 w-5" />
           </Button>
@@ -586,9 +589,43 @@ export default function NapolitainCalculator() {
                 onCheckedChange={setIsSugarEnabled}
               />
             </div>
-            <div className="flex items-center justify-between p-1">
-              <Label className="text-cream text-base">% de levure</Label>
-              <Switch className="h-7 w-12 data-[state=checked]:bg-terracotta" />
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between p-1">
+                <Label className="text-cream text-base">% de levure</Label>
+                <Switch 
+                  className="h-7 w-12 data-[state=checked]:bg-terracotta"
+                  checked={isCustomYeastEnabled}
+                  onCheckedChange={setIsCustomYeastEnabled}
+                />
+              </div>
+              {isCustomYeastEnabled && (
+                <div className="flex items-center bg-white/5 rounded-md h-12">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                    onClick={() => handleDecrement(customYeast, setCustomYeast, 0.01, 0.01)}
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <div className="flex-1 min-w-0">
+                    <Input
+                      type="text"
+                      value={`${customYeast.toFixed(2)}%`}
+                      readOnly
+                      className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                    />
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                    onClick={() => handleIncrement(customYeast, setCustomYeast, 4, 0.01)}
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>

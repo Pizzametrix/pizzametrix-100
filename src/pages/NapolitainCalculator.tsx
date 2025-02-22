@@ -21,6 +21,10 @@ export default function NapolitainCalculator() {
   const [hydration, setHydration] = useState(65);
   const [salt, setSalt] = useState(2.5);
   const [yeast, setYeast] = useState(0.05);
+  const [oil, setOil] = useState(2.5);
+  const [sugar, setSugar] = useState(1.0);
+  const [isOilEnabled, setIsOilEnabled] = useState(false);
+  const [isSugarEnabled, setIsSugarEnabled] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [phases, setPhases] = useState<Phase[]>([
     { id: 1, duration: 18, temperature: 5 },
@@ -95,11 +99,29 @@ export default function NapolitainCalculator() {
 
   const totalDuration = phases.reduce((total, phase) => total + phase.duration, 0);
 
-  const flourWeight = Math.round(totalWeight / (1 + (hydration + salt + yeast) / 100));
+  // Calcul du poids de farine et des autres ingrédients
+  const totalPercentage = 100 + hydration + salt + yeast + 
+    (isOilEnabled ? oil : 0) + 
+    (isSugarEnabled ? sugar : 0);
+  
+  const flourWeight = Math.round(totalWeight / (1 + (totalPercentage - 100) / 100));
   const waterWeight = Math.round((flourWeight * hydration) / 100);
   const saltWeight = Number(((flourWeight * salt) / 100).toFixed(1));
   const yeastWeight = Number(((flourWeight * yeast) / 100).toFixed(2));
-  const ingredientsTotal = Math.round(flourWeight + waterWeight + saltWeight + yeastWeight);
+  const oilWeight = isOilEnabled ? Number(((flourWeight * oil) / 100).toFixed(1)) : 0;
+  const sugarWeight = isSugarEnabled ? Number(((flourWeight * sugar) / 100).toFixed(1)) : 0;
+
+  // Création d'un tableau d'ingrédients pour le tri
+  const ingredients = [
+    { name: "Farine", weight: flourWeight },
+    { name: "Eau", weight: waterWeight },
+    { name: "Sel", weight: saltWeight },
+    { name: "Levure", weight: yeastWeight },
+    ...(isOilEnabled ? [{ name: "Huile", weight: oilWeight }] : []),
+    ...(isSugarEnabled ? [{ name: "Sucre", weight: sugarWeight }] : [])
+  ].sort((a, b) => b.weight - a.weight);
+
+  const ingredientsTotal = Math.round(ingredients.reduce((sum, ing) => sum + ing.weight, 0));
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate relative">
@@ -236,6 +258,70 @@ export default function NapolitainCalculator() {
                     </div>
                   </div>
                 </div>
+
+                {isOilEnabled && (
+                  <div className="space-y-2">
+                    <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Huile</label>
+                    <div className="flex items-center bg-white/5 rounded-md h-12">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                        onClick={() => handleDecrement(oil, setOil, 0.1, 0.1)}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <div className="flex-1 min-w-0">
+                        <Input
+                          type="text"
+                          value={`${oil.toFixed(1)}%`}
+                          readOnly
+                          className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                        />
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                        onClick={() => handleIncrement(oil, setOil, 10, 0.1)}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                {isSugarEnabled && (
+                  <div className="space-y-2">
+                    <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Sucre</label>
+                    <div className="flex items-center bg-white/5 rounded-md h-12">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                        onClick={() => handleDecrement(sugar, setSugar, 0.1, 0.1)}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <div className="flex-1 min-w-0">
+                        <Input
+                          type="text"
+                          value={`${sugar.toFixed(1)}%`}
+                          readOnly
+                          className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                        />
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                        onClick={() => handleIncrement(sugar, setSugar, 10, 0.1)}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
@@ -339,22 +425,14 @@ export default function NapolitainCalculator() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <div className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
-                    <span className="text-[#F5E9D7]">Farine</span>
-                    <span className="text-[#F5E9D7] text-right">{flourWeight}g</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
-                    <span className="text-[#F5E9D7]">Eau</span>
-                    <span className="text-[#F5E9D7] text-right">{waterWeight}g</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
-                    <span className="text-[#F5E9D7]">Sel</span>
-                    <span className="text-[#F5E9D7] text-right">{saltWeight}g</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
-                    <span className="text-[#F5E9D7]">Levure</span>
-                    <span className="text-[#F5E9D7] text-right">{yeastWeight.toFixed(2)}g</span>
-                  </div>
+                  {ingredients.map((ingredient, index) => (
+                    <div key={ingredient.name} className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
+                      <span className="text-[#F5E9D7]">{ingredient.name}</span>
+                      <span className="text-[#F5E9D7] text-right">
+                        {ingredient.name === "Levure" ? ingredient.weight.toFixed(2) : ingredient.weight}g
+                      </span>
+                    </div>
+                  ))}
                   <div className="grid grid-cols-2 gap-4 py-2 font-medium">
                     <span className="text-[#F5E9D7]">Total</span>
                     <span className="text-[#F5E9D7] text-right">{ingredientsTotal}g</span>
@@ -494,11 +572,19 @@ export default function NapolitainCalculator() {
           <div className="space-y-4">
             <div className="flex items-center justify-between p-1">
               <Label className="text-cream text-base">Huile</Label>
-              <Switch className="h-7 w-12 data-[state=checked]:bg-terracotta" />
+              <Switch 
+                className="h-7 w-12 data-[state=checked]:bg-terracotta"
+                checked={isOilEnabled}
+                onCheckedChange={setIsOilEnabled}
+              />
             </div>
             <div className="flex items-center justify-between p-1">
               <Label className="text-cream text-base">Sucre/Miel</Label>
-              <Switch className="h-7 w-12 data-[state=checked]:bg-terracotta" />
+              <Switch 
+                className="h-7 w-12 data-[state=checked]:bg-terracotta"
+                checked={isSugarEnabled}
+                onCheckedChange={setIsSugarEnabled}
+              />
             </div>
             <div className="flex items-center justify-between p-1">
               <Label className="text-cream text-base">% de levure</Label>

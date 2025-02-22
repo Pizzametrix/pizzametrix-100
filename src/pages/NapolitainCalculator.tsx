@@ -214,6 +214,11 @@ export default function NapolitainCalculator() {
         temperature: phase.temperature
       })) as Json;
 
+      console.log("Type de pâte:", doughType);
+      console.log("Farine préferment:", prefermentFlour);
+      console.log("Hydratation préferment:", prefermentHydration);
+      console.log("Levure préferment:", prefermentYeast);
+
       const recipeData = {
         user_id: user.id,
         nom: recipeName,
@@ -232,10 +237,12 @@ export default function NapolitainCalculator() {
         is_oil_enabled: isOilEnabled,
         is_sugar_enabled: isSugarEnabled,
         yeast_type: yeastType,
-        preferment_flour: doughType !== 'direct' ? prefermentFlour : null,
-        preferment_hydration: doughType !== 'direct' ? prefermentHydration : null,
-        preferment_yeast: doughType !== 'direct' ? prefermentYeast : null,
+        preferment_flour: doughType !== 'direct' ? Number(prefermentFlour) : null,
+        preferment_hydration: doughType !== 'direct' ? Number(prefermentHydration) : null,
+        preferment_yeast: doughType !== 'direct' ? Number(prefermentYeast) : null,
       };
+
+      console.log("Données de la recette à sauvegarder:", recipeData);
 
       const { error: insertError } = await supabase
         .from('recettes')

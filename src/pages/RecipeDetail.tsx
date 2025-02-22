@@ -1,8 +1,9 @@
+
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Droplet, Clock, Camera, ChefHat, Edit2, Save, Plus, Pizza, PocketKnife } from "lucide-react";
+import { Droplet, Clock, Camera, ChefHat, Edit2, Save, Plus, Pizza, PocketKnife, Thermometer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";

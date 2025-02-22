@@ -104,7 +104,7 @@ export default function NapolitainCalculator() {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate relative">
       <Sidebar />
-      <main className="flex-1 p-4 md:p-8 mt-16 md:mt-0">
+      <main className="flex-1 p-4 pb-24 md:p-8 md:pb-24 mt-16 md:mt-0">
         <div className="max-w-2xl mx-auto">
           <div className="space-y-6">
             <Card className="bg-slate border-cream/10">
@@ -369,7 +369,7 @@ export default function NapolitainCalculator() {
       <Button
         variant="ghost"
         size="icon"
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-terracotta text-cream hover:bg-terracotta/90 shadow-lg"
+        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-terracotta text-cream hover:bg-terracotta/90 shadow-lg z-30"
         onClick={() => setIsSettingsOpen(true)}
       >
         <Settings className="h-6 w-6" />

@@ -258,71 +258,67 @@ export default function NapolitainCalculator() {
                     </div>
                   </div>
 
-                  {(isOilEnabled || isSugarEnabled) && (
-                    <div className={`grid ${isOilEnabled && isSugarEnabled ? 'grid-cols-2' : 'grid-cols-1'} gap-4`}>
-                      {isOilEnabled && (
-                        <div className="space-y-2">
-                          <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Huile</label>
-                          <div className="flex items-center bg-white/5 rounded-md h-12">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                              onClick={() => handleDecrement(oil, setOil, 0.1, 0.1)}
-                            >
-                              <Minus className="h-4 w-4" />
-                            </Button>
-                            <div className="flex-1 min-w-0">
-                              <Input
-                                type="text"
-                                value={`${oil.toFixed(1)}%`}
-                                readOnly
-                                className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                              />
-                            </div>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                              onClick={() => handleIncrement(oil, setOil, 10, 0.1)}
-                            >
-                              <Plus className="h-4 w-4" />
-                            </Button>
-                          </div>
+                  {isOilEnabled && (
+                    <div className="space-y-2">
+                      <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Huile</label>
+                      <div className="flex items-center bg-white/5 rounded-md h-12">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                          onClick={() => handleDecrement(oil, setOil, 0.1, 0.1)}
+                        >
+                          <Minus className="h-4 w-4" />
+                        </Button>
+                        <div className="flex-1 min-w-0">
+                          <Input
+                            type="text"
+                            value={`${oil.toFixed(1)}%`}
+                            readOnly
+                            className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                          />
                         </div>
-                      )}
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                          onClick={() => handleIncrement(oil, setOil, 10, 0.1)}
+                        >
+                          <Plus className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
 
-                      {isSugarEnabled && (
-                        <div className="space-y-2">
-                          <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Sucre/Miel</label>
-                          <div className="flex items-center bg-white/5 rounded-md h-12">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                              onClick={() => handleDecrement(sugar, setSugar, 0.1, 0.1)}
-                            >
-                              <Minus className="h-4 w-4" />
-                            </Button>
-                            <div className="flex-1 min-w-0">
-                              <Input
-                                type="text"
-                                value={`${sugar.toFixed(1)}%`}
-                                readOnly
-                                className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                              />
-                            </div>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                              onClick={() => handleIncrement(sugar, setSugar, 10, 0.1)}
-                            >
-                              <Plus className="h-4 w-4" />
-                            </Button>
-                          </div>
+                  {isSugarEnabled && (
+                    <div className="space-y-2">
+                      <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Sucre/Miel</label>
+                      <div className="flex items-center bg-white/5 rounded-md h-12">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                          onClick={() => handleDecrement(sugar, setSugar, 0.1, 0.1)}
+                        >
+                          <Minus className="h-4 w-4" />
+                        </Button>
+                        <div className="flex-1 min-w-0">
+                          <Input
+                            type="text"
+                            value={`${sugar.toFixed(1)}%`}
+                            readOnly
+                            className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                          />
                         </div>
-                      )}
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                          onClick={() => handleIncrement(sugar, setSugar, 10, 0.1)}
+                        >
+                          <Plus className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </div>

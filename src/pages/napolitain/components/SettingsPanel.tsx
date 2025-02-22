@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -78,13 +77,13 @@ export function SettingsPanel({
               <div className="relative">
                 <RadioGroupItem value="seche" id="yeast-seche" className="peer absolute w-full h-full opacity-0 cursor-pointer" />
                 <Label htmlFor="yeast-seche" className="flex px-4 py-2 rounded-md bg-white/5 border border-cream/10 text-[#F5E9D7]/80 peer-data-[state=checked]:bg-terracotta/20 peer-data-[state=checked]:border-terracotta peer-data-[state=checked]:text-[#F5E9D7] transition-colors">
-                  Sèche
+                  Sèche active
                 </Label>
               </div>
               <div className="relative">
                 <RadioGroupItem value="saf" id="yeast-saf" className="peer absolute w-full h-full opacity-0 cursor-pointer" />
                 <Label htmlFor="yeast-saf" className="flex px-4 py-2 rounded-md bg-white/5 border border-cream/10 text-[#F5E9D7]/80 peer-data-[state=checked]:bg-terracotta/20 peer-data-[state=checked]:border-terracotta peer-data-[state=checked]:text-[#F5E9D7] transition-colors">
-                  SAF Instant
+                  Instantanée (SAF)
                 </Label>
               </div>
             </RadioGroup>

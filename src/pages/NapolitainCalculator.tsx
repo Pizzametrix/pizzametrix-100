@@ -1,9 +1,10 @@
+
 import { useState, useEffect } from "react";
 import { Settings, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { BIGA_DEFAULTS, POOLISH_DEFAULTS } from "./napolitain/constants";
-import { Phase, DoughType, YeastType } from "./napolitain/types";
+import { Phase, DoughType, YeastType, Json } from "./napolitain/types";
 import { DoughParameters } from "./napolitain/components/DoughParameters";
 import { PrefermentSection } from "./napolitain/components/PrefermentSection";
 import { RestPhases } from "./napolitain/components/RestPhases";
@@ -208,6 +209,12 @@ export default function NapolitainCalculator() {
         return;
       }
 
+      const phasesJson = phases.map(phase => ({
+        id: phase.id,
+        duration: phase.duration,
+        temperature: phase.temperature
+      })) as Json;
+
       const recipeData = {
         user_id: user.id,
         nom: recipeName,
@@ -220,7 +227,7 @@ export default function NapolitainCalculator() {
         oil: isOilEnabled ? oil : null,
         sugar: isSugarEnabled ? sugar : null,
         dough_type: doughType,
-        phases: phases,
+        phases: phasesJson,
         is_custom_yeast_enabled: isCustomYeastEnabled,
         custom_yeast: customYeast,
         is_oil_enabled: isOilEnabled,

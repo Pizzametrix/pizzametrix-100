@@ -7,6 +7,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Calculators from "./pages/Calculators";
 import NapolitainCalculator from "./pages/NapolitainCalculator";
 import MyRecipes from "./pages/MyRecipes";
+import RecipeDetail from "./pages/RecipeDetail";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/calculators" element={<Calculators />} />
         <Route path="/calculators/napolitaine" element={<NapolitainCalculator />} />
         <Route path="/mes-recettes" element={<MyRecipes />} />
+        <Route path="/mes-recettes/:id" element={<RecipeDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

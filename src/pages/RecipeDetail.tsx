@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Clock, Edit2, Save, PocketKnife, Thermometer, Droplet, Settings } from "lucide-react";
+import { Clock, Edit2, Save, PocketKnife, Thermometer, Droplet, Settings, NotebookPen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
@@ -104,7 +104,7 @@ export default function RecipeDetail() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-semibold leading-none tracking-tight text-cream flex items-center gap-2">
-                  <Edit2 className="h-5 w-5 text-terracotta" /> Notes
+                  <NotebookPen className="h-5 w-5 text-terracotta" /> Notes
                 </h2>
                 {isEditingDescription ? (
                   <Button

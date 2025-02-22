@@ -2,14 +2,40 @@
 import { Menu, LogOut, X, Calculator, Home, Book } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useSidebarStore } from "@/store/useSidebarStore";
+import { useEffect, useState } from "react";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const params = useParams();
   const { isOpen, toggle, close } = useSidebarStore();
+  const [recipeName, setRecipeName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchRecipeName = async () => {
+      if (location.pathname.startsWith('/mes-recettes/') && params.id) {
+        try {
+          const { data, error } = await supabase
+            .from('recettes')
+            .select('nom')
+            .eq('id', params.id)
+            .single();
+
+          if (error) throw error;
+          setRecipeName(data.nom);
+        } catch (error) {
+          console.error("Erreur lors du chargement du nom de la recette:", error);
+        }
+      } else {
+        setRecipeName(null);
+      }
+    };
+
+    fetchRecipeName();
+  }, [location.pathname, params.id]);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -27,6 +53,9 @@ export const Sidebar = () => {
   };
 
   const getTitle = () => {
+    if (recipeName) {
+      return recipeName;
+    }
     if (location.pathname === "/calculators/napolitaine") {
       return "Pizza Napolitaine";
     }
@@ -39,11 +68,11 @@ export const Sidebar = () => {
   return (
     <>
       <div className="md:hidden w-full bg-slate border-b border-cream/10 p-4 flex justify-between items-center fixed top-0 z-50">
-        <h1 className="font-montserrat font-bold text-xl text-[#F5E9D7]">{getTitle()}</h1>
+        <h1 className="font-montserrat font-bold text-xl text-[#F5E9D7] truncate pr-2">{getTitle()}</h1>
         <Button
           variant="ghost"
           size="icon"
-          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
+          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
           onClick={toggle}
         >
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

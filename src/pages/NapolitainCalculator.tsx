@@ -1,9 +1,10 @@
+
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus, Settings, Clock, ChefHat } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Phase {
   id: number;
@@ -22,6 +23,11 @@ export default function NapolitainCalculator() {
     { id: 1, duration: 18, temperature: 5 },
     { id: 2, duration: 6, temperature: 20 },
   ]);
+
+  // Mettre à jour le poids total lorsque le nombre de pizzas ou le poids des pâtons change
+  useEffect(() => {
+    setTotalWeight(pizzaCount * ballWeight);
+  }, [pizzaCount, ballWeight]);
 
   const handleIncrement = (value: number, setValue: (value: number) => void, max: number, step: number = 1) => {
     setValue(Math.min(value + step, max));

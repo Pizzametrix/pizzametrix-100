@@ -1,6 +1,6 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ChefHat, Droplet, Scale, Cookie, FlaskConical } from "lucide-react";
+import { Calculator, Droplet, Scale, Cookie, FlaskConical, Pizza, WheatOff } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface RecipeDetailParametersProps {
@@ -12,7 +12,7 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     {
       name: "Nombre de pizzas",
       value: recipe.pizza_count,
-      icon: <ChefHat className="h-4 w-4" />,
+      icon: <Calculator className="h-4 w-4" />,
     },
     {
       name: "Poids des pâtons",
@@ -22,7 +22,7 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     {
       name: "Sel",
       value: `${(recipe.salt * 100).toFixed(1)}%`,
-      icon: <Droplet className="h-4 w-4" />,
+      icon: <FlaskConical className="h-4 w-4" />,
     },
   ];
 
@@ -45,14 +45,14 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
   parameters.push({
     name: "Type de levure",
     value: recipe.yeast_type.charAt(0).toUpperCase() + recipe.yeast_type.slice(1),
-    icon: <ChefHat className="h-4 w-4" />,
+    icon: <WheatOff className="h-4 w-4" />,
   });
 
   if (recipe.is_custom_yeast_enabled && recipe.custom_yeast) {
     parameters.push({
       name: "Levure",
       value: `${(recipe.custom_yeast * 100).toFixed(2)}%`,
-      icon: <ChefHat className="h-4 w-4" />,
+      icon: <WheatOff className="h-4 w-4" />,
     });
   }
 
@@ -60,7 +60,7 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     <Card className="bg-slate border-cream/10">
       <CardHeader className="pb-4">
         <CardTitle className="text-cream flex items-center gap-2">
-          <ChefHat className="h-5 w-5 text-terracotta" /> Paramètres
+          <Pizza className="h-5 w-5 text-terracotta" /> Paramètres
         </CardTitle>
       </CardHeader>
       <CardContent>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Settings } from "lucide-react";
+import { Settings, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { BIGA_DEFAULTS, POOLISH_DEFAULTS } from "./napolitain/constants";
@@ -9,6 +9,9 @@ import { PrefermentSection } from "./napolitain/components/PrefermentSection";
 import { RestPhases } from "./napolitain/components/RestPhases";
 import { IngredientsTable } from "./napolitain/components/IngredientsTable";
 import { SettingsPanel } from "./napolitain/components/SettingsPanel";
+import { supabase } from "@/integrations/supabase/client";
+import { SaveRecipeDialog } from "./napolitain/components/SaveRecipeDialog";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function NapolitainCalculator() {
   const [totalWeight, setTotalWeight] = useState(1000);
@@ -33,6 +36,8 @@ export default function NapolitainCalculator() {
   const [prefermentFlour, setPrefermentFlour] = useState(BIGA_DEFAULTS.flour);
   const [prefermentHydration, setPrefermentHydration] = useState(BIGA_DEFAULTS.hydration);
   const [prefermentYeast, setPrefermentYeast] = useState(BIGA_DEFAULTS.yeast);
+  const [isSaveDialogOpen, setIsSaveDialogOpen] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     setTotalWeight(pizzaCount * ballWeight);
@@ -187,6 +192,74 @@ export default function NapolitainCalculator() {
 
   const ingredientsTotal = Math.round(ingredients.reduce((sum, ing) => sum + ing.total, 0));
 
+  const handleSaveRecipe = async (recipeName: string) => {
+    try {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        toast({
+          title: "Erreur",
+          description: "Vous devez être connecté pour sauvegarder une recette",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const recipeData = {
+        user_id: user.id,
+        nom: recipeName,
+        type: "napolitaine",
+        pizza_count: pizzaCount,
+        ball_weight: ballWeight,
+        hydration: hydration,
+        salt: salt,
+        yeast: isCustomYeastEnabled ? customYeast : yeast,
+        oil: isOilEnabled ? oil : null,
+        sugar: isSugarEnabled ? sugar : null,
+        dough_type: doughType,
+        phases: phases,
+        is_custom_yeast_enabled: isCustomYeastEnabled,
+        custom_yeast: customYeast,
+        is_oil_enabled: isOilEnabled,
+        is_sugar_enabled: isSugarEnabled,
+        yeast_type: yeastType,
+        preferment_flour: doughType !== 'direct' ? prefermentFlour : null,
+        preferment_hydration: doughType !== 'direct' ? prefermentHydration : null,
+        preferment_yeast: doughType !== 'direct' ? prefermentYeast : null,
+      };
+
+      const { error: insertError } = await supabase
+        .from('recettes')
+        .insert(recipeData);
+
+      if (insertError) {
+        toast({
+          title: "Erreur",
+          description: "Impossible de sauvegarder la recette",
+          variant: "destructive",
+        });
+        console.error("Erreur lors de la sauvegarde:", insertError);
+        return;
+      }
+
+      toast({
+        title: "Succès",
+        description: "La recette a été sauvegardée",
+      });
+      setIsSaveDialogOpen(false);
+    } catch (error) {
+      console.error("Erreur lors de la sauvegarde:", error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate relative">
       <Sidebar />
@@ -242,14 +315,24 @@ export default function NapolitainCalculator() {
         </div>
       </main>
 
-      <Button
-        variant="ghost"
-        size="icon"
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-terracotta text-cream hover:bg-terracotta/90 shadow-lg z-30"
-        onClick={() => setIsSettingsOpen(true)}
-      >
-        <Settings className="h-6 w-6" />
-      </Button>
+      <div className="fixed bottom-6 right-6 flex gap-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-14 w-14 rounded-full bg-terracotta text-cream hover:bg-terracotta/90 shadow-lg"
+          onClick={() => setIsSaveDialogOpen(true)}
+        >
+          <Save className="h-6 w-6" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-14 w-14 rounded-full bg-terracotta text-cream hover:bg-terracotta/90 shadow-lg"
+          onClick={() => setIsSettingsOpen(true)}
+        >
+          <Settings className="h-6 w-6" />
+        </Button>
+      </div>
 
       <SettingsPanel
         isOpen={isSettingsOpen}
@@ -268,6 +351,12 @@ export default function NapolitainCalculator() {
         handleIncrement={handleIncrement}
         handleDecrement={handleDecrement}
         setCustomYeast={setCustomYeast}
+      />
+
+      <SaveRecipeDialog
+        open={isSaveDialogOpen}
+        onOpenChange={setIsSaveDialogOpen}
+        onSave={handleSaveRecipe}
       />
     </div>
   );

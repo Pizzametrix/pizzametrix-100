@@ -9,6 +9,81 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      recettes: {
+        Row: {
+          ball_weight: number
+          created_at: string
+          custom_yeast: number | null
+          dough_type: string
+          hydration: number
+          id: string
+          is_custom_yeast_enabled: boolean | null
+          is_oil_enabled: boolean | null
+          is_sugar_enabled: boolean | null
+          nom: string
+          oil: number | null
+          phases: Json
+          pizza_count: number
+          preferment_flour: number | null
+          preferment_hydration: number | null
+          preferment_yeast: number | null
+          salt: number
+          sugar: number | null
+          type: Database["public"]["Enums"]["type_recette"]
+          user_id: string
+          yeast: number
+          yeast_type: string
+        }
+        Insert: {
+          ball_weight: number
+          created_at?: string
+          custom_yeast?: number | null
+          dough_type?: string
+          hydration: number
+          id?: string
+          is_custom_yeast_enabled?: boolean | null
+          is_oil_enabled?: boolean | null
+          is_sugar_enabled?: boolean | null
+          nom: string
+          oil?: number | null
+          phases?: Json
+          pizza_count: number
+          preferment_flour?: number | null
+          preferment_hydration?: number | null
+          preferment_yeast?: number | null
+          salt: number
+          sugar?: number | null
+          type: Database["public"]["Enums"]["type_recette"]
+          user_id: string
+          yeast: number
+          yeast_type?: string
+        }
+        Update: {
+          ball_weight?: number
+          created_at?: string
+          custom_yeast?: number | null
+          dough_type?: string
+          hydration?: number
+          id?: string
+          is_custom_yeast_enabled?: boolean | null
+          is_oil_enabled?: boolean | null
+          is_sugar_enabled?: boolean | null
+          nom?: string
+          oil?: number | null
+          phases?: Json
+          pizza_count?: number
+          preferment_flour?: number | null
+          preferment_hydration?: number | null
+          preferment_yeast?: number | null
+          salt?: number
+          sugar?: number | null
+          type?: Database["public"]["Enums"]["type_recette"]
+          user_id?: string
+          yeast?: number
+          yeast_type?: string
+        }
+        Relationships: []
+      }
       utilisateurs: {
         Row: {
           created_at: string
@@ -38,7 +113,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      type_recette: "napolitaine" | "teglia"
     }
     CompositeTypes: {
       [_ in never]: never

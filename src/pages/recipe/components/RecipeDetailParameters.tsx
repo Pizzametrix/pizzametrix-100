@@ -20,7 +20,7 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     },
     {
       name: "Sel",
-      value: `${(recipe.salt * 100).toFixed(1)}%`,
+      value: `${(Math.round(recipe.salt * 1000) / 10).toFixed(1)}%`,
       icon: <CakeSlice className="h-4 w-4" />,
     },
   ];

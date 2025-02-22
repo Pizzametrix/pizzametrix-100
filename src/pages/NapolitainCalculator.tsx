@@ -219,9 +219,13 @@ export default function NapolitainCalculator() {
       console.log("Hydratation préferment:", prefermentHydration);
       console.log("Levure préferment:", prefermentYeast);
 
+      const formatPercentage = (value: number) => {
+        return Number((value / 100).toFixed(2));
+      };
+
       const prefermentFlourValue = doughType !== 'direct' ? Math.round(Number(prefermentFlour)) : null;
       const prefermentHydrationValue = doughType !== 'direct' ? Math.round(Number(prefermentHydration)) : null;
-      const prefermentYeastValue = doughType !== 'direct' ? Number(Number(prefermentYeast).toFixed(2)) : null;
+      const prefermentYeastValue = doughType !== 'direct' ? formatPercentage(Number(prefermentYeast)) : null;
 
       const recipeData = {
         user_id: user.id,
@@ -230,14 +234,14 @@ export default function NapolitainCalculator() {
         pizza_count: Math.round(Number(pizzaCount)),
         ball_weight: Math.round(Number(ballWeight)),
         hydration: Math.round(Number(hydration)),
-        salt: Number(Number(salt).toFixed(2)),
-        yeast: Number((isCustomYeastEnabled ? customYeast : yeast).toFixed(2)),
-        oil: isOilEnabled ? Number(Number(oil).toFixed(2)) : null,
-        sugar: isSugarEnabled ? Number(Number(sugar).toFixed(2)) : null,
+        salt: Number((Number(salt) / 100).toFixed(2)),
+        yeast: Number((Number(isCustomYeastEnabled ? customYeast : yeast) / 100).toFixed(2)),
+        oil: isOilEnabled ? Number((Number(oil) / 100).toFixed(2)) : null,
+        sugar: isSugarEnabled ? Number((Number(sugar) / 100).toFixed(2)) : null,
         dough_type: doughType,
         phases: phasesJson,
         is_custom_yeast_enabled: isCustomYeastEnabled,
-        custom_yeast: isCustomYeastEnabled ? Number(Number(customYeast).toFixed(2)) : null,
+        custom_yeast: isCustomYeastEnabled ? Number((Number(customYeast) / 100).toFixed(2)) : null,
         is_oil_enabled: isOilEnabled,
         is_sugar_enabled: isSugarEnabled,
         yeast_type: yeastType,

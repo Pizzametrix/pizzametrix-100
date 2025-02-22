@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Clock, Edit2, Save, PocketKnife, Thermometer, Droplet, Settings, NotebookPen } from "lucide-react";
+import { Clock, Edit2, Save, PocketKnife, Thermometer, Droplet, Settings, NotebookPen, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
@@ -13,12 +13,15 @@ import { RecipeDetailPreferment } from "./recipe/components/RecipeDetailPreferme
 import { RecipeDetailPhases } from "./recipe/components/RecipeDetailPhases";
 import { RecipePhotos } from "./recipe/components/RecipePhotos";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { DeleteRecipeDialog } from "./recipe/components/DeleteRecipeDialog";
 
 export default function RecipeDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState<any>(null);
   const [isEditingDescription, setIsEditingDescription] = useState(false);
   const [description, setDescription] = useState("");
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   useEffect(() => {
     fetchRecipe();
@@ -68,6 +71,29 @@ export default function RecipeDetail() {
     }
   };
 
+  const handleDeleteRecipe = async () => {
+    try {
+      const { error } = await supabase
+        .from('recettes')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        description: "Recette supprimée",
+      });
+      navigate('/mes-recettes');
+    } catch (error) {
+      console.error("Erreur lors de la suppression:", error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de supprimer la recette",
+        variant: "destructive",
+      });
+    }
+  };
+
   if (!recipe) return null;
 
   return (
@@ -76,7 +102,17 @@ export default function RecipeDetail() {
       <div className="flex-1">
         <div className="md:ml-64 min-h-screen">
           <main className="p-4 pb-24 space-y-6 max-w-2xl mx-auto">
-            <h1 className="text-cream text-2xl font-medium mt-4 md:mt-0">{recipe.nom}</h1>
+            <div className="flex items-center justify-between">
+              <h1 className="text-cream text-2xl font-medium mt-4 md:mt-0">{recipe.nom}</h1>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
+                onClick={() => setIsDeleteDialogOpen(true)}
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
 
             {/* En-tête de la recette */}
             <div className="space-y-2">
@@ -195,6 +231,11 @@ export default function RecipeDetail() {
           </main>
         </div>
       </div>
+      <DeleteRecipeDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+        onConfirm={handleDeleteRecipe}
+      />
     </div>
   );
 }

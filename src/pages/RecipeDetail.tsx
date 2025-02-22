@@ -137,7 +137,7 @@ export default function RecipeDetail() {
             </div>
 
             {/* Section paramètres */}
-            <div className="space-y-2">
+            <div className="space-y-4">
               <h2 className="text-2xl font-semibold leading-none tracking-tight text-cream flex items-center gap-2">
                 <Pizza className="h-5 w-5 text-terracotta" /> Paramètres
               </h2>
@@ -146,7 +146,7 @@ export default function RecipeDetail() {
 
             {/* Section préferment */}
             {recipe.dough_type !== 'direct' && (
-              <div className="space-y-2">
+              <div className="space-y-4">
                 <h2 className="text-2xl font-semibold leading-none tracking-tight text-cream flex items-center gap-2">
                   <PocketKnife className="h-5 w-5 text-terracotta" /> 
                   {recipe.dough_type === 'biga' ? 'Biga' : 'Poolish'}
@@ -156,11 +156,11 @@ export default function RecipeDetail() {
             )}
 
             {/* Section phases */}
-            <div className="space-y-2">
+            <div className="space-y-4">
               <h2 className="text-2xl font-semibold leading-none tracking-tight text-cream flex items-center gap-2">
                 <Clock className="h-5 w-5 text-terracotta" /> Phases de repos
               </h2>
-              <p className="text-cream/60 text-sm">
+              <p className="text-cream/60 text-sm -mt-2">
                 Durée totale : {recipe.phases.reduce((acc: number, phase: any) => acc + phase.duration, 0)}h
               </p>
               <div className="rounded-md border border-cream/10">

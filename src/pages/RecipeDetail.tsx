@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Clock, Edit2, Save, Pizza, PocketKnife, Thermometer } from "lucide-react";
+import { Clock, Edit2, Save, Pizza, PocketKnife, Thermometer, Droplet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
@@ -83,6 +83,11 @@ export default function RecipeDetail() {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-cream/80">
                 <span>{recipe.dough_type !== 'direct' ? `${recipe.dough_type.charAt(0).toUpperCase() + recipe.dough_type.slice(1)} ${recipe.preferment_flour}%` : 'Direct'}</span>
+                <span>-</span>
+                <span className="flex items-center gap-1">
+                  <Droplet className="h-4 w-4" /> {recipe.hydration}%
+                </span>
+                <span>-</span>
                 <span className="flex items-center gap-1">
                   <Clock className="h-4 w-4" /> 
                   {recipe.phases.reduce((acc: number, phase: any) => acc + phase.duration, 0)}h

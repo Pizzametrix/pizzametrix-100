@@ -46,7 +46,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         />
       </div>
       <div className="flex-1 p-4 text-left">
-        <h3 className="font-semibold text-lg text-cream mb-1 truncate">{recipe.nom}</h3>
+        <h3 className="font-semibold text-lg text-cream mb-1">{recipe.nom}</h3>
         <div className="text-sm text-cream/80 space-y-1">
           <p className="flex items-center gap-2">
             <span>{getPrefermentText()}</span>

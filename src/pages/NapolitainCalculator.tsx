@@ -1,4 +1,3 @@
-
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,6 +31,21 @@ export default function NapolitainCalculator() {
   useEffect(() => {
     setTotalWeight(pizzaCount * ballWeight);
   }, [pizzaCount, ballWeight]);
+
+  // Gestionnaire pour fermer le panel au clic en dehors
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const panel = document.getElementById('settings-panel');
+      if (isSettingsOpen && panel && !panel.contains(event.target as Node)) {
+        setIsSettingsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSettingsOpen]);
 
   const handleIncrement = (value: number, setValue: (value: number) => void, max: number, step: number = 1) => {
     setValue(Math.min(value + step, max));
@@ -352,9 +366,15 @@ export default function NapolitainCalculator() {
         <Settings className="h-6 w-6" />
       </Button>
 
+      {/* Overlay pour le clic en dehors */}
+      {isSettingsOpen && (
+        <div className="fixed inset-0 bg-black/20 transition-opacity" />
+      )}
+
       {/* Slide-in Panel */}
       <div
-        className={`fixed inset-y-0 right-0 w-3/4 sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-300 ease-in-out ${
+        id="settings-panel"
+        className={`fixed inset-y-0 right-0 w-3/4 sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${
           isSettingsOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -364,7 +384,7 @@ export default function NapolitainCalculator() {
             variant="ghost"
             size="icon"
             onClick={() => setIsSettingsOpen(false)}
-            className="text-cream hover:text-terracotta hover:bg-cream/5"
+            className="text-cream hover:text-terracotta hover:bg-cream/5 z-50"
           >
             <X className="h-5 w-5" />
           </Button>

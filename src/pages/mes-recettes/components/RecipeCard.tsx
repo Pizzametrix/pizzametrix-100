@@ -53,6 +53,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
             <span className="flex items-center gap-1">
               <Droplet className="h-4 w-4" /> {recipe.hydration}%
             </span>
+            {" "}
             <span className="flex items-center gap-1">
               <Clock className="h-4 w-4" /> {getTotalDuration(recipe.phases)}h
             </span>

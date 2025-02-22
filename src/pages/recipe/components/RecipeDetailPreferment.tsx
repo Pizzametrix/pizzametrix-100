@@ -1,6 +1,6 @@
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { PocketKnife, Droplet, ChefHat } from "lucide-react";
+import { PocketKnife, Droplet, Wheat } from "lucide-react";
 
 interface RecipeDetailPrefermentProps {
   recipe: any;
@@ -11,7 +11,7 @@ export function RecipeDetailPreferment({ recipe }: RecipeDetailPrefermentProps) 
     {
       name: "Farine",
       value: `${recipe.preferment_flour}%`,
-      icon: <PocketKnife className="h-4 w-4" />,
+      icon: <Wheat className="h-4 w-4" />,
     },
     {
       name: "Hydratation",
@@ -20,8 +20,8 @@ export function RecipeDetailPreferment({ recipe }: RecipeDetailPrefermentProps) 
     },
     {
       name: "Levure",
-      value: `${(recipe.preferment_yeast * 100).toFixed(2)}%`,
-      icon: <ChefHat className="h-4 w-4" />,
+      value: `${Math.round(recipe.preferment_yeast * 100)}%`,
+      icon: <PocketKnife className="h-4 w-4" />,
     },
   ];
 

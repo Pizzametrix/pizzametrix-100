@@ -1,6 +1,6 @@
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { FlaskConical, Droplet, Wheat } from "lucide-react";
+import { CakeSlice, Droplet, Wheat } from "lucide-react";
 
 interface RecipeDetailPrefermentProps {
   recipe: any;
@@ -21,7 +21,7 @@ export function RecipeDetailPreferment({ recipe }: RecipeDetailPrefermentProps) 
     {
       name: "Levure",
       value: `${Math.round(recipe.preferment_yeast * 100)}%`,
-      icon: <FlaskConical className="h-4 w-4" />,
+      icon: <CakeSlice className="h-4 w-4" />,
     },
   ];
 

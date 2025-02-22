@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
@@ -76,7 +77,7 @@ export default function RecipeDetail() {
       <div className="flex-1">
         <div className="md:ml-64 min-h-screen">
           <main className="p-4 pb-24 space-y-6 max-w-2xl mx-auto">
-            <h1 className="text-cream text-2xl font-medium mt-4 md:mt-0">{recipe.nom}</h1>
+            <h1 className="text-cream text-2xl font-medium mt-4 md:mt-0 truncate">{recipe.nom}</h1>
 
             {/* En-tête de la recette */}
             <div className="space-y-2">

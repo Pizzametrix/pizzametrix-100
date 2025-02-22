@@ -24,7 +24,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   };
 
   const getPrefermentText = () => {
-    if (recipe.dough_type === 'direct') return '';
+    if (recipe.dough_type === 'direct') return 'Direct';
     return `${recipe.dough_type.charAt(0).toUpperCase() + recipe.dough_type.slice(1)} ${recipe.preferment_flour}%`;
   };
 
@@ -43,7 +43,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         <h3 className="font-semibold text-lg text-cream mb-1">{recipe.nom}</h3>
         <div className="text-sm text-cream/80 space-y-1">
           <p className="flex items-center gap-2">
-            {getPrefermentText()}
+            <span>{getPrefermentText()}</span>
             <span className="flex items-center gap-1">
               <Droplet className="h-4 w-4" /> {recipe.hydration}%
             </span>

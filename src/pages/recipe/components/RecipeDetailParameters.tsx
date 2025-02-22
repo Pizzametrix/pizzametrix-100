@@ -1,6 +1,6 @@
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Calculator, Droplet, Scale, Cookie, FlaskConical, Pizza, WheatOff, PocketKnife } from "lucide-react";
+import { Calculator, Droplet, Scale, Cookie, FlaskConical, Pizza, WheatOff } from "lucide-react";
 
 interface RecipeDetailParametersProps {
   recipe: any;
@@ -44,14 +44,14 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
   parameters.push({
     name: "Type de levure",
     value: recipe.yeast_type.charAt(0).toUpperCase() + recipe.yeast_type.slice(1),
-    icon: <PocketKnife className="h-4 w-4" />,
+    icon: <FlaskConical className="h-4 w-4" />,
   });
 
   if (recipe.is_custom_yeast_enabled && recipe.custom_yeast) {
     parameters.push({
       name: "Levure",
       value: `${(recipe.custom_yeast * 100).toFixed(2)}%`,
-      icon: <PocketKnife className="h-4 w-4" />,
+      icon: <FlaskConical className="h-4 w-4" />,
     });
   }
 

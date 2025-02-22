@@ -50,10 +50,11 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         <div className="text-sm text-cream/80 space-y-1">
           <p className="flex items-center gap-2">
             <span>{getPrefermentText()}</span>
+            <span className="text-cream/60">-</span>
             <span className="flex items-center gap-1">
               <Droplet className="h-4 w-4" /> {recipe.hydration}%
             </span>
-            {" "}
+            <span className="text-cream/60">-</span>
             <span className="flex items-center gap-1">
               <Clock className="h-4 w-4" /> {getTotalDuration(recipe.phases)}h
             </span>

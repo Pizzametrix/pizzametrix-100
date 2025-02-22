@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Settings, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,6 +12,7 @@ import { SettingsPanel } from "./napolitain/components/SettingsPanel";
 import { supabase } from "@/integrations/supabase/client";
 import { SaveRecipeDialog } from "./napolitain/components/SaveRecipeDialog";
 import { useToast } from "@/components/ui/use-toast";
+import { RecipeDetails } from "./napolitain/components/RecipeDetails";
 
 export default function NapolitainCalculator() {
   const [totalWeight, setTotalWeight] = useState(1000);
@@ -38,6 +38,8 @@ export default function NapolitainCalculator() {
   const [prefermentHydration, setPrefermentHydration] = useState(BIGA_DEFAULTS.hydration);
   const [prefermentYeast, setPrefermentYeast] = useState(BIGA_DEFAULTS.yeast);
   const [isSaveDialogOpen, setIsSaveDialogOpen] = useState(false);
+  const [photos, setPhotos] = useState<string[]>([]);
+  const [description, setDescription] = useState("");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -236,6 +238,8 @@ export default function NapolitainCalculator() {
         preferment_flour: doughType !== 'direct' ? prefermentFlour : null,
         preferment_hydration: doughType !== 'direct' ? prefermentHydration : null,
         preferment_yeast: doughType !== 'direct' ? prefermentYeast : null,
+        photos: photos,
+        description: description || null,
       };
 
       const { error: insertError } = await supabase
@@ -317,6 +321,13 @@ export default function NapolitainCalculator() {
               doughType={doughType}
               ingredients={ingredients}
               ingredientsTotal={ingredientsTotal}
+            />
+
+            <RecipeDetails
+              photos={photos}
+              setPhotos={setPhotos}
+              description={description}
+              setDescription={setDescription}
             />
           </div>
         </div>

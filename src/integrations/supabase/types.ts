@@ -14,6 +14,7 @@ export type Database = {
           ball_weight: number
           created_at: string
           custom_yeast: number | null
+          description: string | null
           dough_type: string
           hydration: number
           id: string
@@ -23,6 +24,7 @@ export type Database = {
           nom: string
           oil: number | null
           phases: Json
+          photos: Json | null
           pizza_count: number
           preferment_flour: number | null
           preferment_hydration: number | null
@@ -38,6 +40,7 @@ export type Database = {
           ball_weight: number
           created_at?: string
           custom_yeast?: number | null
+          description?: string | null
           dough_type?: string
           hydration: number
           id?: string
@@ -47,6 +50,7 @@ export type Database = {
           nom: string
           oil?: number | null
           phases?: Json
+          photos?: Json | null
           pizza_count: number
           preferment_flour?: number | null
           preferment_hydration?: number | null
@@ -62,6 +66,7 @@ export type Database = {
           ball_weight?: number
           created_at?: string
           custom_yeast?: number | null
+          description?: string | null
           dough_type?: string
           hydration?: number
           id?: string
@@ -71,6 +76,7 @@ export type Database = {
           nom?: string
           oil?: number | null
           phases?: Json
+          photos?: Json | null
           pizza_count?: number
           preferment_flour?: number | null
           preferment_hydration?: number | null

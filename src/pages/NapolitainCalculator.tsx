@@ -140,7 +140,7 @@ export default function NapolitainCalculator() {
 
   const prefermentFlourWeight = doughType !== 'direct' ? Math.round((flourWeight * prefermentFlour) / 100) : 0;
   const prefermentWaterWeight = doughType !== 'direct' ? Math.round((prefermentFlourWeight * prefermentHydration) / 100) : 0;
-  const prefermentYeastWeight = doughType !== 'direct' ? Number(((prefermentFlourWeight * prefermentYeast * (isCustomYeastEnabled ? customYeast : yeast)) / 10000).toFixed(2)) : 0;
+  const prefermentYeastWeight = doughType !== 'direct' ? Number(((yeastWeight * prefermentYeast) / 100).toFixed(2)) : 0;
 
   const refreshFlourWeight = flourWeight - prefermentFlourWeight;
   const refreshWaterWeight = waterWeight - prefermentWaterWeight;

@@ -8,6 +8,8 @@ export interface Phase {
 export type YeastType = 'fraiche' | 'seche' | 'saf';
 export type DoughType = 'direct' | 'biga' | 'poolish';
 
+export type RecipeType = 'napolitaine' | 'teglia';
+
 export interface PrefermentDefaults {
   flour: number;
   hydration: number;

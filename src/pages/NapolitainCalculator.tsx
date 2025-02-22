@@ -4,7 +4,7 @@ import { Settings, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { BIGA_DEFAULTS, POOLISH_DEFAULTS } from "./napolitain/constants";
-import { Phase, DoughType, YeastType, Json } from "./napolitain/types";
+import { Phase, DoughType, YeastType, Json, RecipeType } from "./napolitain/types";
 import { DoughParameters } from "./napolitain/components/DoughParameters";
 import { PrefermentSection } from "./napolitain/components/PrefermentSection";
 import { RestPhases } from "./napolitain/components/RestPhases";
@@ -218,7 +218,7 @@ export default function NapolitainCalculator() {
       const recipeData = {
         user_id: user.id,
         nom: recipeName,
-        type: "napolitaine",
+        type: 'napolitaine' as RecipeType,
         pizza_count: pizzaCount,
         ball_weight: ballWeight,
         hydration: hydration,

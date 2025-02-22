@@ -1,6 +1,6 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ChefHat, Droplet, Scale, Cookie, Oil } from "lucide-react";
+import { ChefHat, Droplet, Scale, Cookie, FlaskConical } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface RecipeDetailParametersProps {
@@ -30,7 +30,7 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     parameters.push({
       name: "Huile",
       value: `${(recipe.oil * 100).toFixed(1)}%`,
-      icon: <Oil className="h-4 w-4" />,
+      icon: <FlaskConical className="h-4 w-4" />,
     });
   }
 

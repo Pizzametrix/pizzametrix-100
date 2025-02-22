@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
 import Calculators from "./pages/Calculators";
 import NapolitainCalculator from "./pages/NapolitainCalculator";
+import MyRecipes from "./pages/MyRecipes";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/calculators" element={<Calculators />} />
         <Route path="/calculators/napolitaine" element={<NapolitainCalculator />} />
+        <Route path="/mes-recettes" element={<MyRecipes />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

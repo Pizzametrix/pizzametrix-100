@@ -1,5 +1,5 @@
 
-import { Menu, LogOut, X, Calculator, Home } from "lucide-react";
+import { Menu, LogOut, X, Calculator, Home, Book } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -30,12 +30,14 @@ export const Sidebar = () => {
     if (location.pathname === "/calculators/napolitaine") {
       return "Pizza Napolitaine";
     }
+    if (location.pathname === "/mes-recettes") {
+      return "Mes recettes";
+    }
     return "Pizzametrix";
   };
 
   return (
     <>
-      {/* Barre de navigation mobile */}
       <div className="md:hidden w-full bg-slate border-b border-cream/10 p-4 flex justify-between items-center fixed top-0 z-50">
         <h1 className="font-montserrat font-bold text-xl text-[#F5E9D7]">{getTitle()}</h1>
         <Button
@@ -48,7 +50,6 @@ export const Sidebar = () => {
         </Button>
       </div>
 
-      {/* Menu latéral */}
       <div 
         className={`
           fixed md:static top-0 left-0 h-full w-64 bg-slate border-r border-cream/10
@@ -91,6 +92,14 @@ export const Sidebar = () => {
                   </Button>
                 </div>
               </div>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
+                onClick={() => handleNavigation('/mes-recettes')}
+              >
+                <Book className="mr-2 h-4 w-4" />
+                <span>Mes recettes</span>
+              </Button>
             </nav>
           </div>
           <div>
@@ -106,7 +115,6 @@ export const Sidebar = () => {
         </div>
       </div>
       
-      {/* Overlay pour fermer le menu sur mobile */}
       {isOpen && (
         <div 
           className="md:hidden fixed inset-0 bg-black/50 z-30"

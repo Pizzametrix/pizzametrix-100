@@ -125,8 +125,8 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
 
       <div className="flex gap-2">
         <Button
-          variant="outline"
-          className="flex-1 text-cream border-cream/10 hover:bg-cream/5"
+          variant="ghost"
+          className="flex-1 text-cream hover:bg-terracotta hover:text-cream"
           onClick={() => fileInputRef.current?.click()}
           disabled={isUploading}
         >
@@ -134,8 +134,8 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
           {isUploading ? "Chargement..." : "Ajouter des photos"}
         </Button>
         <Button
-          variant="outline"
-          className="text-cream border-cream/10 hover:bg-cream/5"
+          variant="ghost"
+          className="text-cream hover:bg-terracotta hover:text-cream"
           onClick={() => alert("Fonctionnalité à venir")}
           disabled={isUploading}
         >

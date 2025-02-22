@@ -25,7 +25,12 @@ export default function Register() {
       });
 
       if (error) {
-        throw error;
+        if (error.message.includes("User already registered")) {
+          toast.error("Cette adresse email est déjà utilisée. Veuillez vous connecter ou utiliser une autre adresse.");
+        } else {
+          toast.error(error.message || "Une erreur est survenue lors de l'inscription");
+        }
+        return;
       }
 
       if (data.user) {

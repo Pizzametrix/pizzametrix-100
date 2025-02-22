@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChefHat } from "lucide-react";
+import { Pizza } from "lucide-react";
 import { DoughType, Ingredient } from "../types";
 
 interface IngredientsTableProps {
@@ -18,7 +18,7 @@ export function IngredientsTable({
     <Card className="bg-slate border-cream/10">
       <CardHeader>
         <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
-          <ChefHat className="h-5 w-5 text-terracotta" /> Ingrédients
+          <Pizza className="h-5 w-5 text-terracotta" /> Ingrédients
         </CardTitle>
       </CardHeader>
       <CardContent>

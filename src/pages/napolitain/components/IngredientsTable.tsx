@@ -38,26 +38,26 @@ export function IngredientsTable({
                 <>
                   <span className="text-[#F5E9D7] text-right">
                     {ingredient.preferment > 0 ? (
-                      ingredient.name === "Levure" ? 
-                      ingredient.preferment.toFixed(2) : 
-                      ingredient.preferment
-                    ) : "-"}g
+                      `${ingredient.name === "Levure" ? 
+                        ingredient.preferment.toFixed(2) : 
+                        ingredient.preferment}g` 
+                    ) : "-"}
                   </span>
                   <span className="text-[#F5E9D7] text-right">
                     {ingredient.refresh > 0 ? (
-                      ingredient.name === "Levure" ? 
-                      ingredient.refresh.toFixed(2) : 
-                      ingredient.refresh
-                    ) : "-"}g
+                      `${ingredient.name === "Levure" ? 
+                        ingredient.refresh.toFixed(2) : 
+                        ingredient.refresh}g`
+                    ) : "-"}
                   </span>
                 </>
               ) : null}
               <span className="text-[#F5E9D7] text-right">
                 {ingredient.total > 0 ? (
-                  ingredient.name === "Levure" ? 
-                  ingredient.total.toFixed(2) : 
-                  ingredient.total
-                ) : "-"}g
+                  `${ingredient.name === "Levure" ? 
+                    ingredient.total.toFixed(2) : 
+                    ingredient.total}g`
+                ) : "-"}
               </span>
             </div>
           ))}

@@ -28,7 +28,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
 
   const getPrefermentText = () => {
     if (recipe.dough_type === 'direct') return 'Direct';
-    return `${recipe.dough_type.charAt(0).toUpperCase() + recipe.dough_type.slice(1)} ${recipe.preferment_flour}%`;
+    return recipe.dough_type.charAt(0).toUpperCase() + recipe.dough_type.slice(1);
   };
 
   const defaultImage = "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9";
@@ -46,7 +46,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         />
       </div>
       <div className="flex-1 p-4 text-left">
-        <h3 className="font-semibold text-lg text-cream mb-1">{recipe.nom}</h3>
+        <h3 className="font-semibold text-lg text-cream mb-1 truncate">{recipe.nom}</h3>
         <div className="text-sm text-cream/80 space-y-1">
           <p className="flex items-center gap-2">
             <span>{getPrefermentText()}</span>

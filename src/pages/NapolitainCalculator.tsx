@@ -1,40 +1,14 @@
-<lov-code>
-import { Sidebar } from "@/components/layouts/Sidebar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Minus, Plus, Settings, Clock, ChefHat, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-
-interface Phase {
-  id: number;
-  duration: number;
-  temperature: number;
-}
-
-type YeastType = 'fraiche' | 'seche' | 'saf';
-type DoughType = 'direct' | 'biga' | 'poolish';
-
-interface PrefermentDefaults {
-  flour: number;
-  hydration: number;
-  yeast: number;
-}
-
-const BIGA_DEFAULTS: PrefermentDefaults = {
-  flour: 50,
-  hydration: 48,
-  yeast: 100
-};
-
-const POOLISH_DEFAULTS: PrefermentDefaults = {
-  flour: 40,
-  hydration: 100,
-  yeast: 100
-};
+import { Settings } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sidebar } from "@/components/layouts/Sidebar";
+import { BIGA_DEFAULTS, POOLISH_DEFAULTS } from "./napolitain/constants";
+import { Phase, DoughType, YeastType } from "./napolitain/types";
+import { DoughParameters } from "./napolitain/components/DoughParameters";
+import { PrefermentSection } from "./napolitain/components/PrefermentSection";
+import { RestPhases } from "./napolitain/components/RestPhases";
+import { IngredientsTable } from "./napolitain/components/IngredientsTable";
+import { SettingsPanel } from "./napolitain/components/SettingsPanel";
 
 export default function NapolitainCalculator() {
   const [totalWeight, setTotalWeight] = useState(1000);
@@ -139,7 +113,6 @@ export default function NapolitainCalculator() {
     }
   };
 
-  // Reset preferment values when changing type
   useEffect(() => {
     if (doughType === 'biga') {
       setPrefermentFlour(BIGA_DEFAULTS.flour);
@@ -152,7 +125,6 @@ export default function NapolitainCalculator() {
     }
   }, [doughType]);
 
-  // Calculs des ingrédients avec pré-fermentation
   const totalPercentage = 100 + hydration + salt + 
     (isCustomYeastEnabled ? customYeast : yeast) + 
     (isOilEnabled ? oil : 0) + 
@@ -166,17 +138,14 @@ export default function NapolitainCalculator() {
   const oilWeight = isOilEnabled ? Number(((flourWeight * oil) / 100).toFixed(1)) : 0;
   const sugarWeight = isSugarEnabled ? Number(((flourWeight * sugar) / 100).toFixed(1)) : 0;
 
-  // Calculs pour la pré-fermentation
   const prefermentFlourWeight = doughType !== 'direct' ? Math.round((flourWeight * prefermentFlour) / 100) : 0;
   const prefermentWaterWeight = doughType !== 'direct' ? Math.round((prefermentFlourWeight * prefermentHydration) / 100) : 0;
   const prefermentYeastWeight = doughType !== 'direct' ? Number(((prefermentFlourWeight * prefermentYeast * (isCustomYeastEnabled ? customYeast : yeast)) / 10000).toFixed(2)) : 0;
 
-  // Calculs pour le rafraîchi
   const refreshFlourWeight = flourWeight - prefermentFlourWeight;
   const refreshWaterWeight = waterWeight - prefermentWaterWeight;
   const refreshYeastWeight = Number((yeastWeight - prefermentYeastWeight).toFixed(2));
 
-  // Création d'un tableau d'ingrédients pour le tri avec pré-fermentation
   const ingredients = [
     { 
       name: "Farine",
@@ -224,459 +193,51 @@ export default function NapolitainCalculator() {
       <main className="flex-1 p-4 pb-24 md:p-8 md:pb-24 mt-16 md:mt-0">
         <div className="max-w-2xl mx-auto">
           <div className="space-y-6">
-            <Card className="bg-slate border-cream/10">
-              <CardHeader>
-                <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
-                  <Settings className="h-5 w-5 text-terracotta" /> Paramètres de la pâte
-                </CardTitle>
-                <p className="text-[#F5E9D7]/80 text-sm mt-1">Poids total {totalWeight}g</p>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Nombre de pizzas</label>
-                    <div className="flex items-center bg-white/5 rounded-md h-12">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
-                        onClick={() => handleDecrement(pizzaCount, setPizzaCount, 1)}
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <div className="flex-1">
-                        <Input
-                          type="text"
-                          value={pizzaCount}
-                          readOnly
-                          className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                        />
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
-                        onClick={() => handleIncrement(pizzaCount, setPizzaCount, 300)}
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
+            <DoughParameters
+              totalWeight={totalWeight}
+              pizzaCount={pizzaCount}
+              setPizzaCount={setPizzaCount}
+              ballWeight={ballWeight}
+              setBallWeight={setBallWeight}
+              hydration={hydration}
+              setHydration={setHydration}
+              salt={salt}
+              setSalt={setSalt}
+              oil={oil}
+              setOil={setOil}
+              sugar={sugar}
+              setSugar={setSugar}
+              isOilEnabled={isOilEnabled}
+              isSugarEnabled={isSugarEnabled}
+              handleIncrement={handleIncrement}
+              handleDecrement={handleDecrement}
+            />
 
-                  <div className="space-y-2">
-                    <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Poids des pâtons</label>
-                    <div className="flex items-center bg-white/5 rounded-md h-12">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                        onClick={() => handleDecrement(ballWeight, setBallWeight, 100, 5)}
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <div className="flex-1 min-w-0">
-                        <Input
-                          type="text"
-                          value={`${ballWeight}g`}
-                          readOnly
-                          className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                        />
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                        onClick={() => handleIncrement(ballWeight, setBallWeight, 600, 5)}
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
+            <PrefermentSection
+              doughType={doughType}
+              prefermentFlour={prefermentFlour}
+              setPrefermentFlour={setPrefermentFlour}
+              prefermentHydration={prefermentHydration}
+              setPrefermentHydration={setPrefermentHydration}
+              prefermentYeast={prefermentYeast}
+              setPrefermentYeast={setPrefermentYeast}
+              handleIncrement={handleIncrement}
+              handleDecrement={handleDecrement}
+            />
 
-                  <div className="space-y-2">
-                    <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Hydratation</label>
-                    <div className="flex items-center bg-white/5 rounded-md h-12">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                        onClick={() => handleDecrement(hydration, setHydration, 50)}
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <div className="flex-1 min-w-0">
-                        <Input
-                          type="text"
-                          value={`${hydration}%`}
-                          readOnly
-                          className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                        />
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                        onClick={() => handleIncrement(hydration, setHydration, 100)}
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
+            <RestPhases
+              phases={phases}
+              totalDuration={totalDuration}
+              handlePhaseChange={handlePhaseChange}
+              addPhase={addPhase}
+              removePhase={removePhase}
+            />
 
-                  <div className="space-y-2">
-                    <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Sel</label>
-                    <div className="flex items-center bg-white/5 rounded-md h-12">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                        onClick={() => handleDecrement(salt, setSalt, 0, 0.1)}
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <div className="flex-1 min-w-0">
-                        <Input
-                          type="text"
-                          value={`${salt.toFixed(1)}%`}
-                          readOnly
-                          className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                        />
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                        onClick={() => handleIncrement(salt, setSalt, 5, 0.1)}
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-
-                  {isOilEnabled && (
-                    <div className="space-y-2">
-                      <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Huile</label>
-                      <div className="flex items-center bg-white/5 rounded-md h-12">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                          onClick={() => handleDecrement(oil, setOil, 0.1, 0.1)}
-                        >
-                          <Minus className="h-4 w-4" />
-                        </Button>
-                        <div className="flex-1 min-w-0">
-                          <Input
-                            type="text"
-                            value={`${oil.toFixed(1)}%`}
-                            readOnly
-                            className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                          />
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                          onClick={() => handleIncrement(oil, setOil, 10, 0.1)}
-                        >
-                          <Plus className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-
-                  {isSugarEnabled && (
-                    <div className="space-y-2">
-                      <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Sucre/Miel</label>
-                      <div className="flex items-center bg-white/5 rounded-md h-12">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                          onClick={() => handleDecrement(sugar, setSugar, 0.1, 0.1)}
-                        >
-                          <Minus className="h-4 w-4" />
-                        </Button>
-                        <div className="flex-1 min-w-0">
-                          <Input
-                            type="text"
-                            value={`${sugar.toFixed(1)}%`}
-                            readOnly
-                            className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                          />
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                          onClick={() => handleIncrement(sugar, setSugar, 10, 0.1)}
-                        >
-                          <Plus className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-
-      {(doughType === 'biga' || doughType === 'poolish') && (
-        <Card className="bg-slate border-cream/10">
-          <CardHeader>
-            <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
-              <ChefHat className="h-5 w-5 text-terracotta" /> 
-              {doughType === 'biga' ? 'Biga' : 'Poolish'}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Farine (%)</label>
-                <div className="flex items-center bg-white/5 rounded-md h-12">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                    onClick={() => handleDecrement(prefermentFlour, setPrefermentFlour, 20)}
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <div className="flex-1 min-w-0">
-                    <Input
-                      type="text"
-                      value={`${prefermentFlour}%`}
-                      readOnly
-                      className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                    />
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                    onClick={() => handleIncrement(prefermentFlour, setPrefermentFlour, 100)}
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Hydratation (%)</label>
-                <div className="flex items-center bg-white/5 rounded-md h-12">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                    onClick={() => handleDecrement(prefermentHydration, setPrefermentHydration, 20)}
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <div className="flex-1 min-w-0">
-                    <Input
-                      type="text"
-                      value={`${prefermentHydration}%`}
-                      readOnly
-                      className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                    />
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                    onClick={() => handleIncrement(prefermentHydration, setPrefermentHydration, 100)}
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Levure (%)</label>
-                <div className="flex items-center bg-white/5 rounded-md h-12">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                    onClick={() => handleDecrement(prefermentYeast, setPrefermentYeast, 20)}
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <div className="flex-1 min-w-0">
-                    <Input
-                      type="text"
-                      value={`${prefermentYeast}%`}
-                      readOnly
-                      className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                    />
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                    onClick={() => handleIncrement(prefermentYeast, setPrefermentYeast, 100)}
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-            <Card className="bg-slate border-cream/10">
-              <CardHeader>
-                <div className="flex justify-between items-center">
-                  <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-terracotta" /> Phases de repos
-                  </CardTitle>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
-                      onClick={() => removePhase()}
-                      disabled={phases.length <= 1}
-                    >
-                      <Minus className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
-                      onClick={() => addPhase()}
-                      disabled={phases.length >= 4}
-                    >
-                      <Plus className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                <p className="text-[#F5E9D7]/80 text-sm mt-1">Durée totale {totalDuration}h</p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {phases.map((phase, index) => (
-                  <div key={phase.id} className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Durée (h)</label>
-                      <div className="flex items-center bg-white/5 rounded-md h-12">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                          onClick={() => handlePhaseChange(phase.id, 'duration', phase.duration - 0.5)}
-                        >
-                          <Minus className="h-4 w-4" />
-                        </Button>
-                        <Input
-                          type="text"
-                          value={`${phase.duration}h`}
-                          readOnly
-                          className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                        />
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                          onClick={() => handlePhaseChange(phase.id, 'duration', phase.duration + 0.5)}
-                        >
-                          <Plus className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Température (°C)</label>
-                      <div className="flex items-center bg-white/5 rounded-md h-12">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                          onClick={() => handlePhaseChange(phase.id, 'temperature', phase.temperature - 1)}
-                        >
-                          <Minus className="h-4 w-4" />
-                        </Button>
-                        <Input
-                          type="text"
-                          value={`${phase.temperature}°C`}
-                          readOnly
-                          className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                        />
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                          onClick={() => handlePhaseChange(phase.id, 'temperature', phase.temperature + 1)}
-                        >
-                          <Plus className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-      <Card className="bg-slate border-cream/10">
-        <CardHeader>
-          <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
-            <ChefHat className="h-5 w-5 text-terracotta" /> Ingrédients
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            {doughType !== 'direct' && (
-              <div className="grid grid-cols-4 gap-4 py-2 border-b border-cream/10">
-                <span className="text-[#F5E9D7]/60">Ingrédient</span>
-                <span className="text-right text-[#F5E9D7]/60">{doughType === 'biga' ? 'Biga' : 'Poolish'}</span>
-                <span className="text-right text-[#F5E9D7]/60">Rafraîchi</span>
-                <span className="text-right text-[#F5E9D7]/60">Total</span>
-              </div>
-            )}
-            {ingredients.map((ingredient) => (
-              <div key={ingredient.name} className={`grid ${doughType !== 'direct' ? 'grid-cols-4' : 'grid-cols-2'} gap-4 py-2 border-b border-cream/10`}>
-                <span className="text-[#F5E9D7]">{ingredient.name}</span>
-                {doughType !== 'direct' ? (
-                  <>
-                    <span className="text-[#F5E9D7] text-right">
-                      {ingredient.preferment > 0 ? (
-                        ingredient.name === "Levure" ? 
-                        ingredient.preferment.toFixed(2) : 
-                        ingredient.preferment
-                      ) : "-"}g
-                    </span>
-                    <span className="text-[#F5E9D7] text-right">
-                      {ingredient.refresh > 0 ? (
-                        ingredient.name === "Levure" ? 
-                        ingredient.refresh.toFixed(2) : 
-                        ingredient.refresh
-                      ) : "-"}g
-                    </span>
-                  </>
-                ) : null}
-                <span className="text-[#F5E9D7] text-right">
-                  {ingredient.name === "Levure" ? 
-                    ingredient.total.toFixed(2) : 
-                    ingredient.total}g
-                </span>
-              </div>
-            ))}
-            <div className={`grid ${doughType !== 'direct' ? 'grid-cols-4' : 'grid-cols-2'} gap-4 py-2 font-medium`}>
-              <span className="text-[#F5E9D7]">Total</span>
-              {doughType !== 'direct' && (
-                <>
-                  <span className="text-[#F5E9D7] text-right">
-                    {Math.round(ingredients.reduce((sum, ing) => sum + ing.preferment, 0))}g
-                  </span>
-                  <span className="text-[#F5E9D7] text-right">
-                    {Math.round(ingredients.reduce((sum, ing) => sum + ing.refresh, 0))}g
-                  </span>
-                </>
-              )}
-              <span className="text-[#F5E9D7] text-right">{ingredientsTotal}g</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+            <IngredientsTable
+              doughType={doughType}
+              ingredients={ingredients}
+              ingredientsTotal={ingredientsTotal}
+            />
           </div>
         </div>
       </main>
@@ -690,13 +251,24 @@ export default function NapolitainCalculator() {
         <Settings className="h-6 w-6" />
       </Button>
 
-      {isSettingsOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 transition-opacity z-40"
-          onClick={() => setIsSettingsOpen(false)}
-        />
-      )}
-
-      <div
-        id="settings-panel"
-        className={`fixed inset-y-0 right-0 w-3/4 sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration
+      <SettingsPanel
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        yeastType={yeastType}
+        setYeastType={setYeastType}
+        doughType={doughType}
+        setDoughType={setDoughType}
+        isOilEnabled={isOilEnabled}
+        setIsOilEnabled={setIsOilEnabled}
+        isSugarEnabled={isSugarEnabled}
+        setIsSugarEnabled={setIsSugarEnabled}
+        isCustomYeastEnabled={isCustomYeastEnabled}
+        setIsCustomYeastEnabled={setIsCustomYeastEnabled}
+        customYeast={customYeast}
+        handleIncrement={handleIncrement}
+        handleDecrement={handleDecrement}
+        setCustomYeast={setCustomYeast}
+      />
+    </div>
+  );
+}

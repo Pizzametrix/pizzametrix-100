@@ -1,7 +1,8 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ChefHat, Minus, Plus } from "lucide-react";
+import { PocketKnife } from "lucide-react";
 import { DoughType } from "../types";
 
 interface PrefermentSectionProps {
@@ -33,14 +34,14 @@ export function PrefermentSection({
     <Card className="bg-slate border-cream/10">
       <CardHeader>
         <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
-          <ChefHat className="h-5 w-5 text-terracotta" /> 
+          <PocketKnife className="h-5 w-5 text-terracotta" /> 
           {doughType === 'biga' ? 'Biga' : 'Poolish'}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Farine (%)</label>
+            <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Farine</label>
             <div className="flex items-center bg-white/5 rounded-md h-12">
               <Button
                 variant="ghost"
@@ -70,7 +71,7 @@ export function PrefermentSection({
           </div>
 
           <div className="space-y-2">
-            <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Hydratation (%)</label>
+            <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Hydratation</label>
             <div className="flex items-center bg-white/5 rounded-md h-12">
               <Button
                 variant="ghost"
@@ -100,7 +101,7 @@ export function PrefermentSection({
           </div>
 
           <div className="space-y-2">
-            <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Levure (%)</label>
+            <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Levure</label>
             <div className="flex items-center bg-white/5 rounded-md h-12">
               <Button
                 variant="ghost"

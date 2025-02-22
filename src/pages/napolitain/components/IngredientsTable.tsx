@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChefHat } from "lucide-react";
 import { DoughType, Ingredient } from "../types";
@@ -24,7 +25,7 @@ export function IngredientsTable({
         <div className="space-y-2">
           {doughType !== 'direct' && (
             <div className="grid grid-cols-4 gap-4 py-2 border-b border-cream/10">
-              <span className="text-[#F5E9D7]/60">Ingrédient</span>
+              <span className="text-[#F5E9D7]/60">&nbsp;</span>
               <span className="text-right text-[#F5E9D7]/60">{doughType === 'biga' ? 'Biga' : 'Poolish'}</span>
               <span className="text-right text-[#F5E9D7]/60">Rafraîchi</span>
               <span className="text-right text-[#F5E9D7]/60">Total</span>
@@ -52,9 +53,11 @@ export function IngredientsTable({
                 </>
               ) : null}
               <span className="text-[#F5E9D7] text-right">
-                {ingredient.name === "Levure" ? 
+                {ingredient.total > 0 ? (
+                  ingredient.name === "Levure" ? 
                   ingredient.total.toFixed(2) : 
-                  ingredient.total}g
+                  ingredient.total
+                ) : "-"}g
               </span>
             </div>
           ))}

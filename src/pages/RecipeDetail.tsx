@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Droplet, Clock, Camera, ChefHat, Edit2, Save, Plus } from "lucide-react";
+import { Droplet, Clock, Camera, ChefHat, Edit2, Save, Plus, Pizza, PocketKnife } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
@@ -13,6 +12,7 @@ import { RecipeDetailParameters } from "./recipe/components/RecipeDetailParamete
 import { RecipeDetailPreferment } from "./recipe/components/RecipeDetailPreferment";
 import { RecipeDetailPhases } from "./recipe/components/RecipeDetailPhases";
 import { RecipePhotos } from "./recipe/components/RecipePhotos";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 export default function RecipeDetail() {
   const { id } = useParams();
@@ -101,7 +101,7 @@ export default function RecipeDetail() {
             {/* Section description */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <h2 className="text-cream flex items-center gap-2">
+                <h2 className="text-cream text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
                   <Edit2 className="h-5 w-5 text-terracotta" /> Notes
                 </h2>
                 {isEditingDescription ? (
@@ -139,15 +139,74 @@ export default function RecipeDetail() {
             </div>
 
             {/* Section paramètres */}
-            <RecipeDetailParameters recipe={recipe} />
+            <div className="space-y-2">
+              <h2 className="text-2xl font-semibold leading-none tracking-tight text-cream flex items-center gap-2">
+                <Pizza className="h-5 w-5 text-terracotta" /> Paramètres
+              </h2>
+              <div className="rounded-md border border-cream/10">
+                <Table>
+                  <TableBody>
+                    <TableRow className="border-cream/10">
+                      <TableCell className="text-cream/80 flex items-center gap-2">
+                      </TableCell>
+                      <TableCell className="text-right text-cream"></TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
 
             {/* Section préferment */}
             {recipe.dough_type !== 'direct' && (
-              <RecipeDetailPreferment recipe={recipe} />
+              <div className="space-y-2">
+                <h2 className="text-2xl font-semibold leading-none tracking-tight text-cream flex items-center gap-2">
+                  <PocketKnife className="h-5 w-5 text-terracotta" /> 
+                  {recipe.dough_type === 'biga' ? 'Biga' : 'Poolish'}
+                </h2>
+                <div className="rounded-md border border-cream/10">
+                  <Table>
+                    <TableBody>
+                      <TableRow className="border-cream/10">
+                        <TableCell className="text-cream/80 flex items-center gap-2">
+                        </TableCell>
+                        <TableCell className="text-right text-cream"></TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
             )}
 
             {/* Section phases */}
-            <RecipeDetailPhases phases={recipe.phases} />
+            <div className="space-y-2">
+              <h2 className="text-2xl font-semibold leading-none tracking-tight text-cream flex items-center gap-2">
+                <Clock className="h-5 w-5 text-terracotta" /> Phases de repos
+              </h2>
+              <p className="text-cream/60 text-sm">Durée totale : {recipe.phases.reduce((acc: number, phase: any) => acc + phase.duration, 0)}h</p>
+              <div className="rounded-md border border-cream/10">
+                <Table>
+                  <TableBody>
+                    {recipe.phases.map((phase: any, index: number) => (
+                      <TableRow key={phase.id} className={index === recipe.phases.length - 1 ? "" : "border-cream/10"}>
+                        <TableCell className="text-cream/80">Phase {index + 1}</TableCell>
+                        <TableCell className="text-cream">
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-4 w-4 text-cream/60" />
+                            {phase.duration}h
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right text-cream">
+                          <div className="flex items-center justify-end gap-2">
+                            <Thermometer className="h-4 w-4 text-cream/60" />
+                            {phase.temperature}°C
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
           </main>
         </div>
       </div>

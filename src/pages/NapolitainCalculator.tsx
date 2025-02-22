@@ -477,17 +477,17 @@ export default function NapolitainCalculator() {
           </div>
 
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-1">
               <Label className="text-cream text-base">Huile</Label>
-              <Switch className="data-[state=checked]:bg-terracotta" />
+              <Switch className="h-7 w-12 data-[state=checked]:bg-terracotta" />
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-1">
               <Label className="text-cream text-base">Sucre/Miel</Label>
-              <Switch className="data-[state=checked]:bg-terracotta" />
+              <Switch className="h-7 w-12 data-[state=checked]:bg-terracotta" />
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-1">
               <Label className="text-cream text-base">% de levure</Label>
-              <Switch className="data-[state=checked]:bg-terracotta" />
+              <Switch className="h-7 w-12 data-[state=checked]:bg-terracotta" />
             </div>
           </div>
         </div>

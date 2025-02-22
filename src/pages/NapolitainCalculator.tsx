@@ -3,8 +3,11 @@ import { Sidebar } from "@/components/layouts/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Minus, Plus, Settings, Clock, ChefHat } from "lucide-react";
+import { Minus, Plus, Settings, Clock, ChefHat, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 interface Phase {
   id: number;
@@ -19,6 +22,7 @@ export default function NapolitainCalculator() {
   const [hydration, setHydration] = useState(65);
   const [salt, setSalt] = useState(2.5);
   const [yeast, setYeast] = useState(0.05);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [phases, setPhases] = useState<Phase[]>([
     { id: 1, duration: 18, temperature: 5 },
     { id: 2, duration: 6, temperature: 20 },
@@ -74,7 +78,7 @@ export default function NapolitainCalculator() {
   const ingredientsTotal = Math.round(flourWeight + waterWeight + saltWeight + yeastWeight);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-slate">
+    <div className="min-h-screen flex flex-col md:flex-row bg-slate relative">
       <Sidebar />
       <main className="flex-1 p-4 md:p-8 mt-16 md:mt-0">
         <div className="max-w-2xl mx-auto">
@@ -337,6 +341,91 @@ export default function NapolitainCalculator() {
           </div>
         </div>
       </main>
+
+      {/* Bouton flottant Réglages */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-terracotta text-cream hover:bg-terracotta/90 shadow-lg"
+        onClick={() => setIsSettingsOpen(true)}
+      >
+        <Settings className="h-6 w-6" />
+      </Button>
+
+      {/* Slide-in Panel */}
+      <div
+        className={`fixed inset-y-0 right-0 w-full sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-300 ease-in-out ${
+          isSettingsOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl font-semibold text-cream">Paramètres</h2>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsSettingsOpen(false)}
+            className="text-cream hover:text-terracotta hover:bg-cream/5"
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
+
+        <div className="space-y-8">
+          {/* Type de levure */}
+          <div className="space-y-4">
+            <Label className="text-cream font-medium">Type de levure</Label>
+            <RadioGroup defaultValue="fraiche" className="space-y-2">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="fraiche" id="fraiche" className="border-cream text-terracotta" />
+                <Label htmlFor="fraiche" className="text-cream">Fraîche</Label>
+              </div>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="seche" id="seche" className="border-cream text-terracotta" />
+                <Label htmlFor="seche" className="text-cream">Sèche active</Label>
+              </div>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="saf" id="saf" className="border-cream text-terracotta" />
+                <Label htmlFor="saf" className="text-cream">Instantanée (SAF)</Label>
+              </div>
+            </RadioGroup>
+          </div>
+
+          {/* Type d'empâtement */}
+          <div className="space-y-4">
+            <Label className="text-cream font-medium">Type d'empâtement</Label>
+            <RadioGroup defaultValue="direct" className="space-y-2">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="direct" id="direct" className="border-cream text-terracotta" />
+                <Label htmlFor="direct" className="text-cream">Direct</Label>
+              </div>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="biga" id="biga" className="border-cream text-terracotta" />
+                <Label htmlFor="biga" className="text-cream">Biga</Label>
+              </div>
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="poolish" id="poolish" className="border-cream text-terracotta" />
+                <Label htmlFor="poolish" className="text-cream">Poolish</Label>
+              </div>
+            </RadioGroup>
+          </div>
+
+          {/* Switches */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <Label className="text-cream">Huile</Label>
+              <Switch className="data-[state=checked]:bg-terracotta" />
+            </div>
+            <div className="flex items-center justify-between">
+              <Label className="text-cream">Sucre/Miel</Label>
+              <Switch className="data-[state=checked]:bg-terracotta" />
+            </div>
+            <div className="flex items-center justify-between">
+              <Label className="text-cream">% de levure</Label>
+              <Switch className="data-[state=checked]:bg-terracotta" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

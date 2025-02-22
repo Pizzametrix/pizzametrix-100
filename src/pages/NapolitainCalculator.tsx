@@ -15,6 +15,25 @@ interface Phase {
 }
 
 type YeastType = 'fraiche' | 'seche' | 'saf';
+type DoughType = 'direct' | 'biga' | 'poolish';
+
+interface PrefermentDefaults {
+  flour: number;
+  hydration: number;
+  yeast: number;
+}
+
+const BIGA_DEFAULTS: PrefermentDefaults = {
+  flour: 50,
+  hydration: 48,
+  yeast: 100
+};
+
+const POOLISH_DEFAULTS: PrefermentDefaults = {
+  flour: 40,
+  hydration: 100,
+  yeast: 100
+};
 
 export default function NapolitainCalculator() {
   const [totalWeight, setTotalWeight] = useState(1000);
@@ -35,6 +54,10 @@ export default function NapolitainCalculator() {
     { id: 2, duration: 6, temperature: 20 },
   ]);
   const [yeastType, setYeastType] = useState<YeastType>('fraiche');
+  const [doughType, setDoughType] = useState<DoughType>('direct');
+  const [prefermentFlour, setPrefermentFlour] = useState(BIGA_DEFAULTS.flour);
+  const [prefermentHydration, setPrefermentHydration] = useState(BIGA_DEFAULTS.hydration);
+  const [prefermentYeast, setPrefermentYeast] = useState(BIGA_DEFAULTS.yeast);
 
   useEffect(() => {
     setTotalWeight(pizzaCount * ballWeight);
@@ -115,7 +138,20 @@ export default function NapolitainCalculator() {
     }
   };
 
-  // Calcul du poids de farine et des autres ingrédients
+  // Reset preferment values when changing type
+  useEffect(() => {
+    if (doughType === 'biga') {
+      setPrefermentFlour(BIGA_DEFAULTS.flour);
+      setPrefermentHydration(BIGA_DEFAULTS.hydration);
+      setPrefermentYeast(BIGA_DEFAULTS.yeast);
+    } else if (doughType === 'poolish') {
+      setPrefermentFlour(POOLISH_DEFAULTS.flour);
+      setPrefermentHydration(POOLISH_DEFAULTS.hydration);
+      setPrefermentYeast(POOLISH_DEFAULTS.yeast);
+    }
+  }, [doughType]);
+
+  // Calculs des ingrédients avec pré-fermentation
   const totalPercentage = 100 + hydration + salt + 
     (isCustomYeastEnabled ? customYeast : yeast) + 
     (isOilEnabled ? oil : 0) + 
@@ -129,17 +165,57 @@ export default function NapolitainCalculator() {
   const oilWeight = isOilEnabled ? Number(((flourWeight * oil) / 100).toFixed(1)) : 0;
   const sugarWeight = isSugarEnabled ? Number(((flourWeight * sugar) / 100).toFixed(1)) : 0;
 
-  // Création d'un tableau d'ingrédients pour le tri
-  const ingredients = [
-    { name: "Farine", weight: flourWeight },
-    { name: "Eau", weight: waterWeight },
-    { name: "Sel", weight: saltWeight },
-    { name: "Levure", weight: yeastWeight },
-    ...(isOilEnabled ? [{ name: "Huile", weight: oilWeight }] : []),
-    ...(isSugarEnabled ? [{ name: "Sucre", weight: sugarWeight }] : [])
-  ].sort((a, b) => b.weight - a.weight);
+  // Calculs pour la pré-fermentation
+  const prefermentFlourWeight = doughType !== 'direct' ? Math.round((flourWeight * prefermentFlour) / 100) : 0;
+  const prefermentWaterWeight = doughType !== 'direct' ? Math.round((prefermentFlourWeight * prefermentHydration) / 100) : 0;
+  const prefermentYeastWeight = doughType !== 'direct' ? Number(((prefermentFlourWeight * prefermentYeast * (isCustomYeastEnabled ? customYeast : yeast)) / 10000).toFixed(2)) : 0;
 
-  const ingredientsTotal = Math.round(ingredients.reduce((sum, ing) => sum + ing.weight, 0));
+  // Calculs pour le rafraîchi
+  const refreshFlourWeight = flourWeight - prefermentFlourWeight;
+  const refreshWaterWeight = waterWeight - prefermentWaterWeight;
+  const refreshYeastWeight = Number((yeastWeight - prefermentYeastWeight).toFixed(2));
+
+  // Création d'un tableau d'ingrédients pour le tri avec pré-fermentation
+  const ingredients = [
+    { 
+      name: "Farine",
+      preferment: prefermentFlourWeight,
+      refresh: refreshFlourWeight,
+      total: flourWeight 
+    },
+    { 
+      name: "Eau",
+      preferment: prefermentWaterWeight,
+      refresh: refreshWaterWeight,
+      total: waterWeight
+    },
+    { 
+      name: "Sel",
+      preferment: 0,
+      refresh: saltWeight,
+      total: saltWeight
+    },
+    { 
+      name: "Levure",
+      preferment: prefermentYeastWeight,
+      refresh: refreshYeastWeight,
+      total: yeastWeight
+    },
+    ...(isOilEnabled ? [{ 
+      name: "Huile",
+      preferment: 0,
+      refresh: oilWeight,
+      total: oilWeight
+    }] : []),
+    ...(isSugarEnabled ? [{ 
+      name: "Sucre",
+      preferment: 0,
+      refresh: sugarWeight,
+      total: sugarWeight
+    }] : [])
+  ].sort((a, b) => b.total - a.total);
+
+  const ingredientsTotal = Math.round(ingredients.reduce((sum, ing) => sum + ing.total, 0));
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate relative">
@@ -343,6 +419,110 @@ export default function NapolitainCalculator() {
               </CardContent>
             </Card>
 
+      {(doughType === 'biga' || doughType === 'poolish') && (
+        <Card className="bg-slate border-cream/10">
+          <CardHeader>
+            <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
+              <ChefHat className="h-5 w-5 text-terracotta" /> 
+              {doughType === 'biga' ? 'Biga' : 'Poolish'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Farine (%)</label>
+                <div className="flex items-center bg-white/5 rounded-md h-12">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                    onClick={() => handleDecrement(prefermentFlour, setPrefermentFlour, 20)}
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <div className="flex-1 min-w-0">
+                    <Input
+                      type="text"
+                      value={`${prefermentFlour}%`}
+                      readOnly
+                      className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                    />
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                    onClick={() => handleIncrement(prefermentFlour, setPrefermentFlour, 100)}
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Hydratation (%)</label>
+                <div className="flex items-center bg-white/5 rounded-md h-12">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                    onClick={() => handleDecrement(prefermentHydration, setPrefermentHydration, 20)}
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <div className="flex-1 min-w-0">
+                    <Input
+                      type="text"
+                      value={`${prefermentHydration}%`}
+                      readOnly
+                      className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                    />
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                    onClick={() => handleIncrement(prefermentHydration, setPrefermentHydration, 100)}
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-base text-[#F5E9D7]/80 block text-center font-medium">Levure (%)</label>
+                <div className="flex items-center bg-white/5 rounded-md h-12">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                    onClick={() => handleDecrement(prefermentYeast, setPrefermentYeast, 20)}
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <div className="flex-1 min-w-0">
+                    <Input
+                      type="text"
+                      value={`${prefermentYeast}%`}
+                      readOnly
+                      className="w-full bg-transparent border-0 text-center text-white text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
+                    />
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
+                    onClick={() => handleIncrement(prefermentYeast, setPrefermentYeast, 100)}
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
             <Card className="bg-slate border-cream/10">
               <CardHeader>
                 <div className="flex justify-between items-center">
@@ -435,29 +615,67 @@ export default function NapolitainCalculator() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate border-cream/10">
-              <CardHeader>
-                <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
-                  <ChefHat className="h-5 w-5 text-terracotta" /> Ingrédients
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {ingredients.map((ingredient, index) => (
-                    <div key={ingredient.name} className="grid grid-cols-2 gap-4 py-2 border-b border-cream/10">
-                      <span className="text-[#F5E9D7]">{ingredient.name}</span>
-                      <span className="text-[#F5E9D7] text-right">
-                        {ingredient.name === "Levure" ? ingredient.weight.toFixed(2) : ingredient.weight}g
-                      </span>
-                    </div>
-                  ))}
-                  <div className="grid grid-cols-2 gap-4 py-2 font-medium">
-                    <span className="text-[#F5E9D7]">Total</span>
-                    <span className="text-[#F5E9D7] text-right">{ingredientsTotal}g</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+      <Card className="bg-slate border-cream/10">
+        <CardHeader>
+          <CardTitle className="text-[#F5E9D7] flex items-center gap-2">
+            <ChefHat className="h-5 w-5 text-terracotta" /> Ingrédients
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            {doughType !== 'direct' && (
+              <div className="grid grid-cols-4 gap-4 py-2 border-b border-cream/10">
+                <span className="text-[#F5E9D7]/60">Ingrédient</span>
+                <span className="text-right text-[#F5E9D7]/60">{doughType === 'biga' ? 'Biga' : 'Poolish'}</span>
+                <span className="text-right text-[#F5E9D7]/60">Rafraîchi</span>
+                <span className="text-right text-[#F5E9D7]/60">Total</span>
+              </div>
+            )}
+            {ingredients.map((ingredient) => (
+              <div key={ingredient.name} className={`grid ${doughType !== 'direct' ? 'grid-cols-4' : 'grid-cols-2'} gap-4 py-2 border-b border-cream/10`}>
+                <span className="text-[#F5E9D7]">{ingredient.name}</span>
+                {doughType !== 'direct' ? (
+                  <>
+                    <span className="text-[#F5E9D7] text-right">
+                      {ingredient.preferment > 0 ? (
+                        ingredient.name === "Levure" ? 
+                        ingredient.preferment.toFixed(2) : 
+                        ingredient.preferment
+                      ) : "-"}g
+                    </span>
+                    <span className="text-[#F5E9D7] text-right">
+                      {ingredient.refresh > 0 ? (
+                        ingredient.name === "Levure" ? 
+                        ingredient.refresh.toFixed(2) : 
+                        ingredient.refresh
+                      ) : "-"}g
+                    </span>
+                  </>
+                ) : null}
+                <span className="text-[#F5E9D7] text-right">
+                  {ingredient.name === "Levure" ? 
+                    ingredient.total.toFixed(2) : 
+                    ingredient.total}g
+                </span>
+              </div>
+            ))}
+            <div className={`grid ${doughType !== 'direct' ? 'grid-cols-4' : 'grid-cols-2'} gap-4 py-2 font-medium`}>
+              <span className="text-[#F5E9D7]">Total</span>
+              {doughType !== 'direct' && (
+                <>
+                  <span className="text-[#F5E9D7] text-right">
+                    {Math.round(ingredients.reduce((sum, ing) => sum + ing.preferment, 0))}g
+                  </span>
+                  <span className="text-[#F5E9D7] text-right">
+                    {Math.round(ingredients.reduce((sum, ing) => sum + ing.refresh, 0))}g
+                  </span>
+                </>
+              )}
+              <span className="text-[#F5E9D7] text-right">{ingredientsTotal}g</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
           </div>
         </div>
       </main>
@@ -480,176 +698,4 @@ export default function NapolitainCalculator() {
 
       <div
         id="settings-panel"
-        className={`fixed inset-y-0 right-0 w-3/4 sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-50 overflow-y-auto ${
-          isSettingsOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-cream">Réglages</h2>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsSettingsOpen(false)}
-            className="text-cream hover:text-terracotta hover:bg-cream/5"
-          >
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
-
-        <div className="space-y-8">
-          <div className="space-y-4">
-            <Label className="text-cream font-medium text-base">Type de levure</Label>
-            <RadioGroup 
-              defaultValue="fraiche" 
-              value={yeastType}
-              onValueChange={(value: YeastType) => setYeastType(value)}
-              className="flex flex-wrap gap-2"
-            >
-              <div className="inline-flex">
-                <RadioGroupItem
-                  value="fraiche"
-                  id="fraiche"
-                  className="peer hidden"
-                />
-                <Label
-                  htmlFor="fraiche"
-                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
-                >
-                  Fraîche
-                </Label>
-              </div>
-              <div className="inline-flex">
-                <RadioGroupItem
-                  value="seche"
-                  id="seche"
-                  className="peer hidden"
-                />
-                <Label
-                  htmlFor="seche"
-                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
-                >
-                  Sèche active
-                </Label>
-              </div>
-              <div className="inline-flex">
-                <RadioGroupItem
-                  value="saf"
-                  id="saf"
-                  className="peer hidden"
-                />
-                <Label
-                  htmlFor="saf"
-                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
-                >
-                  Instantanée (SAF)
-                </Label>
-              </div>
-            </RadioGroup>
-          </div>
-
-          <div className="space-y-4">
-            <Label className="text-cream font-medium text-base">Type d'empâtement</Label>
-            <RadioGroup defaultValue="direct" className="flex flex-wrap gap-2">
-              <div className="inline-flex">
-                <RadioGroupItem
-                  value="direct"
-                  id="direct"
-                  className="peer hidden"
-                />
-                <Label
-                  htmlFor="direct"
-                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
-                >
-                  Direct
-                </Label>
-              </div>
-              <div className="inline-flex">
-                <RadioGroupItem
-                  value="biga"
-                  id="biga"
-                  className="peer hidden"
-                />
-                <Label
-                  htmlFor="biga"
-                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
-                >
-                  Biga
-                </Label>
-              </div>
-              <div className="inline-flex">
-                <RadioGroupItem
-                  value="poolish"
-                  id="poolish"
-                  className="peer hidden"
-                />
-                <Label
-                  htmlFor="poolish"
-                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
-                >
-                  Poolish
-                </Label>
-              </div>
-            </RadioGroup>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-1">
-              <Label className="text-cream text-base">Huile</Label>
-              <Switch 
-                className="h-7 w-12 data-[state=checked]:bg-terracotta"
-                checked={isOilEnabled}
-                onCheckedChange={setIsOilEnabled}
-              />
-            </div>
-            <div className="flex items-center justify-between p-1">
-              <Label className="text-cream text-base">Sucre/Miel</Label>
-              <Switch 
-                className="h-7 w-12 data-[state=checked]:bg-terracotta"
-                checked={isSugarEnabled}
-                onCheckedChange={setIsSugarEnabled}
-              />
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between p-1">
-                <Label className="text-cream text-base">% de levure</Label>
-                <Switch 
-                  className="h-7 w-12 data-[state=checked]:bg-terracotta"
-                  checked={isCustomYeastEnabled}
-                  onCheckedChange={setIsCustomYeastEnabled}
-                />
-              </div>
-              {isCustomYeastEnabled && (
-                <div className="flex items-center bg-white/5 rounded-md h-12">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                    onClick={() => handleDecrement(customYeast, setCustomYeast, 0.01, 0.01)}
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <div className="flex-1 min-w-0">
-                    <Input
-                      type="text"
-                      value={`${customYeast.toFixed(2)}%`}
-                      readOnly
-                      className="w-full bg-transparent border-0 text-center text-cream text-lg h-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-0"
-                    />
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                    onClick={() => handleIncrement(customYeast, setCustomYeast, 4, 0.01)}
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+        className={`fixed inset-y-0 right-0 w-3/4 sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-30

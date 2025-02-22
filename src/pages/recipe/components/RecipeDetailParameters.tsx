@@ -1,7 +1,6 @@
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Calculator, Droplet, Scale, Cookie, FlaskConical, Pizza, WheatOff } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface RecipeDetailParametersProps {
   recipe: any;
@@ -57,29 +56,20 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
   }
 
   return (
-    <Card className="bg-slate border-cream/10">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-cream flex items-center gap-2">
-          <Pizza className="h-5 w-5 text-terracotta" /> Paramètres
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="rounded-md border border-cream/10">
-          <Table>
-            <TableBody>
-              {parameters.map((param, index) => (
-                <TableRow key={param.name} className={index === parameters.length - 1 ? "" : "border-cream/10"}>
-                  <TableCell className="text-cream/80 flex items-center gap-2">
-                    {param.icon}
-                    {param.name}
-                  </TableCell>
-                  <TableCell className="text-right text-cream">{param.value}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="rounded-md border border-cream/10">
+      <Table>
+        <TableBody>
+          {parameters.map((param, index) => (
+            <TableRow key={param.name} className={index === parameters.length - 1 ? "" : "border-cream/10"}>
+              <TableCell className="text-cream/80 flex items-center gap-2">
+                {param.icon}
+                {param.name}
+              </TableCell>
+              <TableCell className="text-right text-cream">{param.value}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }

@@ -45,6 +45,18 @@ export default function NapolitainCalculator() {
     };
   }, [isSettingsOpen]);
 
+  useEffect(() => {
+    if (isSettingsOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isSettingsOpen]);
+
   const handleIncrement = (value: number, setValue: (value: number) => void, max: number, step: number = 1) => {
     setValue(Math.min(value + step, max));
   };
@@ -364,12 +376,15 @@ export default function NapolitainCalculator() {
       </Button>
 
       {isSettingsOpen && (
-        <div className="fixed inset-0 bg-black/20 transition-opacity" />
+        <div 
+          className="fixed inset-0 bg-black/50 transition-opacity z-40"
+          onClick={() => setIsSettingsOpen(false)}
+        />
       )}
 
       <div
         id="settings-panel"
-        className={`fixed inset-y-0 right-0 w-3/4 sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed inset-y-0 right-0 w-3/4 sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-50 overflow-y-auto ${
           isSettingsOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

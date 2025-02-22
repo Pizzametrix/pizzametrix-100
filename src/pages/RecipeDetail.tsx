@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Clock, Edit2, Save, PocketKnife, Thermometer, Droplet } from "lucide-react";
+import { Clock, Edit2, Save, PocketKnife, Thermometer, Droplet, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
@@ -143,7 +143,7 @@ export default function RecipeDetail() {
             {/* Section paramètres */}
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold leading-none tracking-tight text-cream flex items-center gap-2">
-                <img src="/lovable-uploads/c42f9bf9-9d17-4a96-9612-140a7237b8b0.png" alt="Paramètres" className="h-5 w-5" /> 
+                <Settings className="h-5 w-5 text-terracotta" />
                 Paramètres
               </h2>
               <RecipeDetailParameters recipe={recipe} />

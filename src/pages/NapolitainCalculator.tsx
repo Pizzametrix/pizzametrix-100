@@ -354,7 +354,7 @@ export default function NapolitainCalculator() {
 
       {/* Slide-in Panel */}
       <div
-        className={`fixed inset-y-0 right-0 w-full sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 right-0 w-3/4 sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-300 ease-in-out ${
           isSettingsOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -373,38 +373,92 @@ export default function NapolitainCalculator() {
         <div className="space-y-8">
           {/* Type de levure */}
           <div className="space-y-4">
-            <Label className="text-cream font-medium">Type de levure</Label>
+            <Label className="text-cream font-medium text-lg">Type de levure</Label>
             <RadioGroup defaultValue="fraiche" className="space-y-2">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="fraiche" id="fraiche" className="border-cream text-terracotta" />
-                <Label htmlFor="fraiche" className="text-cream">Fraîche</Label>
+              <div className="flex-1">
+                <RadioGroupItem
+                  value="fraiche"
+                  id="fraiche"
+                  className="peer hidden"
+                />
+                <Label
+                  htmlFor="fraiche"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                >
+                  Fraîche
+                </Label>
               </div>
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="seche" id="seche" className="border-cream text-terracotta" />
-                <Label htmlFor="seche" className="text-cream">Sèche active</Label>
+              <div className="flex-1">
+                <RadioGroupItem
+                  value="seche"
+                  id="seche"
+                  className="peer hidden"
+                />
+                <Label
+                  htmlFor="seche"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                >
+                  Sèche active
+                </Label>
               </div>
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="saf" id="saf" className="border-cream text-terracotta" />
-                <Label htmlFor="saf" className="text-cream">Instantanée (SAF)</Label>
+              <div className="flex-1">
+                <RadioGroupItem
+                  value="saf"
+                  id="saf"
+                  className="peer hidden"
+                />
+                <Label
+                  htmlFor="saf"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                >
+                  Instantanée (SAF)
+                </Label>
               </div>
             </RadioGroup>
           </div>
 
           {/* Type d'empâtement */}
           <div className="space-y-4">
-            <Label className="text-cream font-medium">Type d'empâtement</Label>
+            <Label className="text-cream font-medium text-lg">Type d'empâtement</Label>
             <RadioGroup defaultValue="direct" className="space-y-2">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="direct" id="direct" className="border-cream text-terracotta" />
-                <Label htmlFor="direct" className="text-cream">Direct</Label>
+              <div className="flex-1">
+                <RadioGroupItem
+                  value="direct"
+                  id="direct"
+                  className="peer hidden"
+                />
+                <Label
+                  htmlFor="direct"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                >
+                  Direct
+                </Label>
               </div>
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="biga" id="biga" className="border-cream text-terracotta" />
-                <Label htmlFor="biga" className="text-cream">Biga</Label>
+              <div className="flex-1">
+                <RadioGroupItem
+                  value="biga"
+                  id="biga"
+                  className="peer hidden"
+                />
+                <Label
+                  htmlFor="biga"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                >
+                  Biga
+                </Label>
               </div>
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="poolish" id="poolish" className="border-cream text-terracotta" />
-                <Label htmlFor="poolish" className="text-cream">Poolish</Label>
+              <div className="flex-1">
+                <RadioGroupItem
+                  value="poolish"
+                  id="poolish"
+                  className="peer hidden"
+                />
+                <Label
+                  htmlFor="poolish"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                >
+                  Poolish
+                </Label>
               </div>
             </RadioGroup>
           </div>
@@ -412,15 +466,15 @@ export default function NapolitainCalculator() {
           {/* Switches */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Label className="text-cream">Huile</Label>
+              <Label className="text-cream text-base">Huile</Label>
               <Switch className="data-[state=checked]:bg-terracotta" />
             </div>
             <div className="flex items-center justify-between">
-              <Label className="text-cream">Sucre/Miel</Label>
+              <Label className="text-cream text-base">Sucre/Miel</Label>
               <Switch className="data-[state=checked]:bg-terracotta" />
             </div>
             <div className="flex items-center justify-between">
-              <Label className="text-cream">% de levure</Label>
+              <Label className="text-cream text-base">% de levure</Label>
               <Switch className="data-[state=checked]:bg-terracotta" />
             </div>
           </div>

@@ -389,7 +389,7 @@ export default function NapolitainCalculator() {
           <div className="space-y-4">
             <Label className="text-cream font-medium text-base">Type de levure</Label>
             <RadioGroup defaultValue="fraiche" className="flex flex-wrap gap-2">
-              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
+              <div className="inline-flex">
                 <RadioGroupItem
                   value="fraiche"
                   id="fraiche"
@@ -397,12 +397,12 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="fraiche"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
+                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Fraîche
                 </Label>
               </div>
-              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
+              <div className="inline-flex">
                 <RadioGroupItem
                   value="seche"
                   id="seche"
@@ -410,12 +410,12 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="seche"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
+                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Sèche active
                 </Label>
               </div>
-              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
+              <div className="inline-flex">
                 <RadioGroupItem
                   value="saf"
                   id="saf"
@@ -423,7 +423,7 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="saf"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
+                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Instantanée (SAF)
                 </Label>
@@ -434,7 +434,7 @@ export default function NapolitainCalculator() {
           <div className="space-y-4">
             <Label className="text-cream font-medium text-base">Type d'empâtement</Label>
             <RadioGroup defaultValue="direct" className="flex flex-wrap gap-2">
-              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
+              <div className="inline-flex">
                 <RadioGroupItem
                   value="direct"
                   id="direct"
@@ -442,12 +442,12 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="direct"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
+                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Direct
                 </Label>
               </div>
-              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
+              <div className="inline-flex">
                 <RadioGroupItem
                   value="biga"
                   id="biga"
@@ -455,12 +455,12 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="biga"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
+                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Biga
                 </Label>
               </div>
-              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
+              <div className="inline-flex">
                 <RadioGroupItem
                   value="poolish"
                   id="poolish"
@@ -468,7 +468,7 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="poolish"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
+                  className="inline-flex cursor-pointer whitespace-nowrap rounded-lg border border-cream/10 bg-white/5 px-4 py-2 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Poolish
                 </Label>

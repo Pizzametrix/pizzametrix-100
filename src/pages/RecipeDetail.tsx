@@ -143,7 +143,7 @@ export default function RecipeDetail() {
             {/* Section paramètres */}
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold leading-none tracking-tight text-cream flex items-center gap-2">
-                <img src="/lovable-uploads/c42f9bf9-9d17-4a96-9612-140a7237b8b0.png" alt="Paramètres" className="h-5 w-5 text-terracotta" /> 
+                <img src="/lovable-uploads/c42f9bf9-9d17-4a96-9612-140a7237b8b0.png" alt="Paramètres" className="h-5 w-5" /> 
                 Paramètres
               </h2>
               <RecipeDetailParameters recipe={recipe} />

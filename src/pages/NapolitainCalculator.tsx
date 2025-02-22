@@ -14,6 +14,8 @@ interface Phase {
   temperature: number;
 }
 
+type YeastType = 'fraiche' | 'seche' | 'saf';
+
 export default function NapolitainCalculator() {
   const [totalWeight, setTotalWeight] = useState(1000);
   const [pizzaCount, setPizzaCount] = useState(1);
@@ -32,6 +34,7 @@ export default function NapolitainCalculator() {
     { id: 1, duration: 18, temperature: 5 },
     { id: 2, duration: 6, temperature: 20 },
   ]);
+  const [yeastType, setYeastType] = useState<YeastType>('fraiche');
 
   useEffect(() => {
     setTotalWeight(pizzaCount * ballWeight);
@@ -101,6 +104,17 @@ export default function NapolitainCalculator() {
 
   const totalDuration = phases.reduce((total, phase) => total + phase.duration, 0);
 
+  const calculateYeastWeight = (baseWeight: number, type: YeastType): number => {
+    switch (type) {
+      case 'seche':
+        return Number((baseWeight * 0.5).toFixed(2));
+      case 'saf':
+        return Number((baseWeight * 0.34).toFixed(2));
+      default:
+        return baseWeight;
+    }
+  };
+
   // Calcul du poids de farine et des autres ingrédients
   const totalPercentage = 100 + hydration + salt + 
     (isCustomYeastEnabled ? customYeast : yeast) + 
@@ -110,7 +124,8 @@ export default function NapolitainCalculator() {
   const flourWeight = Math.round(totalWeight / (1 + (totalPercentage - 100) / 100));
   const waterWeight = Math.round((flourWeight * hydration) / 100);
   const saltWeight = Number(((flourWeight * salt) / 100).toFixed(1));
-  const yeastWeight = Number(((flourWeight * (isCustomYeastEnabled ? customYeast : yeast)) / 100).toFixed(2));
+  const baseYeastWeight = Number(((flourWeight * (isCustomYeastEnabled ? customYeast : yeast)) / 100).toFixed(2));
+  const yeastWeight = calculateYeastWeight(baseYeastWeight, yeastType);
   const oilWeight = isOilEnabled ? Number(((flourWeight * oil) / 100).toFixed(1)) : 0;
   const sugarWeight = isSugarEnabled ? Number(((flourWeight * sugar) / 100).toFixed(1)) : 0;
 
@@ -484,7 +499,12 @@ export default function NapolitainCalculator() {
         <div className="space-y-8">
           <div className="space-y-4">
             <Label className="text-cream font-medium text-base">Type de levure</Label>
-            <RadioGroup defaultValue="fraiche" className="flex flex-wrap gap-2">
+            <RadioGroup 
+              defaultValue="fraiche" 
+              value={yeastType}
+              onValueChange={(value: YeastType) => setYeastType(value)}
+              className="flex flex-wrap gap-2"
+            >
               <div className="inline-flex">
                 <RadioGroupItem
                   value="fraiche"

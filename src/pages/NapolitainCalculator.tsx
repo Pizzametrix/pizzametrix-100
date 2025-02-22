@@ -27,12 +27,10 @@ export default function NapolitainCalculator() {
     { id: 2, duration: 6, temperature: 20 },
   ]);
 
-  // Mettre à jour le poids total lorsque le nombre de pizzas ou le poids des pâtons change
   useEffect(() => {
     setTotalWeight(pizzaCount * ballWeight);
   }, [pizzaCount, ballWeight]);
 
-  // Gestionnaire pour fermer le panel au clic en dehors
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const panel = document.getElementById('settings-panel');
@@ -356,7 +354,6 @@ export default function NapolitainCalculator() {
         </div>
       </main>
 
-      {/* Bouton flottant Réglages */}
       <Button
         variant="ghost"
         size="icon"
@@ -366,12 +363,10 @@ export default function NapolitainCalculator() {
         <Settings className="h-6 w-6" />
       </Button>
 
-      {/* Overlay pour le clic en dehors */}
       {isSettingsOpen && (
         <div className="fixed inset-0 bg-black/20 transition-opacity" />
       )}
 
-      {/* Slide-in Panel */}
       <div
         id="settings-panel"
         className={`fixed inset-y-0 right-0 w-3/4 sm:w-96 bg-slate border-l border-cream/10 p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${
@@ -379,7 +374,7 @@ export default function NapolitainCalculator() {
         }`}
       >
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-cream">Paramètres</h2>
+          <h2 className="text-xl font-semibold text-cream">Réglages</h2>
           <Button
             variant="ghost"
             size="icon"
@@ -391,9 +386,8 @@ export default function NapolitainCalculator() {
         </div>
 
         <div className="space-y-8">
-          {/* Type de levure */}
           <div className="space-y-4">
-            <Label className="text-cream font-medium text-lg">Type de levure</Label>
+            <Label className="text-cream font-medium text-base">Type de levure</Label>
             <RadioGroup defaultValue="fraiche" className="space-y-2">
               <div className="flex-1">
                 <RadioGroupItem
@@ -403,7 +397,7 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="fraiche"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Fraîche
                 </Label>
@@ -416,7 +410,7 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="seche"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Sèche active
                 </Label>
@@ -429,7 +423,7 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="saf"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Instantanée (SAF)
                 </Label>
@@ -437,9 +431,8 @@ export default function NapolitainCalculator() {
             </RadioGroup>
           </div>
 
-          {/* Type d'empâtement */}
           <div className="space-y-4">
-            <Label className="text-cream font-medium text-lg">Type d'empâtement</Label>
+            <Label className="text-cream font-medium text-base">Type d'empâtement</Label>
             <RadioGroup defaultValue="direct" className="space-y-2">
               <div className="flex-1">
                 <RadioGroupItem
@@ -449,7 +442,7 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="direct"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Direct
                 </Label>
@@ -462,7 +455,7 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="biga"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Biga
                 </Label>
@@ -475,7 +468,7 @@ export default function NapolitainCalculator() {
                 />
                 <Label
                   htmlFor="poolish"
-                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-4 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-base"
+                  className="flex w-full cursor-pointer rounded-lg border border-cream/10 bg-white/5 p-3 text-cream hover:bg-cream/5 peer-data-[state=checked]:bg-terracotta peer-data-[state=checked]:text-cream transition-colors text-sm"
                 >
                   Poolish
                 </Label>
@@ -483,7 +476,6 @@ export default function NapolitainCalculator() {
             </RadioGroup>
           </div>
 
-          {/* Switches */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <Label className="text-cream text-base">Huile</Label>

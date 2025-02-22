@@ -228,7 +228,7 @@ export default function NapolitainCalculator() {
         dough_type: doughType,
         phases: phasesJson,
         is_custom_yeast_enabled: isCustomYeastEnabled,
-        custom_yeast: customYeast,
+        custom_yeast: isCustomYeastEnabled ? customYeast : null,
         is_oil_enabled: isOilEnabled,
         is_sugar_enabled: isSugarEnabled,
         yeast_type: yeastType,
@@ -242,12 +242,12 @@ export default function NapolitainCalculator() {
         .insert(recipeData);
 
       if (insertError) {
+        console.error("Erreur détaillée:", insertError);
         toast({
           title: "Erreur",
           description: "Impossible de sauvegarder la recette",
           variant: "destructive",
         });
-        console.error("Erreur lors de la sauvegarde:", insertError);
         return;
       }
 

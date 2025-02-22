@@ -212,41 +212,45 @@ export default function NapolitainCalculator() {
         id: phase.id,
         duration: phase.duration,
         temperature: phase.temperature
-      })) as Json;
+      }));
 
       console.log("Type de pâte:", doughType);
       console.log("Farine préferment:", prefermentFlour);
       console.log("Hydratation préferment:", prefermentHydration);
       console.log("Levure préferment:", prefermentYeast);
 
+      const prefermentFlourValue = doughType !== 'direct' ? Math.round(Number(prefermentFlour)) : null;
+      const prefermentHydrationValue = doughType !== 'direct' ? Math.round(Number(prefermentHydration)) : null;
+      const prefermentYeastValue = doughType !== 'direct' ? Number(Number(prefermentYeast).toFixed(2)) : null;
+
       const recipeData = {
         user_id: user.id,
-        nom: recipeName,
+        nom: recipeName.trim(),
         type: 'napolitaine' as RecipeType,
-        pizza_count: pizzaCount,
-        ball_weight: ballWeight,
-        hydration: hydration,
-        salt: salt,
-        yeast: isCustomYeastEnabled ? customYeast : yeast,
-        oil: isOilEnabled ? oil : null,
-        sugar: isSugarEnabled ? sugar : null,
+        pizza_count: Math.round(Number(pizzaCount)),
+        ball_weight: Math.round(Number(ballWeight)),
+        hydration: Math.round(Number(hydration)),
+        salt: Number(Number(salt).toFixed(2)),
+        yeast: Number((isCustomYeastEnabled ? customYeast : yeast).toFixed(2)),
+        oil: isOilEnabled ? Number(Number(oil).toFixed(2)) : null,
+        sugar: isSugarEnabled ? Number(Number(sugar).toFixed(2)) : null,
         dough_type: doughType,
         phases: phasesJson,
         is_custom_yeast_enabled: isCustomYeastEnabled,
-        custom_yeast: isCustomYeastEnabled ? customYeast : null,
+        custom_yeast: isCustomYeastEnabled ? Number(Number(customYeast).toFixed(2)) : null,
         is_oil_enabled: isOilEnabled,
         is_sugar_enabled: isSugarEnabled,
         yeast_type: yeastType,
-        preferment_flour: doughType !== 'direct' ? Number(prefermentFlour) : null,
-        preferment_hydration: doughType !== 'direct' ? Number(prefermentHydration) : null,
-        preferment_yeast: doughType !== 'direct' ? Number(prefermentYeast) : null,
+        preferment_flour: prefermentFlourValue,
+        preferment_hydration: prefermentHydrationValue,
+        preferment_yeast: prefermentYeastValue
       };
 
       console.log("Données de la recette à sauvegarder:", recipeData);
 
       const { error: insertError } = await supabase
         .from('recettes')
-        .insert(recipeData);
+        .insert([recipeData]);
 
       if (insertError) {
         console.error("Erreur détaillée:", insertError);

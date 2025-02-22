@@ -21,7 +21,7 @@ export function RecipeDetailPreferment({ recipe }: RecipeDetailPrefermentProps) 
     {
       name: "Levure",
       value: `${Math.round(recipe.preferment_yeast * 100)}%`,
-      icon: <PocketKnife className="h-4 w-4" />,
+      icon: <img src="/lovable-uploads/bbef9e96-a767-4130-af50-1e5e69a54e3d.png" alt="Levure" className="h-4 w-4" />,
     },
   ];
 

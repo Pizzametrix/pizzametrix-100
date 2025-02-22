@@ -388,8 +388,8 @@ export default function NapolitainCalculator() {
         <div className="space-y-8">
           <div className="space-y-4">
             <Label className="text-cream font-medium text-base">Type de levure</Label>
-            <RadioGroup defaultValue="fraiche" className="space-y-2">
-              <div className="flex-1">
+            <RadioGroup defaultValue="fraiche" className="flex flex-wrap gap-2">
+              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
                 <RadioGroupItem
                   value="fraiche"
                   id="fraiche"
@@ -402,7 +402,7 @@ export default function NapolitainCalculator() {
                   Fraîche
                 </Label>
               </div>
-              <div className="flex-1">
+              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
                 <RadioGroupItem
                   value="seche"
                   id="seche"
@@ -415,7 +415,7 @@ export default function NapolitainCalculator() {
                   Sèche active
                 </Label>
               </div>
-              <div className="flex-1">
+              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
                 <RadioGroupItem
                   value="saf"
                   id="saf"
@@ -433,8 +433,8 @@ export default function NapolitainCalculator() {
 
           <div className="space-y-4">
             <Label className="text-cream font-medium text-base">Type d'empâtement</Label>
-            <RadioGroup defaultValue="direct" className="space-y-2">
-              <div className="flex-1">
+            <RadioGroup defaultValue="direct" className="flex flex-wrap gap-2">
+              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
                 <RadioGroupItem
                   value="direct"
                   id="direct"
@@ -447,7 +447,7 @@ export default function NapolitainCalculator() {
                   Direct
                 </Label>
               </div>
-              <div className="flex-1">
+              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
                 <RadioGroupItem
                   value="biga"
                   id="biga"
@@ -460,7 +460,7 @@ export default function NapolitainCalculator() {
                   Biga
                 </Label>
               </div>
-              <div className="flex-1">
+              <div className="grow basis-[calc(50%-4px)] min-w-[120px]">
                 <RadioGroupItem
                   value="poolish"
                   id="poolish"

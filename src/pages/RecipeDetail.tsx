@@ -82,14 +82,7 @@ export default function RecipeDetail() {
             {/* En-tête de la recette */}
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-cream/80">
-                {recipe.dough_type !== 'direct' ? (
-                  <span className="flex items-center gap-1">
-                    <PocketKnife className="h-4 w-4" />
-                    {recipe.dough_type.charAt(0).toUpperCase() + recipe.dough_type.slice(1)} {recipe.preferment_flour}%
-                  </span>
-                ) : (
-                  <span>Direct</span>
-                )}
+                <span>{recipe.dough_type !== 'direct' ? `${recipe.dough_type.charAt(0).toUpperCase() + recipe.dough_type.slice(1)} ${recipe.preferment_flour}%` : 'Direct'}</span>
                 <span>-</span>
                 <span className="flex items-center gap-1">
                   <Droplet className="h-4 w-4" /> {recipe.hydration}%

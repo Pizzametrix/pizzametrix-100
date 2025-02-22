@@ -2,7 +2,7 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Card } from "@/components/ui/card";
-import { Clock, Droplet, PocketKnife } from "lucide-react";
+import { Clock, Droplet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface RecipeCardProps {
@@ -49,11 +49,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         <h3 className="font-semibold text-lg text-cream mb-1">{recipe.nom}</h3>
         <div className="text-sm text-cream/80 space-y-1">
           <p className="flex items-center gap-2">
-            {recipe.dough_type !== 'direct' && (
-              <span className="flex items-center gap-1">
-                <PocketKnife className="h-4 w-4" /> {getPrefermentText()}
-              </span>
-            )}
+            <span>{getPrefermentText()}</span>
             <span className="flex items-center gap-1">
               <Droplet className="h-4 w-4" /> {recipe.hydration}%
             </span>

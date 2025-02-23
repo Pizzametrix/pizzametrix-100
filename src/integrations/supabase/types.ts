@@ -63,7 +63,7 @@ export type Database = {
           preferment_yeast: number | null
           salt: number
           sugar: number | null
-          type: Database["public"]["Enums"]["type_recette"]
+          type: string
           user_id: string
           yeast: number
           yeast_type: string
@@ -89,7 +89,7 @@ export type Database = {
           preferment_yeast?: number | null
           salt: number
           sugar?: number | null
-          type: Database["public"]["Enums"]["type_recette"]
+          type: string
           user_id: string
           yeast: number
           yeast_type?: string
@@ -115,7 +115,7 @@ export type Database = {
           preferment_yeast?: number | null
           salt?: number
           sugar?: number | null
-          type?: Database["public"]["Enums"]["type_recette"]
+          type?: string
           user_id?: string
           yeast?: number
           yeast_type?: string

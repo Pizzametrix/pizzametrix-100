@@ -27,6 +27,15 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
+    if (photos.length + files.length > 6) {
+      toast({
+        title: "Erreur",
+        description: "Vous ne pouvez pas ajouter plus de 6 photos",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsUploading(true);
     
     try {
@@ -36,7 +45,6 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
         const fileExt = file.name.split('.').pop();
         const filePath = `${recipeId}/${crypto.randomUUID()}.${fileExt}`;
 
-        // Upload file to storage
         const { error: uploadError } = await supabase.storage
           .from('recipe-photos')
           .upload(filePath, file);
@@ -47,7 +55,6 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
           .from('recipe-photos')
           .getPublicUrl(filePath);
 
-        // Insert into photos table
         const { error: insertError } = await supabase
           .from('photos')
           .insert({
@@ -79,7 +86,6 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
 
   const handleDeletePhoto = async (photoUrl: string) => {
     try {
-      // Get photo information from database
       const { data: photoData, error: fetchError } = await supabase
         .from('photos')
         .select('storage_path')
@@ -88,7 +94,6 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
 
       if (fetchError) throw fetchError;
 
-      // Delete from storage
       if (photoData) {
         const { error: deleteStorageError } = await supabase.storage
           .from('recipe-photos')
@@ -97,7 +102,6 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
         if (deleteStorageError) throw deleteStorageError;
       }
 
-      // Delete from database
       const { error: deleteDbError } = await supabase
         .from('photos')
         .delete()
@@ -163,29 +167,27 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
         )}
       </div>
 
-      {photos.length < 6 && (
-        <div className="flex gap-2">
-          <Button
-            variant="secondary"
-            size="sm"
-            className="flex-1 bg-basil text-slate hover:bg-basil/90"
-            onClick={() => fileInputRef.current?.click()}
-            disabled={isUploading}
-          >
-            <ImagePlus className="h-4 w-4 mr-2" />
-            {isUploading ? "Chargement..." : "Ajouter des photos"}
-          </Button>
-          <Button
-            variant="secondary"
-            size="sm"
-            className="bg-basil text-slate hover:bg-basil/90"
-            onClick={() => alert("Fonctionnalité à venir")}
-            disabled={isUploading}
-          >
-            <Camera className="h-4 w-4" />
-          </Button>
-        </div>
-      )}
+      <div className="flex gap-2">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex-1 bg-basil text-slate hover:bg-basil/90"
+          onClick={() => fileInputRef.current?.click()}
+          disabled={isUploading || photos.length >= 6}
+        >
+          <ImagePlus className="h-4 w-4 mr-2" />
+          {isUploading ? "Chargement..." : "Ajouter des photos"}
+        </Button>
+        <Button
+          variant="secondary"
+          size="sm"
+          className="bg-basil text-slate hover:bg-basil/90"
+          onClick={() => alert("Fonctionnalité à venir")}
+          disabled={isUploading || photos.length >= 6}
+        >
+          <Camera className="h-4 w-4" />
+        </Button>
+      </div>
 
       <input
         type="file"

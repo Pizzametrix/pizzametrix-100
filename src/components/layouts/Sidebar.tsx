@@ -28,7 +28,7 @@ export const Sidebar = () => {
 
   const getTitle = () => {
     if (location.pathname.includes('/mes-recettes/')) {
-      return "Mes recettes";
+      return <>Pizzametri<span className="text-[#77BFA3]">x</span></>;
     }
     if (location.pathname === "/calculators/napolitaine") {
       return "Pizza Napolitaine";
@@ -36,7 +36,7 @@ export const Sidebar = () => {
     if (location.pathname === "/mes-recettes") {
       return "Mes recettes";
     }
-    return "Pizzametrix";
+    return <>Pizzametri<span className="text-[#77BFA3]">x</span></>;
   };
 
   return (

@@ -1,7 +1,7 @@
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Trash2, X } from "lucide-react";
 
 interface PhotoModalProps {
   photo: string | null;
@@ -13,10 +13,23 @@ interface PhotoModalProps {
 export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps) {
   const currentIndex = photo ? photos.indexOf(photo) : -1;
 
+  const handleDelete = () => {
+    if (!photo || !onDelete) return;
+    
+    const nextPhoto = photos[currentIndex + 1] || photos[currentIndex - 1];
+    onDelete(photo);
+    
+    if (!nextPhoto) {
+      onClose();
+    } else {
+      onClose();
+      setTimeout(() => document.dispatchEvent(new CustomEvent('selectPhoto', { detail: nextPhoto })), 0);
+    }
+  };
+
   const showPrevious = () => {
     if (currentIndex > 0) {
       const previousPhoto = photos[currentIndex - 1];
-      // Mettre à jour la photo sélectionnée via un callback
       onClose();
       setTimeout(() => document.dispatchEvent(new CustomEvent('selectPhoto', { detail: previousPhoto })), 0);
     }
@@ -25,7 +38,6 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
   const showNext = () => {
     if (currentIndex < photos.length - 1) {
       const nextPhoto = photos[currentIndex + 1];
-      // Mettre à jour la photo sélectionnée via un callback
       onClose();
       setTimeout(() => document.dispatchEvent(new CustomEvent('selectPhoto', { detail: nextPhoto })), 0);
     }
@@ -37,14 +49,24 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
         <div className="relative w-full h-full">
           {photo && (
             <>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-4 right-4 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
-                onClick={() => onDelete && onDelete(photo)}
-              >
-                <Trash2 className="h-6 w-6" />
-              </Button>
+              <div className="absolute right-0 top-0 z-50 flex gap-2 p-4">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
+                  onClick={handleDelete}
+                >
+                  <Trash2 className="h-6 w-6" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
+                  onClick={onClose}
+                >
+                  <X className="h-6 w-6" />
+                </Button>
+              </div>
 
               <div className="flex items-center justify-between">
                 <Button
@@ -61,7 +83,7 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
                   <img
                     src={photo}
                     alt="Photo agrandie"
-                    className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+                    className="w-full h-auto max-h-[80vh] object-contain"
                     onClick={(e) => e.stopPropagation()}
                   />
                 </div>

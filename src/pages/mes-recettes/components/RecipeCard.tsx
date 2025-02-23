@@ -35,7 +35,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
 
   return (
     <Card 
-      className="flex h-32 overflow-hidden bg-white/5 border-cream/10 cursor-pointer hover:bg-white/10 transition-colors"
+      className="flex h-24 overflow-hidden bg-white/5 border-cream/10 cursor-pointer hover:bg-white/10 transition-colors"
       onClick={() => navigate(`/mes-recettes/${recipe.id}`)}
     >
       <div className="w-[100px] min-w-[100px] h-full">
@@ -45,9 +45,9 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="flex-1 p-4 text-left">
-        <h3 className="font-semibold text-lg text-cream mb-1 truncate">{recipe.nom}</h3>
-        <div className="text-sm text-cream/80 space-y-1">
+      <div className="flex-1 p-3 text-left">
+        <h3 className="font-semibold text-lg text-cream mb-0.5 truncate">{recipe.nom}</h3>
+        <div className="text-sm text-cream/80 space-y-0.5">
           <p className="flex items-center gap-2">
             <span>{getPrefermentText()}</span>
             <span className="text-cream/60">-</span>

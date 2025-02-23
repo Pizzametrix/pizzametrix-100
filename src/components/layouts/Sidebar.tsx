@@ -5,11 +5,34 @@ import { toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useSidebarStore } from "@/store/useSidebarStore";
+import { useQuery } from "@tanstack/react-query";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { isOpen, toggle, close } = useSidebarStore();
+
+  // Extraire l'ID de la recette de l'URL si on est sur une page de détail
+  const recipeId = location.pathname.includes('/mes-recettes/') 
+    ? location.pathname.split('/').pop() 
+    : null;
+
+  // Récupérer le nom de la recette si on a un ID
+  const { data: recipe } = useQuery({
+    queryKey: ['recipe', recipeId],
+    queryFn: async () => {
+      if (!recipeId) return null;
+      const { data, error } = await supabase
+        .from('recipes')
+        .select('name')
+        .eq('id', recipeId)
+        .single();
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!recipeId,
+  });
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -35,6 +58,9 @@ export const Sidebar = () => {
     }
     if (location.pathname === "/calculators") {
       return "Calculatrices";
+    }
+    if (recipe?.name) {
+      return recipe.name;
     }
     return <>Pizzametri<span className="text-[#77BFA3]">x</span></>;
   };

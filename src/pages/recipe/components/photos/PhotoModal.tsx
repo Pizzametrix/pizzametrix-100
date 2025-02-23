@@ -45,11 +45,11 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
 
   return (
     <Dialog open={!!photo} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-slate/95 border-cream/10">
+      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-slate/95 border-none">
         <div className="relative w-full h-full">
           {photo && (
             <>
-              <div className="absolute right-0 top-0 z-50 flex gap-2 p-4">
+              <div className="absolute w-full top-0 z-50 flex justify-between p-4">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -83,7 +83,8 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
                   <img
                     src={photo}
                     alt="Photo agrandie"
-                    className="w-full h-auto max-h-[80vh] object-contain"
+                    className="w-full h-auto max-h-[80vh] object-contain border-0"
+                    style={{ outline: 'none' }}
                     onClick={(e) => e.stopPropagation()}
                   />
                 </div>

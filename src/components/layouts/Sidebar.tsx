@@ -65,7 +65,10 @@ export const Sidebar = () => {
         <div className="flex flex-col h-full justify-between">
           <div>
             <div className="hidden md:block">
-              <h1 className="font-montserrat font-bold text-2xl text-[#F5E9D7] mb-8">{getTitle()}</h1>
+              <h1 className="font-montserrat font-bold text-2xl mb-8">
+                <span className="text-[#F5E9D7]">Pizzametri</span>
+                <span className="text-[#77BFA3]">x</span>
+              </h1>
             </div>
             <nav className="space-y-2">
               <Button

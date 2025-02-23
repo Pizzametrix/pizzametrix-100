@@ -1,5 +1,5 @@
 
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogOverlay } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
 interface DeleteRecipeDialogProps {
@@ -11,6 +11,7 @@ interface DeleteRecipeDialogProps {
 export function DeleteRecipeDialog({ open, onOpenChange, onConfirm }: DeleteRecipeDialogProps) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
+      <AlertDialogOverlay />
       <AlertDialogContent 
         className="bg-slate border-cream/10"
       >

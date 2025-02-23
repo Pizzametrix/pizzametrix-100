@@ -8,7 +8,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { Camera, User, Save } from "lucide-react";
+import { Camera, User, Save, Pencil, Check } from "lucide-react";
 import { Sidebar } from "@/components/layouts/Sidebar";
 
 export default function Profile() {
@@ -20,6 +20,7 @@ export default function Profile() {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     getProfile();
@@ -49,13 +50,13 @@ export default function Profile() {
         setPetrin(data.petrin || "");
       }
 
-      const { data: avatarData } = await supabase
+      const { data: { publicUrl } } = supabase
         .storage
         .from('avatars')
         .getPublicUrl(`${user.id}`);
 
-      if (avatarData) {
-        setAvatarUrl(avatarData.publicUrl);
+      if (publicUrl) {
+        setAvatarUrl(publicUrl);
       }
 
     } catch (error) {
@@ -86,6 +87,7 @@ export default function Profile() {
         .eq('id', user.id);
 
       if (error) throw error;
+      setIsEditing(false);
       toast.success("Profil mis à jour avec succès");
     } catch (error) {
       console.error(error);
@@ -113,12 +115,12 @@ export default function Profile() {
 
       if (uploadError) throw uploadError;
 
-      const { data } = await supabase
+      const { data: { publicUrl } } = supabase
         .storage
         .from('avatars')
         .getPublicUrl(filePath);
 
-      setAvatarUrl(data.publicUrl);
+      setAvatarUrl(publicUrl);
       toast.success("Photo de profil mise à jour");
     } catch (error) {
       console.error(error);
@@ -139,32 +141,30 @@ export default function Profile() {
   return (
     <div className="flex min-h-screen bg-slate">
       <Sidebar />
-      <div className="flex-1 p-8 md:ml-64">
+      <div className="flex-1 px-4 md:px-8 pt-8 pb-20 md:ml-64 overflow-x-hidden">
         <div className="max-w-2xl mx-auto space-y-8">
           {/* En-tête du profil */}
           <div className="flex flex-col items-center space-y-4">
-            <div className="relative">
+            <div className="relative mt-16 md:mt-0">
               <Avatar className="w-32 h-32 border-4 border-basil shadow-lg">
                 <AvatarImage src={avatarUrl || undefined} alt="Photo de profil" />
                 <AvatarFallback className="bg-cream text-basil/30">
                   <User className="w-16 h-16" />
                 </AvatarFallback>
               </Avatar>
-              <div className="absolute bottom-0 right-0 translate-y-2">
-                <Label htmlFor="avatar" className="cursor-pointer">
-                  <div className="bg-basil rounded-full p-2 hover:bg-basil/90 transition-colors">
-                    <Camera className="h-5 w-5 text-slate" />
-                  </div>
-                  <input
-                    id="avatar"
-                    type="file"
-                    accept="image/*"
-                    onChange={uploadAvatar}
-                    disabled={uploading}
-                    className="hidden"
-                  />
-                </Label>
-              </div>
+              <Label htmlFor="avatar" className="absolute -bottom-2 -right-2 cursor-pointer">
+                <div className="bg-basil rounded-full p-2 hover:bg-basil/90 transition-colors">
+                  <Camera className="h-5 w-5 text-slate" />
+                </div>
+                <input
+                  id="avatar"
+                  type="file"
+                  accept="image/*"
+                  onChange={uploadAvatar}
+                  disabled={uploading}
+                  className="hidden"
+                />
+              </Label>
             </div>
             <div className="text-center">
               <h1 className="text-2xl font-bold font-montserrat text-cream">Mon Profil</h1>
@@ -173,7 +173,21 @@ export default function Profile() {
           </div>
 
           {/* Grille d'informations */}
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 space-y-6 border border-cream/5">
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-6 border border-cream/5">
+            <div className="flex justify-end">
+              <Button
+                onClick={() => isEditing ? updateProfile() : setIsEditing(true)}
+                variant="ghost"
+                className="text-cream hover:text-basil"
+              >
+                {isEditing ? (
+                  <><Check className="h-5 w-5 mr-2" /> Enregistrer</>
+                ) : (
+                  <><Pencil className="h-5 w-5 mr-2" /> Modifier</>
+                )}
+              </Button>
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Pseudo */}
               <div className="space-y-2">
@@ -186,10 +200,10 @@ export default function Profile() {
                     type="text"
                     value={pseudonyme}
                     onChange={(e) => setPseudonyme(e.target.value)}
-                    className="pl-10 bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40"
+                    disabled={!isEditing}
+                    className="bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 disabled:opacity-50"
                     placeholder="Votre pseudonyme"
                   />
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-cream/40" />
                 </div>
               </div>
 
@@ -198,8 +212,12 @@ export default function Profile() {
                 <Label htmlFor="niveau" className="text-sm font-medium text-cream">
                   Niveau
                 </Label>
-                <Select value={niveau} onValueChange={setNiveau}>
-                  <SelectTrigger className="bg-slate-700 border-cream/10 text-cream">
+                <Select 
+                  value={niveau} 
+                  onValueChange={setNiveau}
+                  disabled={!isEditing}
+                >
+                  <SelectTrigger className="bg-slate-700 border-cream/10 text-cream disabled:opacity-50">
                     <SelectValue placeholder="Sélectionnez votre niveau" />
                   </SelectTrigger>
                   <SelectContent>
@@ -221,7 +239,8 @@ export default function Profile() {
                   type="text"
                   value={four}
                   onChange={(e) => setFour(e.target.value)}
-                  className="bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40"
+                  disabled={!isEditing}
+                  className="bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 disabled:opacity-50"
                   placeholder="Votre four"
                 />
               </div>
@@ -231,8 +250,12 @@ export default function Profile() {
                 <Label htmlFor="petrin" className="text-sm font-medium text-cream">
                   Pétrin
                 </Label>
-                <Select value={petrin} onValueChange={setPetrin}>
-                  <SelectTrigger className="bg-slate-700 border-cream/10 text-cream">
+                <Select 
+                  value={petrin} 
+                  onValueChange={setPetrin}
+                  disabled={!isEditing}
+                >
+                  <SelectTrigger className="bg-slate-700 border-cream/10 text-cream disabled:opacity-50">
                     <SelectValue placeholder="Sélectionnez votre pétrin" />
                   </SelectTrigger>
                   <SelectContent>
@@ -243,17 +266,6 @@ export default function Profile() {
                   </SelectContent>
                 </Select>
               </div>
-            </div>
-
-            {/* Bouton de sauvegarde */}
-            <div className="flex justify-end pt-4">
-              <Button 
-                onClick={updateProfile}
-                className="bg-basil hover:bg-basil/90 text-slate font-medium px-6"
-              >
-                <Save className="h-5 w-5 mr-2" />
-                <span>Enregistrer les modifications</span>
-              </Button>
             </div>
           </div>
         </div>

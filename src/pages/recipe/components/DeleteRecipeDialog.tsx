@@ -11,7 +11,7 @@ interface DeleteRecipeDialogProps {
 export function DeleteRecipeDialog({ open, onOpenChange, onConfirm }: DeleteRecipeDialogProps) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent className="bg-slate border-cream/10">
+      <AlertDialogContent className="bg-slate border-cream/10" onPointerDownOutside={() => onOpenChange(false)}>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-cream">Supprimer la recette</AlertDialogTitle>
           <AlertDialogDescription className="text-cream/60">

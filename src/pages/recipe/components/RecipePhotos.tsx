@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { Camera, ImagePlus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -124,26 +123,28 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
       )}
 
       {photos.length < 6 && (
-        <div className="flex gap-2">
-          <Button
-            variant="secondary"
-            size="sm"
-            className="flex-1 bg-basil text-slate hover:bg-basil/90"
-            onClick={() => fileInputRef.current?.click()}
-            disabled={isUploading}
-          >
-            <ImagePlus className="h-4 w-4 mr-2" />
-            {isUploading ? "Chargement..." : "Ajouter des photos"}
-          </Button>
-          <Button
-            variant="secondary"
-            size="sm"
-            className="bg-basil text-slate hover:bg-basil/90"
-            onClick={() => alert("Fonctionnalité à venir")}
-            disabled={isUploading}
-          >
-            <Camera className="h-4 w-4" />
-          </Button>
+        <div className="border-2 border-dashed border-cream/20 rounded-lg p-4">
+          <div className="flex gap-2">
+            <Button
+              variant="secondary"
+              size="sm"
+              className="flex-1 bg-basil text-slate hover:bg-basil/90"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isUploading}
+            >
+              <ImagePlus className="h-4 w-4 mr-2" />
+              {isUploading ? "Chargement..." : "Ajouter des photos"}
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              className="bg-basil text-slate hover:bg-basil/90"
+              onClick={() => alert("Fonctionnalité à venir")}
+              disabled={isUploading}
+            >
+              <Camera className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       )}
 

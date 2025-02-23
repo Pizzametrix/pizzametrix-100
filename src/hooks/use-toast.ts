@@ -7,7 +7,7 @@ import type {
 } from "@/components/ui/toast"
 
 const TOAST_LIMIT = 1
-const TOAST_REMOVE_DELAY = 3000 // Réduit à 3 secondes pour une meilleure expérience utilisateur
+const TOAST_REMOVE_DELAY = 5000 // Augmenté à 5 secondes pour être sûr que le toast est visible
 
 type ToasterToast = ToastProps & {
   id: string
@@ -93,6 +93,10 @@ export const reducer = (state: State, action: Action): State => {
 
       if (toastId) {
         addToRemoveQueue(toastId)
+      } else {
+        state.toasts.forEach((toast) => {
+          addToRemoveQueue(toast.id)
+        })
       }
 
       return {
@@ -151,9 +155,7 @@ function toast({ ...props }: Toast) {
       id,
       open: true,
       onOpenChange: (open) => {
-        if (!open) {
-          dismiss()
-        }
+        if (!open) dismiss()
       },
     },
   })

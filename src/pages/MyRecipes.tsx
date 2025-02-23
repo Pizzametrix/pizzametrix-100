@@ -61,6 +61,9 @@ export default function MyRecipes() {
       <div className="flex-1">
         <div className="md:pl-64">
           <main className="w-full max-w-2xl mx-auto p-4 pb-24 md:p-8 md:pb-24 mt-16 md:mt-0">
+            <h1 className="hidden md:block font-montserrat font-bold text-2xl text-cream mb-8">
+              Mes recettes
+            </h1>
             {loading ? (
               <p className="text-cream text-center">Chargement de vos recettes...</p>
             ) : recipes.length === 0 ? (

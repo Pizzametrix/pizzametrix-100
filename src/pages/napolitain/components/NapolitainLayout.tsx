@@ -14,6 +14,9 @@ export function NapolitainLayout({ children, actionButtons }: NapolitainLayoutPr
       <div className="flex-1">
         <div className="md:pl-64">
           <main className="w-full max-w-2xl mx-auto p-4 pb-24 md:p-8 md:pb-24 mt-16 md:mt-0">
+            <h1 className="hidden md:block font-montserrat font-bold text-2xl text-cream mb-8">
+              Pizza Napolitaine
+            </h1>
             <div className="space-y-6">
               {children}
             </div>

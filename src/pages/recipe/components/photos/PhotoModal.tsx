@@ -45,7 +45,7 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
 
   return (
     <Dialog open={!!photo} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-slate/95 border-none">
+      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-slate/95 border-none shadow-none">
         <div className="relative w-full h-full">
           {photo && (
             <>
@@ -83,8 +83,7 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
                   <img
                     src={photo}
                     alt="Photo agrandie"
-                    className="w-full h-auto max-h-[80vh] object-contain border-0"
-                    style={{ outline: 'none' }}
+                    className="w-full h-auto max-h-[80vh] object-contain border-0 outline-none ring-0"
                     onClick={(e) => e.stopPropagation()}
                   />
                 </div>

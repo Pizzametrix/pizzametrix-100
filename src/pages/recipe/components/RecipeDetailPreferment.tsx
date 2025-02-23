@@ -26,18 +26,20 @@ export function RecipeDetailPreferment({ recipe }: RecipeDetailPrefermentProps) 
   ];
 
   return (
-    <Table>
-      <TableBody>
-        {parameters.map((param, index) => (
-          <TableRow key={param.name} className={index === parameters.length - 1 ? "" : "border-cream/10"}>
-            <TableCell className="text-cream/80 flex items-center gap-2">
-              {param.icon}
-              {param.name}
-            </TableCell>
-            <TableCell className="text-right text-cream">{param.value}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <div className="rounded-md border border-cream/10">
+      <Table>
+        <TableBody>
+          {parameters.map((param, index) => (
+            <TableRow key={param.name} className={index === parameters.length - 1 ? "" : "border-cream/10"}>
+              <TableCell className="text-cream/80 flex items-center gap-2">
+                {param.icon}
+                {param.name}
+              </TableCell>
+              <TableCell className="text-right text-cream">{param.value}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }

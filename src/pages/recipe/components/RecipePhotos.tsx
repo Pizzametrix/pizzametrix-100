@@ -6,12 +6,6 @@ import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-interface Photo {
-  id: string;
-  url: string;
-  storage_path: string;
-}
-
 interface RecipePhotosProps {
   recipeId: string;
   photos: string[];
@@ -36,7 +30,6 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
         const fileExt = file.name.split('.').pop();
         const filePath = `${recipeId}/${crypto.randomUUID()}.${fileExt}`;
 
-        // Upload file to storage
         const { error: uploadError } = await supabase.storage
           .from('recipe-photos')
           .upload(filePath, file);
@@ -47,19 +40,15 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
           .from('recipe-photos')
           .getPublicUrl(filePath);
 
-        // Insert into photos table
-        const { error: insertError } = await supabase
-          .from('photos')
-          .insert({
-            recipe_id: recipeId,
-            url: publicUrl,
-            storage_path: filePath
-          });
-
-        if (insertError) throw insertError;
-
         newPhotos.push(publicUrl);
       }
+
+      const { error: updateError } = await supabase
+        .from('recettes')
+        .update({ photos: newPhotos })
+        .eq('id', recipeId);
+
+      if (updateError) throw updateError;
 
       setPhotos(newPhotos);
       toast({
@@ -79,35 +68,25 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
 
   const handleDeletePhoto = async (photoUrl: string) => {
     try {
-      // Get photo information from database
-      const { data: photoData, error: fetchError } = await supabase
-        .from('photos')
-        .select('storage_path')
-        .eq('url', photoUrl)
-        .single();
+      const fileName = photoUrl.split('/').pop();
+      if (!fileName) throw new Error("Nom de fichier invalide");
 
-      if (fetchError) throw fetchError;
+      const { error: deleteError } = await supabase.storage
+        .from('recipe-photos')
+        .remove([`${recipeId}/${fileName}`]);
 
-      // Delete from storage
-      if (photoData) {
-        const { error: deleteStorageError } = await supabase.storage
-          .from('recipe-photos')
-          .remove([photoData.storage_path]);
-
-        if (deleteStorageError) throw deleteStorageError;
-      }
-
-      // Delete from database
-      const { error: deleteDbError } = await supabase
-        .from('photos')
-        .delete()
-        .eq('url', photoUrl);
-
-      if (deleteDbError) throw deleteDbError;
+      if (deleteError) throw deleteError;
 
       const newPhotos = photos.filter(p => p !== photoUrl);
-      setPhotos(newPhotos);
 
+      const { error: updateError } = await supabase
+        .from('recettes')
+        .update({ photos: newPhotos })
+        .eq('id', recipeId);
+
+      if (updateError) throw updateError;
+
+      setPhotos(newPhotos);
       toast({
         description: "Photo supprimée",
       });

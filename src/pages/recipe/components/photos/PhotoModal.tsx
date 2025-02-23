@@ -91,7 +91,7 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute right-16 top-1/2 -translate-y-1/2 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
+                  className="absolute right-24 top-1/2 -translate-y-1/2 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
                   onClick={showNext}
                   disabled={currentIndex >= photos.length - 1}
                 >

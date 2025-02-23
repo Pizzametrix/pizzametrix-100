@@ -59,8 +59,8 @@ export default function MyRecipes() {
     <div className="min-h-screen flex bg-slate">
       <Sidebar />
       <main className="flex-1 flex flex-col items-center p-4 pb-24 md:p-8 md:pb-24 mt-16 md:mt-0">
-        <div className="w-full max-w-4xl mx-auto">
-          <div className="max-w-2xl mx-auto space-y-4">
+        <div className="w-full max-w-4xl mx-auto flex justify-center">
+          <div className="w-full max-w-2xl space-y-4">
             {loading ? (
               <p className="text-cream text-center">Chargement de vos recettes...</p>
             ) : recipes.length === 0 ? (

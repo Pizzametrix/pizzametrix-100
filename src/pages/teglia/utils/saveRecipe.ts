@@ -1,5 +1,5 @@
 
-import { DoughType, YeastType, Phase } from "../../napolitain/types";
+import { DoughType, YeastType, Phase, RecipeType } from "../../napolitain/types";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -41,7 +41,7 @@ export async function saveRecipe(params: SaveRecipeParams) {
   // S'assurer que les nombres sont bien des nombres
   const recipeData = {
     nom: params.recipeName,
-    type: 'teglia',
+    type: 'teglia' as RecipeType,
     user_id: user.id,
     pizza_count: Number(params.pizzaCount),
     ball_weight: Number(params.ballWeight),

@@ -24,14 +24,27 @@ export default function MyRecipes() {
           return;
         }
 
+        // Optimisation: récupérer les recettes et leurs photos en une seule requête
         const { data, error } = await supabase
           .from('recettes')
-          .select('*')
+          .select(`
+            *,
+            photos (
+              url
+            )
+          `)
           .eq('user_id', user.id)
           .order('created_at', { ascending: false });
 
         if (error) throw error;
-        setRecipes(data || []);
+        
+        // Transforme les données pour garder la compatibilité avec le composant RecipeCard
+        const recipesWithPhotos = data?.map(recipe => ({
+          ...recipe,
+          photos: recipe.photos?.map(photo => photo.url) || []
+        })) || [];
+        
+        setRecipes(recipesWithPhotos);
       } catch (error) {
         console.error("Erreur lors du chargement des recettes:", error);
         toast({

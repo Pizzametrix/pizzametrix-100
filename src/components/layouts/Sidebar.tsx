@@ -36,6 +36,9 @@ export const Sidebar = () => {
     if (location.pathname === "/mes-recettes") {
       return "Mes recettes";
     }
+    if (location.pathname === "/calculators") {
+      return "Calculatrices";
+    }
     return <>Pizzametri<span className="text-[#77BFA3]">x</span></>;
   };
 

@@ -13,7 +13,6 @@ export function DeleteRecipeDialog({ open, onOpenChange, onConfirm }: DeleteReci
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent 
         className="bg-slate border-cream/10"
-        onInteractOutside={() => onOpenChange(false)}
       >
         <AlertDialogHeader>
           <AlertDialogTitle className="text-cream">Supprimer la recette</AlertDialogTitle>

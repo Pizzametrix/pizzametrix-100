@@ -20,8 +20,13 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
+    console.log("Nombre de photos actuelles:", photos.length);
+    console.log("Nombre de nouvelles photos:", files.length);
+    console.log("Total:", photos.length + files.length);
+
     // Vérification immédiate du nombre total de photos
     if (photos.length + files.length > 6) {
+      event.preventDefault();
       toast({
         title: "Erreur",
         description: `Vous ne pouvez pas ajouter ${files.length} photos. La limite est de 6 photos au total (${6 - photos.length} restantes).`,
@@ -35,7 +40,7 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
     }
 
     await uploadPhotos(files);
-    // Reset l'input file après un upload réussi
+    // Reset l'input file pour permettre une nouvelle sélection
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -58,7 +63,11 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
       </div>
 
       <PhotoActions
-        onAddClick={() => fileInputRef.current?.click()}
+        onAddClick={() => {
+          console.log("Clic sur ajouter des photos");
+          console.log("Nombre de photos actuelles:", photos.length);
+          fileInputRef.current?.click();
+        }}
         isUploading={isUploading}
         isDisabled={isUploading || photos.length >= 6}
       />
@@ -79,4 +88,3 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
     </div>
   );
 }
-

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/hooks/use-toast";
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { RecipeDetailParameters } from "./recipe/components/RecipeDetailParameters";
 import { RecipeDetailPreferment } from "./recipe/components/RecipeDetailPreferment";
@@ -12,6 +12,7 @@ import { DeleteRecipeDialog } from "./recipe/components/DeleteRecipeDialog";
 import { RecipeDetailSkeleton } from "./recipe/components/RecipeDetailSkeleton";
 import { RecipeDescription } from "./recipe/components/RecipeDescription";
 import { RecipeHeader } from "./recipe/components/RecipeHeader";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function RecipeDetail() {
   const { id } = useParams();
@@ -160,6 +161,7 @@ export default function RecipeDetail() {
         onOpenChange={setIsDeleteDialogOpen}
         onConfirm={handleDeleteRecipe}
       />
+      <Toaster />
     </div>
   );
 }

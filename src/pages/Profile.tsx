@@ -38,7 +38,7 @@ export default function Profile() {
         .from('utilisateurs')
         .select('pseudonyme, niveau, four, petrin')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
 

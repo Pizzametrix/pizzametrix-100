@@ -41,7 +41,6 @@ export default function Profile() {
         setPseudonyme(data.pseudonyme || "");
       }
 
-      // Get avatar URL if exists
       const { data: avatarData } = await supabase
         .storage
         .from('avatars')
@@ -118,72 +117,87 @@ export default function Profile() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-slate">
         <div className="text-cream animate-pulse">Chargement...</div>
       </div>
     );
   }
 
   return (
-    <div className="container max-w-xl mx-auto p-4">
-      <div className="bg-slate/50 backdrop-blur-sm rounded-lg border border-cream/10 p-6 space-y-8">
-        <div className="flex items-center gap-4 pb-6 border-b border-cream/10">
-          <Avatar className="w-24 h-24 border-2 border-cream/20">
+    <div className="min-h-screen bg-slate py-12 px-4">
+      <div className="max-w-2xl mx-auto space-y-8">
+        {/* En-tête du profil */}
+        <div className="flex flex-col items-center space-y-4">
+          <Avatar className="w-32 h-32 border-4 border-basil shadow-lg">
             <AvatarImage src={avatarUrl || undefined} alt="Photo de profil" />
-            <AvatarFallback className="bg-cream text-basil">
+            <AvatarFallback className="bg-cream text-basil text-2xl font-bold">
               x
             </AvatarFallback>
           </Avatar>
-          <div className="space-y-1">
-            <h1 className="text-xl font-semibold text-cream">Mon Profil</h1>
-            <p className="text-cream/60 text-sm">Gérez vos informations personnelles</p>
+          <div className="text-center">
+            <h1 className="text-2xl font-bold font-montserrat text-cream">Mon Profil</h1>
+            <p className="text-cream/60 mt-1">Gérez vos informations personnelles</p>
           </div>
         </div>
 
-        <div className="space-y-6">
-          <div className="relative">
+        {/* Formulaire du profil */}
+        <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 space-y-6 border border-cream/5">
+          {/* Section photo de profil */}
+          <div>
             <Label htmlFor="avatar" className="sr-only">Photo de profil</Label>
-            <Button
-              variant="outline"
-              className="w-full border-dashed border-2 border-cream/20 text-cream hover:text-basil hover:border-basil h-24 relative"
-            >
-              <input
-                id="avatar"
-                type="file"
-                accept="image/*"
-                onChange={uploadAvatar}
-                disabled={uploading}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              />
-              <div className="flex flex-col items-center gap-2">
-                <Camera className="h-6 w-6" />
-                <span className="text-sm">
-                  {uploading ? "Téléchargement..." : "Changer la photo de profil"}
-                </span>
-              </div>
-            </Button>
+            <div className="mt-1">
+              <Button
+                variant="outline"
+                className="w-full py-8 border-2 border-dashed border-cream/20 rounded-lg hover:border-basil hover:bg-basil/5 transition-all duration-300"
+              >
+                <input
+                  id="avatar"
+                  type="file"
+                  accept="image/*"
+                  onChange={uploadAvatar}
+                  disabled={uploading}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                />
+                <div className="flex flex-col items-center gap-3">
+                  <div className="p-3 bg-basil/10 rounded-full">
+                    <Camera className="h-6 w-6 text-basil" />
+                  </div>
+                  <div className="text-center">
+                    <span className="text-sm font-medium text-cream block">
+                      {uploading ? "Téléchargement..." : "Changer la photo de profil"}
+                    </span>
+                    <span className="text-xs text-cream/60 mt-1 block">
+                      PNG, JPG (max. 10 Mo)
+                    </span>
+                  </div>
+                </div>
+              </Button>
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="pseudonyme" className="text-cream">Pseudonyme</Label>
-            <div className="flex gap-2">
+          {/* Section pseudonyme */}
+          <div className="space-y-4">
+            <Label htmlFor="pseudonyme" className="text-sm font-medium text-cream">
+              Pseudonyme
+            </Label>
+            <div className="flex gap-3">
               <div className="relative flex-1">
                 <Input
                   id="pseudonyme"
                   type="text"
                   value={pseudonyme}
                   onChange={(e) => setPseudonyme(e.target.value)}
-                  className="text-cream bg-slate-700/50 border-cream/10 pl-10"
+                  className="pl-10 bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 focus:border-basil focus:ring-1 focus:ring-basil"
                   placeholder="Votre pseudonyme"
                 />
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-cream/40" />
               </div>
               <Button 
                 onClick={updateProfile}
-                className="bg-basil hover:bg-basil/90 text-slate"
+                className="bg-basil hover:bg-basil/90 text-slate font-medium px-6"
               >
-                <Save className="h-5 w-5" />
-                <span className="hidden sm:inline ml-2">Enregistrer</span>
+                <Save className="h-5 w-5 mr-2" />
+                <span>Enregistrer</span>
               </Button>
             </div>
           </div>

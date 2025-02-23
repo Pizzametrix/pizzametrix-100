@@ -34,7 +34,7 @@ export default function Calculators() {
       <div className="flex-1">
         <div className="md:pl-64">
           <main className="w-full max-w-4xl mx-auto p-4 md:p-8 mt-16 md:mt-0">
-            <h1 className="text-2xl md:text-3xl font-bold text-cream mb-8 mx-0 text-left">
+            <h1 className="text-2xl font-bold text-cream mb-8 mx-0 text-left md:text-2xl">
               Calculatrices
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

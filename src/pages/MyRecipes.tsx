@@ -59,22 +59,18 @@ export default function MyRecipes() {
     <div className="min-h-screen flex bg-slate">
       <Sidebar />
       <div className="flex-1">
-        <div className="w-full flex">
-          <div className="flex-1 max-w-[calc(100%-256px)] md:ml-64">
-            <div className="w-full flex justify-center">
-              <main className="w-full max-w-2xl p-4 pb-24 md:p-8 md:pb-24 mt-16 md:mt-0">
-                {loading ? (
-                  <p className="text-cream text-center">Chargement de vos recettes...</p>
-                ) : recipes.length === 0 ? (
-                  <p className="text-cream text-center">Vous n'avez pas encore de recettes enregistrées.</p>
-                ) : (
-                  <div className="space-y-4">
-                    {recipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
-                  </div>
-                )}
-              </main>
-            </div>
-          </div>
+        <div className="md:pl-64">
+          <main className="w-full max-w-2xl mx-auto p-4 pb-24 md:p-8 md:pb-24 mt-16 md:mt-0">
+            {loading ? (
+              <p className="text-cream text-center">Chargement de vos recettes...</p>
+            ) : recipes.length === 0 ? (
+              <p className="text-cream text-center">Vous n'avez pas encore de recettes enregistrées.</p>
+            ) : (
+              <div className="space-y-4">
+                {recipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
+              </div>
+            )}
+          </main>
         </div>
       </div>
     </div>

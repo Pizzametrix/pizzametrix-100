@@ -49,11 +49,11 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
         <div className="relative w-full h-full">
           {photo && (
             <>
-              <div className="absolute w-full top-0 z-50 flex justify-between p-4">
+              <div className="absolute w-full top-6 z-50 flex justify-between px-8">
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
+                  className="bg-slate/80 text-cream hover:text-terracotta hover:bg-slate ml-8"
                   onClick={handleDelete}
                 >
                   <Trash2 className="h-6 w-6" />
@@ -61,7 +61,7 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
+                  className="bg-slate/80 text-cream hover:text-terracotta hover:bg-slate mr-8"
                   onClick={onClose}
                 >
                   <X className="h-6 w-6" />
@@ -72,7 +72,7 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
+                  className="absolute left-12 top-1/2 -translate-y-1/2 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
                   onClick={showPrevious}
                   disabled={currentIndex <= 0}
                 >
@@ -91,7 +91,7 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
+                  className="absolute right-12 top-1/2 -translate-y-1/2 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
                   onClick={showNext}
                   disabled={currentIndex >= photos.length - 1}
                 >

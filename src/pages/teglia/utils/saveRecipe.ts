@@ -30,6 +30,13 @@ export async function saveRecipe(params: SaveRecipeParams) {
     throw new Error("Vous devez être connecté pour sauvegarder une recette");
   }
 
+  // Convertir les phases en format JSON compatible avec Supabase
+  const phasesJson = params.phases.map(phase => ({
+    id: phase.id,
+    duration: phase.duration,
+    temperature: phase.temperature
+  }));
+
   const { error } = await supabase
     .from('recettes')
     .insert({
@@ -48,7 +55,7 @@ export async function saveRecipe(params: SaveRecipeParams) {
       is_sugar_enabled: params.isSugarEnabled,
       sugar: params.sugar,
       dough_type: params.doughType,
-      phases: params.phases,
+      phases: phasesJson,
       yeast_type: params.yeastType,
       preferment_flour: params.prefermentFlour,
       preferment_hydration: params.prefermentHydration,

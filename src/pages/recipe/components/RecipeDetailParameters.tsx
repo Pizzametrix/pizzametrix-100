@@ -48,14 +48,6 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     icon: <Leaf className="h-4 w-4" />,
   });
 
-  if (!recipe.is_custom_yeast_enabled && recipe.yeast) {
-    parameters.push({
-      name: "Levure",
-      value: `${(recipe.yeast * 100).toFixed(2)}%`,
-      icon: <Leaf className="h-4 w-4" />,
-    });
-  }
-
   if (recipe.is_custom_yeast_enabled && recipe.custom_yeast) {
     parameters.push({
       name: "Levure (forcé)",

@@ -31,10 +31,10 @@ export default function Calculators() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-slate">
+    <div className="min-h-screen flex bg-slate">
       <Sidebar />
-      <main className="flex-1 p-4 md:p-8 mt-16 md:mt-0">
-        <div className="max-w-6xl mx-auto">
+      <main className="flex-1 flex flex-col items-center p-4 md:p-8 mt-16 md:mt-0">
+        <div className="w-full max-w-4xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-bold text-cream mb-8 text-center">
             Calculatrices
           </h1>

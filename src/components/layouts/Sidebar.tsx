@@ -1,4 +1,3 @@
-
 import { Menu, LogOut, X, Calculator, Home, Book, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -167,8 +166,8 @@ export const Sidebar = () => {
             >
               <Avatar className="mr-2 h-4 w-4">
                 <AvatarImage src={avatarUrl || undefined} />
-                <AvatarFallback className="bg-slate-700 text-[9px]">
-                  {pseudonyme?.[0]?.toUpperCase() || "U"}
+                <AvatarFallback className="bg-cream text-basil">
+                  x
                 </AvatarFallback>
               </Avatar>
               <span>Profil</span>

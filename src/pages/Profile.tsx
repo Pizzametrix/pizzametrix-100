@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -131,8 +130,8 @@ export default function Profile() {
           <div className="flex items-center gap-4">
             <Avatar className="w-20 h-20">
               <AvatarImage src={avatarUrl || undefined} alt="Photo de profil" />
-              <AvatarFallback className="bg-slate-700 text-cream">
-                {pseudonyme?.[0]?.toUpperCase() || "U"}
+              <AvatarFallback className="bg-cream text-basil">
+                x
               </AvatarFallback>
             </Avatar>
             <Input

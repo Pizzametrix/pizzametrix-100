@@ -55,10 +55,10 @@ export const Sidebar = () => {
 
       <div 
         className={`
-          fixed md:static top-0 left-0 h-full w-64 bg-slate border-r border-cream/10
+          fixed top-0 left-0 h-screen w-64 bg-slate border-r border-cream/10
           transition-transform duration-300 ease-in-out z-40
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-          md:translate-x-0 md:h-screen
+          md:translate-x-0
           pt-20 md:pt-4 p-4
         `}
       >
@@ -126,4 +126,4 @@ export const Sidebar = () => {
       )}
     </>
   );
-};
+}

@@ -118,9 +118,9 @@ export default function RecipeDetail() {
   return (
     <div className="flex min-h-screen bg-slate">
       <Sidebar />
-      <div className="flex-1">
-        <div className="md:ml-64 min-h-screen">
-          <main className="p-4 pb-24 space-y-6 max-w-2xl mx-auto">
+      <div className="flex-1 md:pl-64">
+        <main className="container mx-auto p-4 pb-24">
+          <div className="max-w-2xl mx-auto">
             <RecipeHeader 
               recipe={recipe} 
               onDelete={() => setIsDeleteDialogOpen(true)} 
@@ -152,8 +152,8 @@ export default function RecipeDetail() {
             <div className="space-y-4">
               <RecipeDetailPhases phases={recipe.phases} />
             </div>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
 
       <DeleteRecipeDialog

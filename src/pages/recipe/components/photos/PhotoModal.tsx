@@ -33,45 +33,47 @@ export function PhotoModal({ photo, photos, onClose, onDelete }: PhotoModalProps
 
   return (
     <Dialog open={!!photo} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl p-6 overflow-hidden bg-slate/95 border-cream/10">
-        <div className="relative">
+      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-slate/95 border-cream/10">
+        <div className="relative w-full h-full">
           {photo && (
             <>
-              <div className="absolute top-0 right-0 z-10">
-                {onDelete && (
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-cream hover:text-terracotta hover:bg-cream/5"
-                    onClick={() => onDelete(photo)}
-                  >
-                    <Trash2 className="h-5 w-5" />
-                  </Button>
-                )}
-              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-4 right-4 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
+                onClick={() => onDelete && onDelete(photo)}
+              >
+                <Trash2 className="h-6 w-6" />
+              </Button>
+
               <div className="flex items-center justify-between">
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-cream hover:text-terracotta hover:bg-cream/5"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
                   onClick={showPrevious}
                   disabled={currentIndex <= 0}
                 >
-                  <ChevronLeft className="h-8 w-8" />
+                  <ChevronLeft className="h-10 w-10" />
                 </Button>
-                <img
-                  src={photo}
-                  alt="Photo agrandie"
-                  className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
-                />
+
+                <div className="w-full flex items-center justify-center p-6">
+                  <img
+                    src={photo}
+                    alt="Photo agrandie"
+                    className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </div>
+
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-cream hover:text-terracotta hover:bg-cream/5"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-slate/80 text-cream hover:text-terracotta hover:bg-slate"
                   onClick={showNext}
                   disabled={currentIndex >= photos.length - 1}
                 >
-                  <ChevronRight className="h-8 w-8" />
+                  <ChevronRight className="h-10 w-10" />
                 </Button>
               </div>
             </>

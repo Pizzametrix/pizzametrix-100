@@ -35,7 +35,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
     <div className="w-full h-full bg-slate flex flex-col items-center justify-center">
       <Camera className="w-8 h-8 text-cream mb-2" />
       <p className="text-cream text-sm font-semibold">
-        pizzametri<span className="text-basil">x</span>
+        Pizzametri<span className="text-basil">x</span>
       </p>
     </div>
   );

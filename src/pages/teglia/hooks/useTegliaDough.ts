@@ -15,7 +15,7 @@ export const useTegliaDough = () => {
   const [yeast, setYeast] = useState(0.05);
   const [customYeast, setCustomYeast] = useState(0.20);
   const [isCustomYeastEnabled, setIsCustomYeastEnabled] = useState(false);
-  const [oil, setOil] = useState(3.0);
+  const [oil, setOil] = useState(2.5);
   const [sugar, setSugar] = useState(1.0);
   const [isOilEnabled, setIsOilEnabled] = useState(false);
   const [isSugarEnabled, setIsSugarEnabled] = useState(false);

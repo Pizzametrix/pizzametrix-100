@@ -9,6 +9,38 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      photos: {
+        Row: {
+          created_at: string
+          id: string
+          recipe_id: string | null
+          storage_path: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          recipe_id?: string | null
+          storage_path: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          recipe_id?: string | null
+          storage_path?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "photos_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recettes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       recettes: {
         Row: {
           ball_weight: number

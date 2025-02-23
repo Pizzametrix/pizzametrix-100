@@ -50,37 +50,39 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
 
   return (
     <div className="space-y-4">
-      <div className="border-2 border-dashed border-cream/20 rounded-lg p-4 min-h-[200px]">
-        {photos.length > 0 ? (
-          <PhotoGrid
-            photos={photos}
-            onPhotoClick={setSelectedPhoto}
-            onDeletePhoto={deletePhoto}
-          />
-        ) : (
-          <div className="flex items-center justify-center h-full">
-            <p className="text-cream/60 text-center">Ajoutez des photos de votre recette ici</p>
-          </div>
-        )}
-      </div>
+      <div className="border-2 border-dashed border-cream/20 rounded-lg p-4">
+        <div className="space-y-4">
+          {photos.length > 0 ? (
+            <PhotoGrid
+              photos={photos}
+              onPhotoClick={setSelectedPhoto}
+              onDeletePhoto={deletePhoto}
+            />
+          ) : (
+            <div className="flex items-center justify-center h-[200px]">
+              <p className="text-cream/60 text-center">Ajoutez des photos de votre recette ici</p>
+            </div>
+          )}
 
-      <PhotoActions
-        onAddClick={() => {
-          if (photos.length >= 6) {
-            toast({
-              title: "Limite atteinte",
-              description: "Vous avez atteint la limite de 6 photos",
-              variant: "destructive",
-            });
-            return;
-          }
-          console.log("Clic sur ajouter des photos");
-          console.log("Nombre de photos actuelles:", photos.length);
-          fileInputRef.current?.click();
-        }}
-        isUploading={isUploading}
-        isDisabled={isUploading || photos.length >= 6}
-      />
+          <PhotoActions
+            onAddClick={() => {
+              if (photos.length >= 6) {
+                toast({
+                  title: "Limite atteinte",
+                  description: "Vous avez atteint la limite de 6 photos",
+                  variant: "destructive",
+                });
+                return;
+              }
+              console.log("Clic sur ajouter des photos");
+              console.log("Nombre de photos actuelles:", photos.length);
+              fileInputRef.current?.click();
+            }}
+            isUploading={isUploading}
+            isDisabled={isUploading || photos.length >= 6}
+          />
+        </div>
+      </div>
 
       <input
         type="file"

@@ -286,56 +286,58 @@ export default function NapolitainCalculator() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-slate relative">
+    <div className="min-h-screen flex bg-slate">
       <Sidebar />
-      <main className="flex-1 p-4 pb-24 md:p-8 md:pb-24 mt-16 md:mt-0">
-        <div className="max-w-2xl mx-auto">
-          <div className="space-y-6">
-            <DoughParameters
-              totalWeight={totalWeight}
-              pizzaCount={pizzaCount}
-              setPizzaCount={setPizzaCount}
-              ballWeight={ballWeight}
-              setBallWeight={setBallWeight}
-              hydration={hydration}
-              setHydration={setHydration}
-              salt={salt}
-              setSalt={setSalt}
-              oil={oil}
-              setOil={setOil}
-              sugar={sugar}
-              setSugar={setSugar}
-              isOilEnabled={isOilEnabled}
-              isSugarEnabled={isSugarEnabled}
-              handleIncrement={handleIncrement}
-              handleDecrement={handleDecrement}
-            />
+      <main className="flex-1 flex flex-col items-center p-4 pb-24 md:p-8 md:pb-24 mt-16 md:mt-0">
+        <div className="w-full max-w-4xl mx-auto">
+          <div className="max-w-2xl mx-auto">
+            <div className="space-y-6">
+              <DoughParameters
+                totalWeight={totalWeight}
+                pizzaCount={pizzaCount}
+                setPizzaCount={setPizzaCount}
+                ballWeight={ballWeight}
+                setBallWeight={setBallWeight}
+                hydration={hydration}
+                setHydration={setHydration}
+                salt={salt}
+                setSalt={setSalt}
+                oil={oil}
+                setOil={setOil}
+                sugar={sugar}
+                setSugar={setSugar}
+                isOilEnabled={isOilEnabled}
+                isSugarEnabled={isSugarEnabled}
+                handleIncrement={handleIncrement}
+                handleDecrement={handleDecrement}
+              />
 
-            <PrefermentSection
-              doughType={doughType}
-              prefermentFlour={prefermentFlour}
-              setPrefermentFlour={setPrefermentFlour}
-              prefermentHydration={prefermentHydration}
-              setPrefermentHydration={setPrefermentHydration}
-              prefermentYeast={prefermentYeast}
-              setPrefermentYeast={setPrefermentYeast}
-              handleIncrement={handleIncrement}
-              handleDecrement={handleDecrement}
-            />
+              <PrefermentSection
+                doughType={doughType}
+                prefermentFlour={prefermentFlour}
+                setPrefermentFlour={setPrefermentFlour}
+                prefermentHydration={prefermentHydration}
+                setPrefermentHydration={setPrefermentHydration}
+                prefermentYeast={prefermentYeast}
+                setPrefermentYeast={setPrefermentYeast}
+                handleIncrement={handleIncrement}
+                handleDecrement={handleDecrement}
+              />
 
-            <RestPhases
-              phases={phases}
-              totalDuration={totalDuration}
-              handlePhaseChange={handlePhaseChange}
-              addPhase={addPhase}
-              removePhase={removePhase}
-            />
+              <RestPhases
+                phases={phases}
+                totalDuration={totalDuration}
+                handlePhaseChange={handlePhaseChange}
+                addPhase={addPhase}
+                removePhase={removePhase}
+              />
 
-            <IngredientsTable
-              doughType={doughType}
-              ingredients={ingredients}
-              ingredientsTotal={ingredientsTotal}
-            />
+              <IngredientsTable
+                doughType={doughType}
+                ingredients={ingredients}
+                ingredientsTotal={ingredientsTotal}
+              />
+            </div>
           </div>
         </div>
       </main>

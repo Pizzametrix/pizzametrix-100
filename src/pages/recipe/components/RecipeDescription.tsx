@@ -48,18 +48,20 @@ export function RecipeDescription({
         </div>
       </CardHeader>
       <CardContent>
-        {isEditing ? (
-          <Textarea
-            value={description}
-            onChange={(e) => onChange(e.target.value)}
-            className="bg-white/5 border-cream/10 text-cream resize-none"
-            placeholder="Ajoutez vos notes ici..."
-          />
-        ) : (
-          <p className="text-cream/80 min-h-[4rem]">
-            {description || "Aucune note"}
-          </p>
-        )}
+        <div className="border border-cream/10 rounded-md p-4">
+          {isEditing ? (
+            <Textarea
+              value={description}
+              onChange={(e) => onChange(e.target.value)}
+              className="bg-white/5 border-cream/10 text-cream resize-none"
+              placeholder="Ajoutez vos notes ici..."
+            />
+          ) : (
+            <p className="text-cream/80 min-h-[4rem]">
+              {description || "Aucune note"}
+            </p>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

@@ -4,7 +4,7 @@ import { PhotoGrid } from "./photos/PhotoGrid";
 import { PhotoActions } from "./photos/PhotoActions";
 import { PhotoModal } from "./photos/PhotoModal";
 import { usePhotos } from "./photos/usePhotos";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/hooks/use-toast";
 
 interface RecipePhotosProps {
   recipeId: string;

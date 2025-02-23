@@ -1,6 +1,6 @@
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Calculator, Scale, CakeSlice, Cookie } from "lucide-react";
+import { Calculator, Scale, Crystal, Droplet } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface RecipeDetailParametersProps {
@@ -22,7 +22,7 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     {
       name: "Sel",
       value: `${(Math.round(recipe.salt * 1000) / 10).toFixed(1)}%`,
-      icon: <CakeSlice className="h-4 w-4" />,
+      icon: <Crystal className="h-4 w-4" />,
     },
   ];
 
@@ -30,7 +30,7 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     parameters.push({
       name: "Huile",
       value: `${(recipe.oil * 100).toFixed(1)}%`,
-      icon: <CakeSlice className="h-4 w-4" />,
+      icon: <Droplet className="h-4 w-4" />,
     });
   }
 

@@ -1,6 +1,6 @@
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Calculator, Scale, Crystal, Droplet } from "lucide-react";
+import { Calculator, Scale, Soup, Drop, Cookie, Leaf } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface RecipeDetailParametersProps {
@@ -22,7 +22,7 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     {
       name: "Sel",
       value: `${(Math.round(recipe.salt * 1000) / 10).toFixed(1)}%`,
-      icon: <Crystal className="h-4 w-4" />,
+      icon: <Soup className="h-4 w-4" />,
     },
   ];
 
@@ -30,7 +30,7 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     parameters.push({
       name: "Huile",
       value: `${(recipe.oil * 100).toFixed(1)}%`,
-      icon: <Droplet className="h-4 w-4" />,
+      icon: <Drop className="h-4 w-4" />,
     });
   }
 
@@ -45,14 +45,14 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
   parameters.push({
     name: "Type de levure",
     value: recipe.yeast_type.charAt(0).toUpperCase() + recipe.yeast_type.slice(1),
-    icon: <CakeSlice className="h-4 w-4" />,
+    icon: <Leaf className="h-4 w-4" />,
   });
 
   if (recipe.is_custom_yeast_enabled && recipe.custom_yeast) {
     parameters.push({
       name: "Levure",
       value: `${(recipe.custom_yeast * 100).toFixed(2)}%`,
-      icon: <CakeSlice className="h-4 w-4" />,
+      icon: <Leaf className="h-4 w-4" />,
     });
   }
 

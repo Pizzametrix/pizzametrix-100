@@ -33,6 +33,9 @@ export const Sidebar = () => {
     if (location.pathname === "/calculators/napolitaine") {
       return "Pizza Napolitaine";
     }
+    if (location.pathname === "/calculators/teglia") {
+      return "Pizza Teglia";
+    }
     if (location.pathname === "/mes-recettes") {
       return "Mes recettes";
     }
@@ -98,6 +101,13 @@ export const Sidebar = () => {
                     onClick={() => handleNavigation('/calculators/napolitaine')}
                   >
                     <span>Pizza Napolitaine</span>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-[#F5E9D7]/80 hover:text-terracotta hover:bg-cream/5 text-sm"
+                    onClick={() => handleNavigation('/calculators/teglia')}
+                  >
+                    <span>Pizza Teglia</span>
                   </Button>
                 </div>
               </div>

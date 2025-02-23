@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
 import Calculators from "./pages/Calculators";
 import NapolitainCalculator from "./pages/NapolitainCalculator";
+import TegliaCalculator from "./pages/TegliaCalculator";
 import MyRecipes from "./pages/MyRecipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import NotFound from "./pages/NotFound";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/calculators" element={<Calculators />} />
         <Route path="/calculators/napolitaine" element={<NapolitainCalculator />} />
+        <Route path="/calculators/teglia" element={<TegliaCalculator />} />
         <Route path="/mes-recettes" element={<MyRecipes />} />
         <Route path="/mes-recettes/:id" element={<RecipeDetail />} />
         <Route path="*" element={<NotFound />} />

@@ -10,6 +10,7 @@ import TegliaCalculator from "./pages/TegliaCalculator";
 import MyRecipes from "./pages/MyRecipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/calculators/teglia" element={<TegliaCalculator />} />
         <Route path="/mes-recettes" element={<MyRecipes />} />
         <Route path="/mes-recettes/:id" element={<RecipeDetail />} />
+        <Route path="/profil" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

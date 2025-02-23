@@ -214,18 +214,22 @@ export default function NapolitainCalculator() {
         temperature: phase.temperature
       }));
 
-      console.log("Type de pâte:", doughType);
-      console.log("Farine préferment:", prefermentFlour);
-      console.log("Hydratation préferment:", prefermentHydration);
-      console.log("Levure préferment:", prefermentYeast);
-
-      const formatPercentage = (value: number) => {
-        return Number((value / 100).toFixed(2));
+      const formatYeastType = (type: YeastType): string => {
+        switch (type) {
+          case 'fraiche':
+            return 'Fraîche';
+          case 'seche':
+            return 'Sèche';
+          case 'saf':
+            return 'SAF';
+          default:
+            return type;
+        }
       };
 
       const prefermentFlourValue = doughType !== 'direct' ? Math.round(Number(prefermentFlour)) : null;
       const prefermentHydrationValue = doughType !== 'direct' ? Math.round(Number(prefermentHydration)) : null;
-      const prefermentYeastValue = doughType !== 'direct' ? formatPercentage(Number(prefermentYeast)) : null;
+      const prefermentYeastValue = doughType !== 'direct' ? Number((Number(prefermentYeast) / 100).toFixed(2)) : null;
 
       const recipeData = {
         user_id: user.id,
@@ -244,7 +248,7 @@ export default function NapolitainCalculator() {
         custom_yeast: isCustomYeastEnabled ? Number(customYeast.toFixed(2)) : null,
         is_oil_enabled: isOilEnabled,
         is_sugar_enabled: isSugarEnabled,
-        yeast_type: yeastType,
+        yeast_type: formatYeastType(yeastType),
         preferment_flour: prefermentFlourValue,
         preferment_hydration: prefermentHydrationValue,
         preferment_yeast: prefermentYeastValue

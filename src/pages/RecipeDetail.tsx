@@ -120,7 +120,7 @@ export default function RecipeDetail() {
       <Sidebar />
       <div className="flex-1 md:pl-64">
         <main className="container mx-auto p-4 pb-24">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto space-y-8">
             <RecipeHeader 
               recipe={recipe} 
               onDelete={() => setIsDeleteDialogOpen(true)} 

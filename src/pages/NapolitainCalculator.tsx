@@ -241,7 +241,7 @@ export default function NapolitainCalculator() {
         dough_type: doughType,
         phases: phasesJson,
         is_custom_yeast_enabled: isCustomYeastEnabled,
-        custom_yeast: isCustomYeastEnabled ? Number((Number(customYeast) / 100).toFixed(2)) : null,
+        custom_yeast: isCustomYeastEnabled ? Number(customYeast.toFixed(2)) : null,
         is_oil_enabled: isOilEnabled,
         is_sugar_enabled: isSugarEnabled,
         yeast_type: yeastType,

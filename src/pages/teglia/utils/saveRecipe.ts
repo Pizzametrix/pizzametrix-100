@@ -63,6 +63,7 @@ export async function saveRecipe(params: SaveRecipeParams) {
     });
 
   if (error) {
+    console.error("Erreur de sauvegarde:", error);
     throw new Error("Erreur lors de la sauvegarde de la recette");
   }
 }

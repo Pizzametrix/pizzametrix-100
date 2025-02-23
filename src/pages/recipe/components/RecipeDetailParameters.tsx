@@ -42,16 +42,26 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
     });
   }
 
-  parameters.push({
-    name: "Type de levure",
-    value: recipe.yeast_type.charAt(0).toUpperCase() + recipe.yeast_type.slice(1),
-    icon: <Leaf className="h-4 w-4" />,
-  });
+  // Ajout du type de levure
+  if (recipe.yeast_type) {
+    parameters.push({
+      name: "Type de levure",
+      value: recipe.yeast_type.charAt(0).toUpperCase() + recipe.yeast_type.slice(1),
+      icon: <Leaf className="h-4 w-4" />,
+    });
+  }
 
+  // Ajout du pourcentage de levure uniquement si forcé
   if (recipe.is_custom_yeast_enabled && recipe.custom_yeast) {
     parameters.push({
       name: "Levure (forcé)",
       value: `${(recipe.custom_yeast * 100).toFixed(2)}%`,
+      icon: <Leaf className="h-4 w-4" />,
+    });
+  } else if (recipe.yeast) {
+    parameters.push({
+      name: "Levure",
+      value: `${(recipe.yeast * 100).toFixed(2)}%`,
       icon: <Leaf className="h-4 w-4" />,
     });
   }

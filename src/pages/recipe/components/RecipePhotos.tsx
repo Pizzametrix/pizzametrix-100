@@ -4,7 +4,7 @@ import { PhotoGrid } from "./photos/PhotoGrid";
 import { PhotoActions } from "./photos/PhotoActions";
 import { PhotoModal } from "./photos/PhotoModal";
 import { usePhotos } from "./photos/usePhotos";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 interface RecipePhotosProps {
   recipeId: string;
@@ -15,6 +15,7 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
   const { photos, isUploading, uploadPhotos, deletePhoto } = usePhotos(recipeId, initialPhotos);
+  const { toast } = useToast();
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -26,10 +27,11 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
 
     // Vérification immédiate du nombre total de photos
     if (photos.length + files.length > 6) {
+      console.log("Tentative d'affichage du toast d'erreur");
       event.preventDefault();
       toast({
-        title: "Erreur",
-        description: `Vous ne pouvez pas ajouter ${files.length} photos. La limite est de 6 photos au total (${6 - photos.length} restantes).`,
+        title: "Limite de photos atteinte",
+        description: `Impossible d'ajouter ${files.length} photos. La limite est de 6 photos au total (${6 - photos.length} restantes).`,
         variant: "destructive",
       });
       // Reset l'input file pour permettre une nouvelle sélection
@@ -64,6 +66,14 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
 
       <PhotoActions
         onAddClick={() => {
+          if (photos.length >= 6) {
+            toast({
+              title: "Limite atteinte",
+              description: "Vous avez atteint la limite de 6 photos",
+              variant: "destructive",
+            });
+            return;
+          }
           console.log("Clic sur ajouter des photos");
           console.log("Nombre de photos actuelles:", photos.length);
           fileInputRef.current?.click();

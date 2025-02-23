@@ -15,8 +15,6 @@ export function PhotoActions({
         <ImagePlus className="h-4 w-4 mr-2" />
         {isUploading ? "Chargement..." : "Ajouter des photos"}
       </Button>
-      <Button variant="secondary" size="sm" className="bg-basil text-slate hover:bg-basil/90" onClick={() => alert("Fonctionnalité à venir")} disabled={isDisabled}>
-        <Camera className="h-4 w-4" />
-      </Button>
+      
     </div>;
 }

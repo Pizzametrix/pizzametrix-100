@@ -7,22 +7,22 @@ import { calculateIngredients } from "../utils/calculateIngredients";
 import { saveRecipe } from "../utils/saveRecipe";
 
 export const useTegliaDough = () => {
-  const [totalWeight, setTotalWeight] = useState(1000);
+  const [totalWeight, setTotalWeight] = useState(600);
   const [pizzaCount, setPizzaCount] = useState(1);
-  const [ballWeight, setBallWeight] = useState(1000);
-  const [hydration, setHydration] = useState(75);
+  const [ballWeight, setBallWeight] = useState(600);
+  const [hydration, setHydration] = useState(80);
   const [salt, setSalt] = useState(2.5);
   const [yeast, setYeast] = useState(0.05);
   const [customYeast, setCustomYeast] = useState(0.20);
   const [isCustomYeastEnabled, setIsCustomYeastEnabled] = useState(false);
   const [oil, setOil] = useState(3.0);
   const [sugar, setSugar] = useState(1.0);
-  const [isOilEnabled, setIsOilEnabled] = useState(true);
+  const [isOilEnabled, setIsOilEnabled] = useState(false);
   const [isSugarEnabled, setIsSugarEnabled] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [phases, setPhases] = useState<Phase[]>([
-    { id: 1, duration: 24, temperature: 4 },
-    { id: 2, duration: 2, temperature: 20 },
+    { id: 1, duration: 42, temperature: 5 },
+    { id: 2, duration: 6, temperature: 20 },
   ]);
   const [yeastType, setYeastType] = useState<YeastType>('fraiche');
   const [doughType, setDoughType] = useState<DoughType>('direct');

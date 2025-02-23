@@ -1,16 +1,13 @@
-
 import { useRef, useState } from "react";
 import { PhotoGrid } from "./photos/PhotoGrid";
 import { PhotoActions } from "./photos/PhotoActions";
 import { PhotoModal } from "./photos/PhotoModal";
 import { usePhotos } from "./photos/usePhotos";
 import { useToast } from "@/hooks/use-toast";
-
 interface RecipePhotosProps {
   recipeId: string;
   photos: string[];
 }
-
 export function RecipePhotos({
   recipeId,
   photos: initialPhotos
@@ -23,8 +20,9 @@ export function RecipePhotos({
     uploadPhotos,
     deletePhoto
   } = usePhotos(recipeId, initialPhotos);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
@@ -32,34 +30,32 @@ export function RecipePhotos({
     // Vérification immédiate du nombre total de photos
     if (photos.length + files.length > 6) {
       event.preventDefault();
-      
+
       // Forcer l'affichage du toast avec une durée plus longue
       toast({
         title: "Limite de photos atteinte",
         description: `Impossible d'ajouter ${files.length} photos. La limite est de 6 photos au total (${6 - photos.length} restantes).`,
         variant: "destructive",
-        duration: 5000, // 5 secondes
+        duration: 5000 // 5 secondes
       });
-      
+
       // Reset l'input file
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
       return;
     }
-
     await uploadPhotos(files);
     // Reset l'input file
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
-
   return <div className="space-y-4">
       <div className="border-2 border-dashed border-cream/20 rounded-lg p-4">
         <div className="space-y-4">
           {photos.length > 0 ? <PhotoGrid photos={photos} onPhotoClick={setSelectedPhoto} onDeletePhoto={deletePhoto} /> : <div className="flex items-center justify-center h-[200px]">
-              <p className="text-cream/60 text-center px-[40px]">Ajoutez les photos de votre recette ici</p>
+              <p className="text-cream/60 text-center px-[40px]">Ajoutez les photos de votre pizza ici</p>
             </div>}
 
           <PhotoActions onAddClick={() => {
@@ -68,7 +64,7 @@ export function RecipePhotos({
               title: "Limite atteinte",
               description: "Vous avez atteint la limite de 6 photos",
               variant: "destructive",
-              duration: 5000, // 5 secondes
+              duration: 5000 // 5 secondes
             });
             return;
           }

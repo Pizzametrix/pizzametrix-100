@@ -95,7 +95,9 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
 
       <PhotoModal
         photo={selectedPhoto}
+        photos={photos}
         onClose={() => setSelectedPhoto(null)}
+        onDelete={deletePhoto}
       />
     </div>
   );

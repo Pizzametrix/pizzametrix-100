@@ -1,6 +1,5 @@
 
-import { X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 interface PhotoGridProps {
   photos: string[];
@@ -8,7 +7,18 @@ interface PhotoGridProps {
   onDeletePhoto: (photo: string) => void;
 }
 
-export function PhotoGrid({ photos, onPhotoClick, onDeletePhoto }: PhotoGridProps) {
+export function PhotoGrid({ photos, onPhotoClick }: PhotoGridProps) {
+  useEffect(() => {
+    const handleSelectPhoto = (event: CustomEvent<string>) => {
+      onPhotoClick(event.detail);
+    };
+
+    document.addEventListener('selectPhoto', handleSelectPhoto as EventListener);
+    return () => {
+      document.removeEventListener('selectPhoto', handleSelectPhoto as EventListener);
+    };
+  }, [onPhotoClick]);
+
   return (
     <div className="grid grid-cols-2 gap-4">
       {photos.map((photo, index) => (
@@ -23,17 +33,6 @@ export function PhotoGrid({ photos, onPhotoClick, onDeletePhoto }: PhotoGridProp
             className="w-full h-full object-cover rounded-lg"
             loading="lazy"
           />
-          <Button
-            variant="destructive"
-            size="icon"
-            className="absolute top-2 right-2"
-            onClick={(e) => {
-              e.stopPropagation();
-              onDeletePhoto(photo);
-            }}
-          >
-            <X className="h-4 w-4" />
-          </Button>
         </div>
       ))}
     </div>

@@ -2,7 +2,7 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Card } from "@/components/ui/card";
-import { Clock, Droplet } from "lucide-react";
+import { Clock, Droplet, Camera } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface RecipeCardProps {
@@ -31,7 +31,14 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
     return recipe.dough_type.charAt(0).toUpperCase() + recipe.dough_type.slice(1);
   };
 
-  const defaultImage = "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9";
+  const DefaultImagePlaceholder = () => (
+    <div className="w-full h-full bg-slate flex flex-col items-center justify-center">
+      <Camera className="w-8 h-8 text-cream mb-2" />
+      <p className="text-cream text-sm font-semibold">
+        pizzametri<span className="text-basil">x</span>
+      </p>
+    </div>
+  );
 
   return (
     <Card 
@@ -39,11 +46,15 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
       onClick={() => navigate(`/mes-recettes/${recipe.id}`)}
     >
       <div className="w-[100px] min-w-[100px] h-full">
-        <img
-          src={recipe.photos?.[0] || defaultImage}
-          alt={recipe.nom}
-          className="w-full h-full object-cover"
-        />
+        {recipe.photos?.[0] ? (
+          <img
+            src={recipe.photos[0]}
+            alt={recipe.nom}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <DefaultImagePlaceholder />
+        )}
       </div>
       <div className="flex-1 p-3 text-left">
         <h3 className="font-semibold text-lg text-cream mb-0.5 truncate">{recipe.nom}</h3>

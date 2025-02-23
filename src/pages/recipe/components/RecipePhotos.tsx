@@ -35,6 +35,10 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
     }
 
     await uploadPhotos(files);
+    // Reset l'input file après un upload réussi
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   return (
@@ -75,3 +79,4 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
     </div>
   );
 }
+

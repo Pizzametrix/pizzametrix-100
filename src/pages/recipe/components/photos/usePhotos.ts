@@ -8,15 +8,6 @@ export function usePhotos(recipeId: string, initialPhotos: string[]) {
   const [isUploading, setIsUploading] = useState(false);
 
   const uploadPhotos = async (files: FileList) => {
-    if (photos.length + files.length > 6) {
-      toast({
-        title: "Erreur",
-        description: "Vous ne pouvez pas ajouter plus de 6 photos",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsUploading(true);
     
     try {
@@ -111,3 +102,4 @@ export function usePhotos(recipeId: string, initialPhotos: string[]) {
     deletePhoto
   };
 }
+

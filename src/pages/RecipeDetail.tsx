@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
@@ -22,6 +23,7 @@ export default function RecipeDetail() {
   const [isEditingDescription, setIsEditingDescription] = useState(false);
   const [description, setDescription] = useState("");
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchRecipe();
@@ -29,15 +31,28 @@ export default function RecipeDetail() {
 
   const fetchRecipe = async () => {
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from('recettes')
-        .select('*')
+        .select(`
+          *,
+          photos (
+            url
+          )
+        `)
         .eq('id', id)
         .single();
 
       if (error) throw error;
-      setRecipe(data);
-      setDescription(data.description || "");
+
+      // Transforme les données pour garder la compatibilité
+      const recipeWithPhotos = {
+        ...data,
+        photos: data.photos?.map((photo: any) => photo.url) || []
+      };
+      
+      setRecipe(recipeWithPhotos);
+      setDescription(recipeWithPhotos.description || "");
     } catch (error) {
       console.error("Erreur lors du chargement de la recette:", error);
       toast({
@@ -45,6 +60,9 @@ export default function RecipeDetail() {
         description: "Impossible de charger la recette",
         variant: "destructive",
       });
+      navigate('/mes-recettes');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,6 +111,30 @@ export default function RecipeDetail() {
       });
     }
   };
+
+  // Affichage pendant le chargement
+  if (loading) {
+    return (
+      <div className="flex min-h-screen bg-slate">
+        <Sidebar />
+        <div className="flex-1">
+          <div className="md:ml-64 min-h-screen">
+            <main className="p-4 pb-24 space-y-6 max-w-2xl mx-auto">
+              <div className="animate-pulse mt-16 md:mt-0">
+                <div className="h-8 bg-cream/10 rounded w-1/3 mb-4"></div>
+                <div className="h-4 bg-cream/10 rounded w-1/4 mb-8"></div>
+                <div className="space-y-4">
+                  <div className="h-64 bg-cream/10 rounded"></div>
+                  <div className="h-32 bg-cream/10 rounded"></div>
+                  <div className="h-48 bg-cream/10 rounded"></div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!recipe) return null;
 

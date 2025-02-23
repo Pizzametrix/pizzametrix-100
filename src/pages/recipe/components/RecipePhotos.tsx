@@ -4,6 +4,7 @@ import { PhotoGrid } from "./photos/PhotoGrid";
 import { PhotoActions } from "./photos/PhotoActions";
 import { PhotoModal } from "./photos/PhotoModal";
 import { usePhotos } from "./photos/usePhotos";
+import { toast } from "@/components/ui/use-toast";
 
 interface RecipePhotosProps {
   recipeId: string;
@@ -18,6 +19,21 @@ export function RecipePhotos({ recipeId, photos: initialPhotos }: RecipePhotosPr
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
+
+    // Vérification immédiate du nombre total de photos
+    if (photos.length + files.length > 6) {
+      toast({
+        title: "Erreur",
+        description: `Vous ne pouvez pas ajouter ${files.length} photos. La limite est de 6 photos au total (${6 - photos.length} restantes).`,
+        variant: "destructive",
+      });
+      // Reset l'input file pour permettre une nouvelle sélection
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      return;
+    }
+
     await uploadPhotos(files);
   };
 

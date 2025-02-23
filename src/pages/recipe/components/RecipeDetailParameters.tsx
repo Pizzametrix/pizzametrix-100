@@ -1,6 +1,6 @@
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Calculator, Scale, Soup, Droplets, Cookie, Leaf } from "lucide-react";
+import { Calculator, Scale, Soup, Droplets, Cookie, Leaf, Percent } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface RecipeDetailParametersProps {
@@ -55,8 +55,8 @@ export function RecipeDetailParameters({ recipe }: RecipeDetailParametersProps) 
   if (recipe.is_custom_yeast_enabled && recipe.custom_yeast) {
     parameters.push({
       name: "Levure (forcé)",
-      value: `${(recipe.custom_yeast * 100).toFixed(2)}%`,
-      icon: <Leaf className="h-4 w-4" />,
+      value: `${recipe.custom_yeast.toFixed(2)}%`,
+      icon: <Percent className="h-4 w-4" />,
     });
   } else if (recipe.yeast) {
     parameters.push({

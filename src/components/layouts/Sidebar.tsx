@@ -1,3 +1,4 @@
+
 import { Menu, LogOut, X, Calculator, Home, Book, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -23,13 +24,13 @@ export const Sidebar = () => {
     
     if (user) {
       // Get avatar URL if exists
-      const { data: avatarData } = await supabase
+      const { data: { publicUrl } } = supabase
         .storage
         .from('avatars')
         .getPublicUrl(`${user.id}`);
 
-      if (avatarData) {
-        setAvatarUrl(avatarData.publicUrl);
+      if (publicUrl) {
+        setAvatarUrl(publicUrl);
       }
 
       // Get pseudonyme
@@ -166,11 +167,11 @@ export const Sidebar = () => {
             >
               <Avatar className="mr-2 h-4 w-4">
                 <AvatarImage src={avatarUrl || undefined} />
-                <AvatarFallback className="bg-cream text-basil">
-                  x
+                <AvatarFallback className="bg-cream text-basil/30">
+                  <User className="h-2 w-2" />
                 </AvatarFallback>
               </Avatar>
-              <span>Profil</span>
+              <span>Mon profil</span>
             </Button>
             <Button
               variant="ghost"

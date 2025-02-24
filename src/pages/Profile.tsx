@@ -120,8 +120,10 @@ export default function Profile() {
         .from('avatars')
         .getPublicUrl(filePath);
 
-      setAvatarUrl(publicUrl);
-      toast.success("Photo de profil mise à jour");
+      if (publicUrl) {
+        setAvatarUrl(publicUrl);
+        toast.success("Photo de profil mise à jour");
+      }
     } catch (error) {
       console.error(error);
       toast.error("Erreur lors du téléchargement de l'image");

@@ -1,4 +1,3 @@
-
 import { Menu, LogOut, X, Calculator, Home, Book, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -176,12 +175,7 @@ export const Sidebar = () => {
               className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
               onClick={() => handleNavigation('/profil')}
             >
-              <Avatar className="mr-2 h-4 w-4">
-                <AvatarImage src={avatarUrl || undefined} />
-                <AvatarFallback className="bg-cream text-basil/30">
-                  <User className="h-2 w-2" />
-                </AvatarFallback>
-              </Avatar>
+              <User className="mr-2 h-4 w-4" />
               <span>Mon profil</span>
             </Button>
             <Button

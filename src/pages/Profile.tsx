@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Camera, User, Save, Pencil, Check } from "lucide-react";
 import { Sidebar } from "@/components/layouts/Sidebar";
+
 export default function Profile() {
   const navigate = useNavigate();
   const [pseudonyme, setPseudonyme] = useState("");
@@ -19,36 +20,39 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
   useEffect(() => {
     getProfile();
   }, []);
+
   async function getProfile() {
     try {
-      const {
-        data: {
-          user
-        }
-      } = await supabase.auth.getUser();
+      const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         navigate("/login");
         return;
       }
-      const {
-        data,
-        error
-      } = await supabase.from('utilisateurs').select('pseudonyme, niveau, four, petrin').eq('id', user.id).maybeSingle();
+
+      const { data, error } = await supabase
+        .from('utilisateurs')
+        .select('pseudonyme, niveau, four, petrin')
+        .eq('id', user.id)
+        .maybeSingle();
+
       if (error) throw error;
+
       if (data) {
         setPseudonyme(data.pseudonyme || "");
         setNiveau(data.niveau || "");
         setFour(data.four || "");
         setPetrin(data.petrin || "");
       }
-      const {
-        data: {
-          publicUrl
-        }
-      } = supabase.storage.from('avatars').getPublicUrl(`${user.id}`);
+
+      const { data: { publicUrl } } = supabase
+        .storage
+        .from('avatars')
+        .getPublicUrl(`${user.id}`);
+
       if (publicUrl) {
         setAvatarUrl(publicUrl);
       }
@@ -59,61 +63,57 @@ export default function Profile() {
       setLoading(false);
     }
   }
+
   async function updateProfile() {
     try {
-      const {
-        data: {
-          user
-        }
-      } = await supabase.auth.getUser();
+      const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         navigate("/login");
         return;
       }
-      const {
-        error
-      } = await supabase.from('utilisateurs').update({
-        pseudonyme,
-        niveau,
-        four,
-        petrin
-      }).eq('id', user.id);
+
+      const { error } = await supabase
+        .from('utilisateurs')
+        .update({
+          pseudonyme,
+          niveau,
+          four,
+          petrin
+        })
+        .eq('id', user.id);
+
       if (error) throw error;
+      
       setIsEditing(false);
       toast.success("Profil mis à jour avec succès");
+      
+      // Mise à jour du profil dans la sidebar
+      const event = new CustomEvent('profile-updated');
+      window.dispatchEvent(event);
     } catch (error) {
       console.error(error);
       toast.error("Erreur lors de la mise à jour du profil");
     }
   }
+
   async function uploadAvatar(event: React.ChangeEvent<HTMLInputElement>) {
     try {
       setUploading(true);
-      const {
-        data: {
-          user
-        }
-      } = await supabase.auth.getUser();
+      const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Non authentifié");
       if (!event.target.files || event.target.files.length === 0) {
         throw new Error("Vous devez sélectionner une image");
       }
       const file = event.target.files[0];
       const filePath = `${user.id}`;
-      const {
-        error: uploadError
-      } = await supabase.storage.from('avatars').upload(filePath, file, {
+      const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file, {
         upsert: true
       });
       if (uploadError) throw uploadError;
 
       // Force le rafraîchissement de l'URL avec un timestamp
       const timestamp = new Date().getTime();
-      const {
-        data: {
-          publicUrl
-        }
-      } = supabase.storage.from('avatars').getPublicUrl(`${filePath}?t=${timestamp}`);
+      const { data: { publicUrl } } = supabase.storage.from('avatars').getPublicUrl(`${filePath}?t=${timestamp}`);
       if (publicUrl) {
         setAvatarUrl(publicUrl);
         // Forcer un rafraîchissement du profil dans la sidebar
@@ -128,12 +128,17 @@ export default function Profile() {
       setUploading(false);
     }
   }
+
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen bg-slate">
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate">
         <div className="text-cream animate-pulse">Chargement...</div>
-      </div>;
+      </div>
+    );
   }
-  return <div className="flex min-h-screen bg-slate">
+
+  return (
+    <div className="flex min-h-screen bg-slate">
       <Sidebar />
       <div className="flex-1 px-4 md:px-8 pt-8 pb-20 md:ml-64 overflow-x-hidden">
         <div className="max-w-2xl mx-auto space-y-8">
@@ -150,7 +155,14 @@ export default function Profile() {
                 <div className="bg-basil rounded-full p-2 hover:bg-basil/90 transition-colors">
                   <Camera className="h-5 w-5 text-slate" />
                 </div>
-                <input id="avatar" type="file" accept="image/*" onChange={uploadAvatar} disabled={uploading} className="hidden" />
+                <input
+                  id="avatar"
+                  type="file"
+                  accept="image/*"
+                  onChange={uploadAvatar}
+                  disabled={uploading}
+                  className="hidden"
+                />
               </Label>
             </div>
             <div className="text-center">
@@ -163,14 +175,37 @@ export default function Profile() {
           <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-6 border border-cream/5">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-montserrat text-cream">Informations personnelles</h2>
-              <Button onClick={() => isEditing ? updateProfile() : setIsEditing(true)} variant="ghost" className="text-cream hover:text-basil">
-                {isEditing ? <><Check className="h-5 w-5 mr-2" /> Enregistrer</> : <><Pencil className="h-5 w-5 mr-2" /> Modifier</>}
+              <Button
+                onClick={() => isEditing ? updateProfile() : setIsEditing(true)}
+                variant="ghost"
+                className="text-cream hover:text-basil"
+              >
+                {isEditing ? (
+                  <><Check className="h-5 w-5 mr-2" /> Enregistrer</>
+                ) : (
+                  <><Pencil className="h-5 w-5 mr-2" /> Modifier</>
+                )}
               </Button>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Pseudo */}
-              
+              <div className="space-y-2">
+                <Label htmlFor="pseudonyme" className="text-sm font-medium text-cream">
+                  Pseudonyme
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="pseudonyme"
+                    type="text"
+                    value={pseudonyme}
+                    onChange={(e) => setPseudonyme(e.target.value)}
+                    disabled={!isEditing}
+                    className="!bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 disabled:opacity-50"
+                    placeholder="Votre pseudonyme"
+                  />
+                </div>
+              </div>
 
               {/* Niveau */}
               <div className="space-y-2">
@@ -228,5 +263,6 @@ export default function Profile() {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 }

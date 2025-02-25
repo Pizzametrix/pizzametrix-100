@@ -179,7 +179,7 @@ export default function Profile() {
                   Pseudonyme
                 </Label>
                 <div className="relative">
-                  <Input id="pseudonyme" type="text" value={pseudonyme} onChange={e => setPseudonyme(e.target.value)} disabled={!isEditing} placeholder="Votre pseudonyme" className="bg-secondary-foreground rounded" />
+                  <Input id="pseudonyme" type="text" value={pseudonyme} onChange={e => setPseudonyme(e.target.value)} disabled={!isEditing} placeholder="Votre pseudonyme" className="bg-secondary-foreground rounded-sm" />
                 </div>
               </div>
 

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -202,7 +201,7 @@ export default function Profile() {
                     value={pseudonyme}
                     onChange={(e) => setPseudonyme(e.target.value)}
                     disabled={!isEditing}
-                    className={`w-full bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 ${!isEditing ? 'opacity-50' : ''}`}
+                    className={`w-full bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 disabled:opacity-50 focus:bg-slate-700`}
                     placeholder="Votre pseudonyme"
                   />
                 </div>

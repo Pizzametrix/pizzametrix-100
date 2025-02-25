@@ -115,10 +115,12 @@ export default function Profile() {
 
       if (uploadError) throw uploadError;
 
+      // Force le rafraîchissement de l'URL avec un timestamp
+      const timestamp = new Date().getTime();
       const { data: { publicUrl } } = supabase
         .storage
         .from('avatars')
-        .getPublicUrl(filePath);
+        .getPublicUrl(`${filePath}?t=${timestamp}`);
 
       if (publicUrl) {
         setAvatarUrl(publicUrl);
@@ -176,7 +178,8 @@ export default function Profile() {
 
           {/* Grille d'informations */}
           <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-6 border border-cream/5">
-            <div className="flex justify-end">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-montserrat text-cream">Informations personnelles</h2>
               <Button
                 onClick={() => isEditing ? updateProfile() : setIsEditing(true)}
                 variant="ghost"
@@ -236,15 +239,20 @@ export default function Profile() {
                 <Label htmlFor="four" className="text-sm font-medium text-cream">
                   Four
                 </Label>
-                <Input
-                  id="four"
-                  type="text"
-                  value={four}
-                  onChange={(e) => setFour(e.target.value)}
+                <Select 
+                  value={four} 
+                  onValueChange={setFour}
                   disabled={!isEditing}
-                  className="bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 disabled:opacity-50"
-                  placeholder="Votre four"
-                />
+                >
+                  <SelectTrigger className="bg-slate-700 border-cream/10 text-cream disabled:opacity-50">
+                    <SelectValue placeholder="Sélectionnez votre four" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="domestique">Domestique</SelectItem>
+                    <SelectItem value="semi-pro">Semi Pro</SelectItem>
+                    <SelectItem value="pro">Pro</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Pétrin */}

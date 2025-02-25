@@ -165,9 +165,14 @@ export default function Profile() {
                 />
               </Label>
             </div>
-            <div className="text-center">
+            <div className="text-center space-y-2">
               <h1 className="text-2xl font-bold font-montserrat text-cream">Mon Profil</h1>
-              <p className="text-cream/60 mt-1">Gérez vos informations personnelles</p>
+              {pseudonyme ? (
+                <p className="text-xl text-cream font-montserrat">{pseudonyme}</p>
+              ) : (
+                <p className="text-cream/40 text-xl font-montserrat">Aucun pseudonyme</p>
+              )}
+              <p className="text-cream/60">Gérez vos informations personnelles</p>
             </div>
           </div>
 

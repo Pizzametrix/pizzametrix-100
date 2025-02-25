@@ -208,7 +208,7 @@ export default function Profile() {
                     value={pseudonyme}
                     onChange={(e) => setPseudonyme(e.target.value)}
                     disabled={!isEditing}
-                    className="bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 disabled:opacity-50 [&:not(:disabled)]:bg-slate-700"
+                    className="!bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 disabled:opacity-50"
                     placeholder="Votre pseudonyme"
                   />
                 </div>

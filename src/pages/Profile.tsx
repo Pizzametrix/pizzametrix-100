@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -124,6 +123,9 @@ export default function Profile() {
 
       if (publicUrl) {
         setAvatarUrl(publicUrl);
+        // Forcer un rafraîchissement du profil dans la sidebar
+        const event = new CustomEvent('profile-updated');
+        window.dispatchEvent(event);
         toast.success("Photo de profil mise à jour");
       }
     } catch (error) {
@@ -206,7 +208,7 @@ export default function Profile() {
                     value={pseudonyme}
                     onChange={(e) => setPseudonyme(e.target.value)}
                     disabled={!isEditing}
-                    className="bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 disabled:opacity-50"
+                    className="bg-slate-700 border-cream/10 text-cream placeholder:text-cream/40 disabled:opacity-50 [&:not(:disabled)]:bg-slate-700"
                     placeholder="Votre pseudonyme"
                   />
                 </div>

@@ -17,6 +17,17 @@ export const Sidebar = () => {
 
   useEffect(() => {
     getProfile();
+    
+    // Écouter les mises à jour du profil
+    const handleProfileUpdate = () => {
+      getProfile();
+    };
+    
+    window.addEventListener('profile-updated', handleProfileUpdate);
+    
+    return () => {
+      window.removeEventListener('profile-updated', handleProfileUpdate);
+    };
   }, []);
 
   const getProfile = async () => {

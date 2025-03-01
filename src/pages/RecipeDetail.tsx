@@ -122,15 +122,15 @@ export default function RecipeDetail() {
       <Sidebar />
       <div className="flex-1 md:pl-64">
         <main className="container mx-auto p-4 pb-24">
-          <div className="flex items-center mb-6">
+          <div className="flex items-center mb-6 sticky top-0 z-10 bg-slate py-2">
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={() => navigate('/mes-recettes')}
-              className="mr-2 text-cream hover:text-cream hover:bg-slate-700"
+              className="mr-2 text-cream hover:text-cream hover:bg-slate-700 flex items-center justify-center"
               aria-label="Retour aux recettes"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-6 w-6" />
             </Button>
             <h1 className="text-xl font-bold text-cream font-montserrat">Ma Recette</h1>
           </div>

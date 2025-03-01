@@ -7,6 +7,7 @@ import { IngredientCalculator } from "@/components/landing/IngredientCalculator"
 import { RecipeSaving } from "@/components/landing/RecipeSaving";
 import { Platforms } from "@/components/landing/Platforms";
 import { FAQ } from "@/components/landing/FAQ";
+import { Testimonials } from "@/components/landing/Testimonials";
 import { CTASection } from "@/components/landing/CTASection";
 import { Footer } from "@/components/landing/Footer";
 import { SEOMetadata } from "@/components/landing/SEOMetadata";
@@ -21,6 +22,7 @@ export default function LandingFr() {
       <RecipeSaving />
       <Platforms />
       <FAQ />
+      <Testimonials />
       <CTASection />
       <Footer />
       <SEOMetadata />

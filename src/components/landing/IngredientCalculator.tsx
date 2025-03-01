@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Droplet, Timer, Package, Circle } from "lucide-react";
 import { getLandingAssetsBySection } from "@/services/landingAssetsService";
@@ -57,7 +56,7 @@ export const IngredientCalculator = () => {
                 <Droplet className="w-6 h-6" />
                 <h3 className="text-xl font-montserrat font-bold mb-0">Eau, sel, huile, sucre</h3>
               </div>
-              <p className={`mt-0 pb-4 pl-4 pr-4 text-sm text-left ${
+              <p className={`mt-0 pb-4 pl-4 pr-4 ${
                 selectedIngredient === 'eau' ? 'text-white/90' : 'text-[#F5E9D7]/80'
               }`}>
                 Calculez précisément les quantités de liquides et d'additifs pour une hydratation parfaite.
@@ -76,7 +75,7 @@ export const IngredientCalculator = () => {
                 <Circle className="w-6 h-6" />
                 <h3 className="text-xl font-montserrat font-bold mb-0">Quantité de levure précise</h3>
               </div>
-              <p className={`mt-0 pb-4 pl-4 pr-4 text-sm text-left ${
+              <p className={`mt-0 pb-4 pl-4 pr-4 ${
                 selectedIngredient === 'levure' ? 'text-white/90' : 'text-[#F5E9D7]/80'
               }`}>
                 Obtenez la quantité exacte de levure selon votre temps de fermentation et température ambiante.
@@ -95,7 +94,7 @@ export const IngredientCalculator = () => {
                 <Timer className="w-6 h-6" />
                 <h3 className="text-xl font-montserrat font-bold mb-0">Ajoutez des durées de repos</h3>
               </div>
-              <p className={`mt-0 pb-4 pl-4 pr-4 text-sm text-left ${
+              <p className={`mt-0 pb-4 pl-4 pr-4 ${
                 selectedIngredient === 'repos' ? 'text-white/90' : 'text-[#F5E9D7]/80'
               }`}>
                 Planifiez chaque étape de fermentation pour développer les arômes et la structure optimale de votre pâte.
@@ -114,7 +113,7 @@ export const IngredientCalculator = () => {
                 <Package className="w-6 h-6" />
                 <h3 className="text-xl font-montserrat font-bold mb-0 text-left">Gérez vos pré-empattements Biga ou Poolish</h3>
               </div>
-              <p className={`mt-0 pb-4 pl-4 pr-4 text-sm text-left ${
+              <p className={`mt-0 pb-4 pl-4 pr-4 ${
                 selectedIngredient === 'preempattement' ? 'text-white/90' : 'text-[#F5E9D7]/80'
               }`}>
                 Améliorez la complexité et la digestibilité de votre pâte grâce aux calculs précis de pré-fermentations.

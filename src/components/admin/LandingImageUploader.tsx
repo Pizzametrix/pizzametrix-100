@@ -52,13 +52,13 @@ export function LandingImageUploader({ onUploadSuccess }: LandingImageUploaderPr
 
       if (uploadError) throw uploadError;
 
-      // 3. Enregistrer les métadonnées - utilisation de l'API SQL brute pour contourner les limitations de typage
+      // 3. Enregistrer les métadonnées - utilisation de l'API RPC pour contourner les limitations de typage
       const { error: insertError } = await supabase.rpc('insert_landing_asset', {
         storage_path_param: fileName,
         section_param: section,
         alt_text_param: altText,
         dimensions_param: dimensions || null
-      });
+      } as any); // Utilisation de 'any' pour contourner l'erreur de typage
 
       if (insertError) throw insertError;
 

@@ -154,7 +154,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      insert_landing_asset: {
+        Args: {
+          storage_path_param: string
+          section_param: string
+          alt_text_param: string
+          dimensions_param: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       type_recette: "napolitaine" | "teglia"

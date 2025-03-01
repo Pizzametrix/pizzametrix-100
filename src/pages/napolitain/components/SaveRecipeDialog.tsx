@@ -29,7 +29,7 @@ export function SaveRecipeDialog({ open, onOpenChange, onSave }: SaveRecipeDialo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate border-cream/10 text-cream md:translate-y-[-25%] translate-y-0">
+      <DialogContent className="bg-slate border-cream/10 text-cream md:translate-y-[-25%] translate-y-[-10%]">
         <DialogHeader>
           <DialogTitle className="text-cream">Sauvegarder la recette</DialogTitle>
         </DialogHeader>

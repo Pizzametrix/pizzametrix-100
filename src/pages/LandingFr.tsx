@@ -1,9 +1,8 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Droplet, Timer, Package, Salt, Save, Database, Smartphone, Tablet, Laptop } from "lucide-react";
+import { Droplet, Timer, Package, Circle, Save, Database, Smartphone, Tablet, Laptop } from "lucide-react";
 
 export default function LandingFr() {
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
@@ -117,7 +116,7 @@ export default function LandingFr() {
                 onClick={() => handleIngredientClick('levure')}
                 className={`flex items-center gap-3 p-4 rounded-lg transition-colors ${selectedIngredient === 'levure' ? 'bg-[#77BFA3] text-white' : 'bg-slate-700 text-[#F5E9D7]'}`}
               >
-                <Salt className="w-6 h-6" />
+                <Circle className="w-6 h-6" />
                 <span className="font-medium">Quantité de levure précise</span>
               </button>
               

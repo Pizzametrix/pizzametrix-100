@@ -2,7 +2,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface SaveRecipeDialogProps {
   open: boolean;
@@ -12,6 +12,7 @@ interface SaveRecipeDialogProps {
 
 export function SaveRecipeDialog({ open, onOpenChange, onSave }: SaveRecipeDialogProps) {
   const [recipeName, setRecipeName] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSave = () => {
     if (recipeName.trim()) {
@@ -27,9 +28,15 @@ export function SaveRecipeDialog({ open, onOpenChange, onSave }: SaveRecipeDialo
     }
   };
 
+  useEffect(() => {
+    if (!open) {
+      setIsFocused(false);
+    }
+  }, [open]);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate border-cream/10 text-cream md:translate-y-[-25%] translate-y-[-60%]">
+      <DialogContent className={`bg-slate border-cream/10 text-cream md:translate-y-[-25%] ${isFocused ? 'translate-y-[-80%]' : 'translate-y-[-60%]'}`}>
         <DialogHeader>
           <DialogTitle className="text-cream">Sauvegarder la recette</DialogTitle>
         </DialogHeader>
@@ -41,6 +48,8 @@ export function SaveRecipeDialog({ open, onOpenChange, onSave }: SaveRecipeDialo
               onChange={handleRecipeNameChange}
               maxLength={20}
               className="bg-white/5 border-cream/10 text-cream placeholder:text-cream/50"
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
             />
             <p className="text-xs text-cream/50 text-right">{recipeName.length}/20</p>
           </div>

@@ -16,16 +16,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/sign-in" element={<Register />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/calculators" element={<Calculators />} />
-        <Route path="/calculators/napolitaine" element={<NapolitainCalculator />} />
+        <Route path="/calculators/neapolitan" element={<NapolitainCalculator />} />
         <Route path="/calculators/teglia" element={<TegliaCalculator />} />
-        <Route path="/mes-recettes" element={<MyRecipes />} />
-        <Route path="/mes-recettes/:id" element={<RecipeDetail />} />
+        <Route path="/my-recipes" element={<MyRecipes />} />
+        <Route path="/my-recipes/:id" element={<RecipeDetail />} />
         <Route path="/profil" element={<Profile />} />
+        <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

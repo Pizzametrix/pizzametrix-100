@@ -59,7 +59,7 @@ export default function RecipeDetail() {
         description: "Impossible de charger la recette",
         variant: "destructive",
       });
-      navigate('/mes-recettes');
+      navigate('/my-recipes');
     } finally {
       setLoading(false);
     }
@@ -100,7 +100,7 @@ export default function RecipeDetail() {
       toast({
         description: "Recette supprimée",
       });
-      navigate('/mes-recettes');
+      navigate('/my-recipes');
     } catch (error) {
       console.error("Erreur lors de la suppression:", error);
       toast({
@@ -126,7 +126,7 @@ export default function RecipeDetail() {
             <Button 
               variant="ghost" 
               size="icon" 
-              onClick={() => navigate('/mes-recettes')}
+              onClick={() => navigate('/my-recipes')}
               className="mr-2 text-cream hover:text-cream hover:bg-slate-700 flex items-center justify-center"
               aria-label="Retour aux recettes"
             >

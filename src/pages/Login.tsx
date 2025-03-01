@@ -28,7 +28,7 @@ export default function Login() {
         toast.error(error.message);
       } else {
         toast.success("Connexion réussie!");
-        navigate("/");
+        navigate("/home");
       }
     } catch (error) {
       toast.error("Une erreur est survenue lors de la connexion");
@@ -80,7 +80,7 @@ export default function Login() {
         </Button>
         <p className="text-center text-sm text-cream/80">
           Pas encore de compte ?{" "}
-          <Link to="/register" className="text-basil hover:text-basil/80 transition-colors">
+          <Link to="/sign-in" className="text-basil hover:text-basil/80 transition-colors">
             S'inscrire
           </Link>
         </p>

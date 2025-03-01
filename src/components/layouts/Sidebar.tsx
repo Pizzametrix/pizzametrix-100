@@ -1,3 +1,4 @@
+
 import { Menu, LogOut, X, Calculator, Home, Book, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -75,16 +76,16 @@ export const Sidebar = () => {
     if (location.pathname === '/profil') {
       return "Mon profil";
     }
-    if (location.pathname.includes('/mes-recettes/')) {
+    if (location.pathname.includes('/my-recipes/')) {
       return "Ma recette";
     }
-    if (location.pathname === "/calculators/napolitaine") {
+    if (location.pathname === "/calculators/neapolitan") {
       return "Pizza Napolitaine";
     }
     if (location.pathname === "/calculators/teglia") {
       return "Pizza Teglia";
     }
-    if (location.pathname === "/mes-recettes") {
+    if (location.pathname === "/my-recipes") {
       return "Mes recettes";
     }
     if (location.pathname === "/calculators") {
@@ -128,7 +129,7 @@ export const Sidebar = () => {
               <Button
                 variant="ghost"
                 className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
-                onClick={() => handleNavigation('/')}
+                onClick={() => handleNavigation('/home')}
               >
                 <Home className="mr-2 h-4 w-4" />
                 <span>Accueil</span>
@@ -146,7 +147,7 @@ export const Sidebar = () => {
                   <Button
                     variant="ghost"
                     className="w-full justify-start text-[#F5E9D7]/80 hover:text-terracotta hover:bg-cream/5 text-sm"
-                    onClick={() => handleNavigation('/calculators/napolitaine')}
+                    onClick={() => handleNavigation('/calculators/neapolitan')}
                   >
                     <span>Pizza Napolitaine</span>
                   </Button>
@@ -162,7 +163,7 @@ export const Sidebar = () => {
               <Button
                 variant="ghost"
                 className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
-                onClick={() => handleNavigation('/mes-recettes')}
+                onClick={() => handleNavigation('/my-recipes')}
               >
                 <Book className="mr-2 h-4 w-4" />
                 <span>Mes recettes</span>

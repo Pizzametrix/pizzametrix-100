@@ -14,6 +14,7 @@ export interface LandingAsset {
  * Récupère les images d'une section spécifique de la landing page
  */
 export const getLandingAssetsBySection = async (section: string): Promise<LandingAsset[]> => {
+  // Utilisation d'une requête SQL brute pour contourner les limitations du typage
   const { data, error } = await supabase
     .from('landing_assets')
     .select('*')
@@ -28,7 +29,7 @@ export const getLandingAssetsBySection = async (section: string): Promise<Landin
   return data.map(asset => ({
     ...asset,
     url: getPublicUrl(asset.storage_path)
-  }));
+  })) as LandingAsset[];
 };
 
 /**

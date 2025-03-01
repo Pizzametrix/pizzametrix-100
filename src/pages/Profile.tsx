@@ -167,7 +167,7 @@ export default function Profile() {
           <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-6 border border-cream/5">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-montserrat text-cream">Informations personnelles</h2>
-              <Button onClick={() => isEditing ? updateProfile() : setIsEditing(true)} variant="ghost" className="text-cream hover:text-basil rounded-none">
+              <Button onClick={() => isEditing ? updateProfile() : setIsEditing(true)} variant="ghost" className="text-cream hover:text-basil rounded-md">
                 {isEditing ? <><Check className="h-5 w-5 mr-2" /> Enregistrer</> : <><Pencil className="h-5 w-5 mr-2" /> Modifier</>}
               </Button>
             </div>

@@ -10,8 +10,16 @@ export const Header = () => {
   const scrollToSection = (sectionId: string) => {
     setIsMenuOpen(false);
     const section = document.getElementById(sectionId);
+    const headerOffset = 90; // Hauteur de la navbar + marge
+    
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+      const elementPosition = section.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 

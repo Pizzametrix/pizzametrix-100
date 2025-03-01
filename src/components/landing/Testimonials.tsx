@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Star } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 type Testimonial = {
   id: number;
@@ -40,6 +40,34 @@ const testimonials: Testimonial[] = [
     content: "Même en tant que professionnel, j'utilise Pizzametrix pour tester de nouvelles recettes. Un outil remarquable qui a sa place dans toutes les cuisines.",
     rating: 5,
   },
+  {
+    id: 5,
+    name: "Emma Rousseau",
+    role: "Chef à Domicile",
+    content: "Depuis que j'utilise Pizzametrix, mes clients sont impressionnés par la qualité de mes pizzas. La précision des calculs est incomparable.",
+    rating: 5,
+  },
+  {
+    id: 6,
+    name: "Lucas Bernard",
+    role: "Étudiant en Cuisine",
+    content: "Simple, efficace et précis. Pizzametrix m'aide à comprendre les fondamentaux de la pâte à pizza tout en m'offrant des résultats professionnels.",
+    rating: 4,
+  },
+  {
+    id: 7,
+    name: "Camille Morel",
+    role: "Influenceuse Food",
+    content: "J'ai testé plusieurs calculateurs, mais Pizzametrix est le seul qui m'a donné des résultats constants et fiables. Mes abonnés adorent mes nouvelles recettes!",
+    rating: 5,
+  },
+  {
+    id: 8,
+    name: "Antoine Lambert",
+    role: "Boulanger-Pâtissier",
+    content: "En tant que professionnel du métier, je suis impressionné par la précision et la flexibilité de Pizzametrix. Un indispensable pour toute cuisine sérieuse.",
+    rating: 5,
+  },
 ];
 
 export const Testimonials = () => {
@@ -60,7 +88,7 @@ export const Testimonials = () => {
           <CarouselContent className="-ml-1">
             {testimonials.map((testimonial) => (
               <CarouselItem key={testimonial.id} className="pl-1 md:basis-1/2 lg:basis-1/3">
-                <div className="bg-slate-700 p-6 rounded-lg h-full flex flex-col">
+                <div className="bg-slate-700/90 p-6 rounded-lg h-full flex flex-col shadow-lg border border-slate-600">
                   <div className="flex mb-4">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
@@ -73,7 +101,7 @@ export const Testimonials = () => {
                       />
                     ))}
                   </div>
-                  <p className="text-[#F5E9D7]/80 italic mb-4 flex-grow">"{testimonial.content}"</p>
+                  <p className="text-[#F5E9D7]/90 italic mb-4 flex-grow">"{testimonial.content}"</p>
                   <div className="mt-auto">
                     <p className="text-[#F5E9D7] font-semibold">{testimonial.name}</p>
                     <p className="text-[#77BFA3] text-sm">{testimonial.role}</p>
@@ -82,9 +110,13 @@ export const Testimonials = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex justify-center mt-8">
-            <CarouselPrevious className="relative static mr-2 bg-[#C53030]/10 hover:bg-[#C53030]/20 border-[#C53030]/20" />
-            <CarouselNext className="relative static ml-2 bg-[#C53030]/10 hover:bg-[#C53030]/20 border-[#C53030]/20" />
+          <div className="flex justify-center mt-8 gap-4">
+            <CarouselPrevious className="relative static bg-[#C53030] hover:bg-[#C53030]/80 border-none shadow-md text-[#F5E9D7] h-10 w-10 rounded-full">
+              <ChevronLeft className="h-6 w-6" />
+            </CarouselPrevious>
+            <CarouselNext className="relative static bg-[#C53030] hover:bg-[#C53030]/80 border-none shadow-md text-[#F5E9D7] h-10 w-10 rounded-full">
+              <ChevronRight className="h-6 w-6" />
+            </CarouselNext>
           </div>
         </Carousel>
       </div>

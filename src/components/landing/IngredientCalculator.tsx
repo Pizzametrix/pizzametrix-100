@@ -46,62 +46,86 @@ export const IngredientCalculator = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col">
+            <div 
+              className={`flex flex-col rounded-lg transition-colors ${
+                selectedIngredient === 'eau' ? 'bg-[#77BFA3]' : 'bg-slate-700'
+              }`}
+            >
               <button 
                 onClick={() => handleIngredientClick('eau')} 
-                className={`flex items-center gap-3 p-4 rounded-lg transition-colors ${
-                  selectedIngredient === 'eau' ? 'bg-[#77BFA3] text-white' : 'bg-slate-700 text-[#F5E9D7]'
+                className={`flex items-center gap-3 p-4 ${
+                  selectedIngredient === 'eau' ? 'text-white' : 'text-[#F5E9D7]'
                 }`}
               >
                 <Droplet className="w-6 h-6" />
                 <span className="font-medium">Eau, sel, huile, sucre</span>
               </button>
-              <p className="text-[#F5E9D7]/80 mt-2 pl-4 text-sm">
+              <p className={`mt-0 pb-4 pl-4 pr-4 text-sm ${
+                selectedIngredient === 'eau' ? 'text-white/90' : 'text-[#F5E9D7]/80'
+              }`}>
                 Calculez précisément les quantités de liquides et d'additifs pour une hydratation parfaite.
               </p>
             </div>
             
-            <div className="flex flex-col">
+            <div 
+              className={`flex flex-col rounded-lg transition-colors ${
+                selectedIngredient === 'levure' ? 'bg-[#77BFA3]' : 'bg-slate-700'
+              }`}
+            >
               <button 
                 onClick={() => handleIngredientClick('levure')} 
-                className={`flex items-center gap-3 p-4 rounded-lg transition-colors ${
-                  selectedIngredient === 'levure' ? 'bg-[#77BFA3] text-white' : 'bg-slate-700 text-[#F5E9D7]'
+                className={`flex items-center gap-3 p-4 ${
+                  selectedIngredient === 'levure' ? 'text-white' : 'text-[#F5E9D7]'
                 }`}
               >
                 <Circle className="w-6 h-6" />
                 <span className="font-medium">Quantité de levure précise</span>
               </button>
-              <p className="text-[#F5E9D7]/80 mt-2 pl-4 text-sm">
+              <p className={`mt-0 pb-4 pl-4 pr-4 text-sm ${
+                selectedIngredient === 'levure' ? 'text-white/90' : 'text-[#F5E9D7]/80'
+              }`}>
                 Obtenez la quantité exacte de levure selon votre temps de fermentation et température ambiante.
               </p>
             </div>
             
-            <div className="flex flex-col">
+            <div 
+              className={`flex flex-col rounded-lg transition-colors ${
+                selectedIngredient === 'repos' ? 'bg-[#77BFA3]' : 'bg-slate-700'
+              }`}
+            >
               <button 
                 onClick={() => handleIngredientClick('repos')} 
-                className={`flex items-center gap-3 p-4 rounded-lg transition-colors ${
-                  selectedIngredient === 'repos' ? 'bg-[#77BFA3] text-white' : 'bg-slate-700 text-[#F5E9D7]'
+                className={`flex items-center gap-3 p-4 ${
+                  selectedIngredient === 'repos' ? 'text-white' : 'text-[#F5E9D7]'
                 }`}
               >
                 <Timer className="w-6 h-6" />
                 <span className="font-medium">Ajoutez des durées de repos</span>
               </button>
-              <p className="text-[#F5E9D7]/80 mt-2 pl-4 text-sm">
+              <p className={`mt-0 pb-4 pl-4 pr-4 text-sm ${
+                selectedIngredient === 'repos' ? 'text-white/90' : 'text-[#F5E9D7]/80'
+              }`}>
                 Planifiez chaque étape de fermentation pour développer les arômes et la structure optimale de votre pâte.
               </p>
             </div>
             
-            <div className="flex flex-col">
+            <div 
+              className={`flex flex-col rounded-lg transition-colors ${
+                selectedIngredient === 'preempattement' ? 'bg-[#77BFA3]' : 'bg-slate-700'
+              }`}
+            >
               <button 
                 onClick={() => handleIngredientClick('preempattement')} 
-                className={`flex items-center gap-3 p-4 rounded-lg transition-colors ${
-                  selectedIngredient === 'preempattement' ? 'bg-[#77BFA3] text-white' : 'bg-slate-700 text-[#F5E9D7]'
+                className={`flex items-center gap-3 p-4 ${
+                  selectedIngredient === 'preempattement' ? 'text-white' : 'text-[#F5E9D7]'
                 }`}
               >
                 <Package className="w-6 h-6" />
                 <span className="font-medium text-left">Gérez vos pré-empattements Biga ou Poolish</span>
               </button>
-              <p className="text-[#F5E9D7]/80 mt-2 pl-4 text-sm">
+              <p className={`mt-0 pb-4 pl-4 pr-4 text-sm ${
+                selectedIngredient === 'preempattement' ? 'text-white/90' : 'text-[#F5E9D7]/80'
+              }`}>
                 Améliorez la complexité et la digestibilité de votre pâte grâce aux calculs précis de pré-fermentations.
               </p>
             </div>
@@ -129,4 +153,3 @@ export const IngredientCalculator = () => {
     </section>
   );
 };
-

@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { RecipeCard } from "./mes-recettes/components/RecipeCard";
 import { supabase } from "@/integrations/supabase/client";
@@ -14,14 +14,6 @@ export default function MyRecipes() {
     const fetchRecipes = async () => {
       try {
         const { data: { user } } = await supabase.auth.getUser();
-        if (!user) {
-          toast({
-            title: "Erreur",
-            description: "Vous devez être connecté pour voir vos recettes",
-            variant: "destructive"
-          });
-          return;
-        }
 
         const { data, error } = await supabase
           .from('recettes')

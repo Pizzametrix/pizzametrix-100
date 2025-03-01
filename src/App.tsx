@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -27,6 +27,12 @@ function App() {
         <Route path="/my-recipes/:id" element={<RecipeDetail />} />
         <Route path="/profil" element={<Profile />} />
         <Route path="/" element={<Home />} />
+        
+        {/* Redirections des anciennes routes vers les nouvelles */}
+        <Route path="/mes-recettes" element={<Navigate to="/my-recipes" replace />} />
+        <Route path="/mes-recettes/:id" element={<Navigate to={window.location.pathname.replace('/mes-recettes/', '/my-recipes/')} replace />} />
+        <Route path="/calculators/napolitaine" element={<Navigate to="/calculators/neapolitan" replace />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

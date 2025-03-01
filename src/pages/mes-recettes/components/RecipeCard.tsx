@@ -43,7 +43,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   return (
     <Card 
       className="flex h-24 overflow-hidden bg-white/5 border-cream/10 cursor-pointer hover:bg-white/10 transition-colors"
-      onClick={() => navigate(`/mes-recettes/${recipe.id}`)}
+      onClick={() => navigate(`/my-recipes/${recipe.id}`)}
     >
       <div className="w-[100px] min-w-[100px] h-full">
         {recipe.photos?.[0] ? (

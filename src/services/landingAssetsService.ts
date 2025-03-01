@@ -61,3 +61,31 @@ export const loadAllLandingAssets = async () => {
   
   return assets;
 };
+
+/**
+ * Composant Image avec lazy loading intégré
+ * Peut être utilisé comme un composant React normal
+ */
+export const LazyImage = ({ 
+  src, 
+  alt, 
+  className, 
+  fallbackSrc,
+  ...props 
+}: React.ImgHTMLAttributes<HTMLImageElement> & { fallbackSrc?: string }) => {
+  const imgSrc = src || fallbackSrc || '/placeholder.svg';
+  return (
+    <img
+      src={imgSrc}
+      alt={alt || 'Image'}
+      loading="lazy"
+      className={className || ''}
+      onError={(e) => {
+        if (fallbackSrc && e.currentTarget.src !== fallbackSrc) {
+          e.currentTarget.src = fallbackSrc;
+        }
+      }}
+      {...props}
+    />
+  );
+};

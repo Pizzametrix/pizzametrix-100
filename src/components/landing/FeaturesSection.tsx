@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { getLandingAssetsBySection } from "@/services/landingAssetsService";
+import { getLandingAssetsBySection, LazyImage } from "@/services/landingAssetsService";
 import type { LandingAsset } from "@/services/landingAssetsService";
 
 export const FeaturesSection = () => {
@@ -44,7 +44,12 @@ export const FeaturesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card className="bg-slate-700 border-[#77BFA3] overflow-hidden">
             <div className="h-48 overflow-hidden">
-              <img src={getImageByPosition(0, 'napolitaine')} alt="Pizza Napolitaine" className="w-full h-full object-cover" />
+              <LazyImage 
+                src={getImageByPosition(0, 'napolitaine')} 
+                alt="Pizza Napolitaine" 
+                className="w-full h-full object-cover" 
+                fallbackSrc={fallbackImages.napolitaine}
+              />
             </div>
             <CardContent className="p-6">
               <h3 className="text-[#F5E9D7] text-xl font-montserrat font-bold mb-2">Pizza Napolitaine</h3>
@@ -56,7 +61,12 @@ export const FeaturesSection = () => {
           
           <Card className="bg-slate-700 border-[#C53030] overflow-hidden">
             <div className="h-48 overflow-hidden">
-              <img src={getImageByPosition(1, 'teglia')} alt="Pizza Teglia Romaine" className="w-full h-full object-cover" />
+              <LazyImage 
+                src={getImageByPosition(1, 'teglia')} 
+                alt="Pizza Teglia Romaine" 
+                className="w-full h-full object-cover" 
+                fallbackSrc={fallbackImages.teglia}
+              />
             </div>
             <CardContent className="p-6">
               <h3 className="text-[#F5E9D7] text-xl font-montserrat font-bold mb-2">Pizza Teglia Romaine</h3>

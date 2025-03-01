@@ -15,6 +15,12 @@ import { RecipeHeader } from "./recipe/components/RecipeHeader";
 import { Toaster } from "@/components/ui/toaster";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
+import { LazyImage } from "@/services/landingAssetsService";
+
+// Ici, nous allons uniquement exporter le LazyImage pour qu'il soit disponible aux composants enfants
+// qui gèrent les photos de recettes
+
+export { LazyImage };
 
 export default function RecipeDetail() {
   const { id } = useParams();

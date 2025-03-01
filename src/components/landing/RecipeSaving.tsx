@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Save, Database } from "lucide-react";
+import { LazyImage } from "@/services/landingAssetsService";
 
 export const RecipeSaving = () => {
   return (
@@ -13,7 +14,7 @@ export const RecipeSaving = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="order-2 md:order-1">
             <div className="bg-slate-700 rounded-lg overflow-hidden h-80">
-              <img 
+              <LazyImage 
                 src="/recipe-placeholder.jpg" 
                 alt="Enregistrement de recettes" 
                 className="w-full h-full object-cover"

@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Star, ChevronLeft, ChevronRight, User } from "lucide-react";
-import { getLandingAssetsBySection } from "@/services/landingAssetsService";
+import { getLandingAssetsBySection, LazyImage } from "@/services/landingAssetsService";
 
 type Testimonial = {
   id: number;
@@ -128,7 +129,7 @@ export const Testimonials = () => {
                     </div>
                     {testimonialImages[testimonial.id.toString()] ? (
                       <div className="w-12 h-12 rounded-full overflow-hidden">
-                        <img 
+                        <LazyImage 
                           src={testimonialImages[testimonial.id.toString()]} 
                           alt={testimonial.name}
                           className="w-full h-full object-cover"

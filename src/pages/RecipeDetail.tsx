@@ -13,6 +13,8 @@ import { RecipeDetailSkeleton } from "./recipe/components/RecipeDetailSkeleton";
 import { RecipeDescription } from "./recipe/components/RecipeDescription";
 import { RecipeHeader } from "./recipe/components/RecipeHeader";
 import { Toaster } from "@/components/ui/toaster";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
 
 export default function RecipeDetail() {
   const { id } = useParams();
@@ -120,6 +122,19 @@ export default function RecipeDetail() {
       <Sidebar />
       <div className="flex-1 md:pl-64">
         <main className="container mx-auto p-4 pb-24">
+          <div className="flex items-center mb-6">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => navigate('/mes-recettes')}
+              className="mr-2 text-cream hover:text-cream hover:bg-slate-700"
+              aria-label="Retour aux recettes"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+            <h1 className="text-xl font-bold text-cream font-montserrat">Ma Recette</h1>
+          </div>
+          
           <div className="max-w-2xl mx-auto space-y-8">
             <RecipeHeader 
               recipe={recipe} 

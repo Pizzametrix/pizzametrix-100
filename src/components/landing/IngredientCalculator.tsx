@@ -44,8 +44,8 @@ export const IngredientCalculator = () => {
           Calcul à la perfection tous vos ingrédients
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="flex flex-col gap-4 md:col-span-2">
             <button 
               onClick={() => handleIngredientClick('eau')} 
               className={`flex flex-col rounded-lg transition-colors ${
@@ -123,7 +123,7 @@ export const IngredientCalculator = () => {
             </button>
           </div>
           
-          <div className="bg-slate-700 rounded-lg overflow-hidden h-80 flex items-center justify-center">
+          <div className="bg-slate-700 rounded-lg overflow-hidden h-full flex items-center justify-center">
             {selectedIngredient && ingredientImages[selectedIngredient] ? (
               <img 
                 src={ingredientImages[selectedIngredient]} 

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Droplet, Timer, Package, Circle } from "lucide-react";
-import { getLandingAssetsBySection, LazyImage } from "@/services/landingAssetsService";
+import { getLandingAssetsBySection } from "@/services/landingAssetsService";
 
 export const IngredientCalculator = () => {
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>("eau");
@@ -89,7 +89,7 @@ export const IngredientCalculator = () => {
           
           <div className="bg-slate-700 rounded-lg overflow-hidden h-80 flex items-center justify-center">
             {selectedIngredient && ingredientImages[selectedIngredient] ? (
-              <LazyImage 
+              <img 
                 src={ingredientImages[selectedIngredient]} 
                 alt={`Fonction ${selectedIngredient}`} 
                 className="w-full h-full object-cover" 

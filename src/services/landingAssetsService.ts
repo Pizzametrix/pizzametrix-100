@@ -1,6 +1,5 @@
 
 import { supabase } from "@/integrations/supabase/client";
-import React from "react";
 
 export interface LandingAsset {
   id: string;
@@ -61,28 +60,4 @@ export const loadAllLandingAssets = async () => {
   );
   
   return assets;
-};
-
-/**
- * Composant Image avec lazy loading intégré
- * Peut être utilisé comme un composant React normal
- */
-export const LazyImage: React.FC<React.ImgHTMLAttributes<HTMLImageElement> & { fallbackSrc?: string }> = (props) => {
-  const { src, alt, className, fallbackSrc, ...restProps } = props;
-  const imgSrc = src || fallbackSrc || '/placeholder.svg';
-  
-  return (
-    <img
-      src={imgSrc}
-      alt={alt || 'Image'}
-      loading="lazy"
-      className={className || ''}
-      onError={(e) => {
-        if (fallbackSrc && e.currentTarget.src !== fallbackSrc) {
-          e.currentTarget.src = fallbackSrc;
-        }
-      }}
-      {...restProps}
-    />
-  );
 };

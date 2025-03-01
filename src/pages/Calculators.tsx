@@ -1,11 +1,8 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sidebar } from "@/components/layouts/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
-import { LazyImage } from "@/services/landingAssetsService";
-
 export default function Calculators() {
   const navigate = useNavigate();
   const bucketName = "pizza-images";
@@ -47,13 +44,7 @@ export default function Calculators() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {napolitaineUrl && (
-                    <LazyImage 
-                      src={napolitaineUrl} 
-                      alt="Pizza Napolitaine" 
-                      className="w-full h-48 object-cover rounded-md" 
-                    />
-                  )}
+                  {napolitaineUrl && <img src={napolitaineUrl} alt="Pizza Napolitaine" className="w-full h-48 object-cover rounded-md" />}
                 </CardContent>
               </Card>
 
@@ -65,13 +56,7 @@ export default function Calculators() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {tegliaUrl && (
-                    <LazyImage 
-                      src={tegliaUrl} 
-                      alt="Pizza Teglia" 
-                      className="w-full h-48 object-cover rounded-md" 
-                    />
-                  )}
+                  {tegliaUrl && <img src={tegliaUrl} alt="Pizza Teglia" className="w-full h-48 object-cover rounded-md" />}
                 </CardContent>
               </Card>
             </div>

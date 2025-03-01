@@ -69,7 +69,7 @@ export const Header = () => {
       
       <div className="flex items-center">
         <Link to="/login" className="hidden md:block">
-          <Button variant="secondary" className="mr-2">
+          <Button variant="outline" className="mr-2 border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10">
             Connexion
           </Button>
         </Link>
@@ -127,7 +127,7 @@ export const Header = () => {
           </button>
           <div className="pt-2 flex flex-col space-y-2">
             <Link to="/login" className="w-full">
-              <Button variant="secondary" className="w-full">
+              <Button variant="outline" className="w-full border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10">
                 Connexion
               </Button>
             </Link>

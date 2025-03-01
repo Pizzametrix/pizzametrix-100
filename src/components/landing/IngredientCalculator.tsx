@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Droplet, Timer, Package, Circle } from "lucide-react";
 import { getLandingAssetsBySection } from "@/services/landingAssetsService";
@@ -15,7 +14,6 @@ export const IngredientCalculator = () => {
         const imageMap: Record<string, string> = {};
         
         assets.forEach(asset => {
-          // L'identifiant est stocké dans l'alt_text (par exemple "eau", "levure", etc.)
           const ingredientId = asset.alt_text.split('-')[0];
           if (ingredientId) {
             imageMap[ingredientId] = asset.url || '';
@@ -56,7 +54,7 @@ export const IngredientCalculator = () => {
                 selectedIngredient === 'eau' ? 'text-white' : 'text-[#F5E9D7]'
               }`}>
                 <Droplet className="w-6 h-6" />
-                <span className="font-medium">Eau, sel, huile, sucre</span>
+                <h3 className="font-medium m-0">Eau, sel, huile, sucre</h3>
               </div>
               <p className={`mt-0 pb-4 pl-4 pr-4 text-sm text-left ${
                 selectedIngredient === 'eau' ? 'text-white/90' : 'text-[#F5E9D7]/80'
@@ -75,7 +73,7 @@ export const IngredientCalculator = () => {
                 selectedIngredient === 'levure' ? 'text-white' : 'text-[#F5E9D7]'
               }`}>
                 <Circle className="w-6 h-6" />
-                <span className="font-medium">Quantité de levure précise</span>
+                <h3 className="font-medium m-0">Quantité de levure précise</h3>
               </div>
               <p className={`mt-0 pb-4 pl-4 pr-4 text-sm text-left ${
                 selectedIngredient === 'levure' ? 'text-white/90' : 'text-[#F5E9D7]/80'
@@ -94,7 +92,7 @@ export const IngredientCalculator = () => {
                 selectedIngredient === 'repos' ? 'text-white' : 'text-[#F5E9D7]'
               }`}>
                 <Timer className="w-6 h-6" />
-                <span className="font-medium">Ajoutez des durées de repos</span>
+                <h3 className="font-medium m-0">Ajoutez des durées de repos</h3>
               </div>
               <p className={`mt-0 pb-4 pl-4 pr-4 text-sm text-left ${
                 selectedIngredient === 'repos' ? 'text-white/90' : 'text-[#F5E9D7]/80'
@@ -113,7 +111,7 @@ export const IngredientCalculator = () => {
                 selectedIngredient === 'preempattement' ? 'text-white' : 'text-[#F5E9D7]'
               }`}>
                 <Package className="w-6 h-6" />
-                <span className="font-medium text-left">Gérez vos pré-empattements Biga ou Poolish</span>
+                <h3 className="font-medium m-0 text-left">Gérez vos pré-empattements Biga ou Poolish</h3>
               </div>
               <p className={`mt-0 pb-4 pl-4 pr-4 text-sm text-left ${
                 selectedIngredient === 'preempattement' ? 'text-white/90' : 'text-[#F5E9D7]/80'

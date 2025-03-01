@@ -122,7 +122,6 @@ export default function RecipeDetail() {
       <Sidebar />
       <div className="flex-1 md:pl-64">
         <main className="container mx-auto p-4 pb-24">
-          {/* Cette div contient le bouton de retour, visible à la fois sur desktop et mobile */}
           <div className="flex items-center mb-6 sticky top-0 z-20 bg-slate py-3 -mx-4 px-4 shadow-md">
             <Button 
               variant="ghost" 

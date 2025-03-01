@@ -1,5 +1,6 @@
 
 import { supabase } from "@/integrations/supabase/client";
+import React from "react";
 
 export interface LandingAsset {
   id: string;

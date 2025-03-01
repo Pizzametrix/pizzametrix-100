@@ -8,17 +8,19 @@ export interface LandingAsset {
   alt_text: string;
   dimensions?: string;
   url?: string;
+  position?: number;
 }
 
 /**
- * Récupère les images d'une section spécifique de la landing page
+ * Récupère les images d'une section spécifique de la landing page, ordonnées par position
  */
 export const getLandingAssetsBySection = async (section: string): Promise<LandingAsset[]> => {
   // Utilisation d'une requête SQL brute pour contourner les limitations du typage
   const { data, error } = await supabase
     .from('landing_assets')
     .select('*')
-    .eq('section', section);
+    .eq('section', section)
+    .order('position');  // Tri par position
 
   if (error) {
     console.error('Erreur lors de la récupération des assets:', error);

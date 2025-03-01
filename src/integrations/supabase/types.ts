@@ -15,6 +15,7 @@ export type Database = {
           created_at: string
           dimensions: string | null
           id: string
+          position: number | null
           section: string
           storage_path: string
         }
@@ -23,6 +24,7 @@ export type Database = {
           created_at?: string
           dimensions?: string | null
           id?: string
+          position?: number | null
           section: string
           storage_path: string
         }
@@ -31,6 +33,7 @@ export type Database = {
           created_at?: string
           dimensions?: string | null
           id?: string
+          position?: number | null
           section?: string
           storage_path?: string
         }

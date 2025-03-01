@@ -2,6 +2,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import Home from "./pages/Home";
+import LandingFr from "./pages/LandingFr";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Routes publiques */}
+        <Route path="/fr" element={<LandingFr />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-in" element={<Register />} />
         <Route path="/reset-password" element={<ResetPassword />} />
@@ -54,7 +56,7 @@ function App() {
         } />
         
         {/* Route par défaut */}
-        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/" element={<Navigate to="/fr" replace />} />
         
         {/* Redirections des anciennes routes vers les nouvelles */}
         <Route path="/mes-recettes" element={<Navigate to="/my-recipes" replace />} />

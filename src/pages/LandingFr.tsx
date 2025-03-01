@@ -17,12 +17,24 @@ export default function LandingFr() {
     <div className="min-h-screen bg-[#2C2C2C] font-inter">
       <Header />
       <HeroSection />
-      <FeaturesSection />
-      <IngredientCalculator />
-      <RecipeSaving />
-      <Platforms />
-      <FAQ />
-      <Testimonials />
+      <div id="features">
+        <FeaturesSection />
+      </div>
+      <div id="calculator">
+        <IngredientCalculator />
+      </div>
+      <div id="recipes">
+        <RecipeSaving />
+      </div>
+      <div id="platforms">
+        <Platforms />
+      </div>
+      <div id="faq">
+        <FAQ />
+      </div>
+      <div id="testimonials">
+        <Testimonials />
+      </div>
       <CTASection />
       <Footer />
       <SEOMetadata />

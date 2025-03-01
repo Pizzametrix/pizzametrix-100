@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "@/components/landing/Header";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
@@ -12,9 +12,25 @@ import { Testimonials } from "@/components/landing/Testimonials";
 import { CTASection } from "@/components/landing/CTASection";
 import { Footer } from "@/components/landing/Footer";
 import { SEOMetadata } from "@/components/landing/SEOMetadata";
+import { loadAllLandingAssets } from "@/services/landingAssetsService";
 
 export default function LandingFr() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    // Charger toutes les images de la landing page au démarrage
+    const preloadAssets = async () => {
+      try {
+        await loadAllLandingAssets();
+      } catch (error) {
+        console.error("Erreur lors du chargement des assets:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    preloadAssets();
+
     const handleScroll = () => {
       const elements = document.querySelectorAll('.animate-on-scroll');
       

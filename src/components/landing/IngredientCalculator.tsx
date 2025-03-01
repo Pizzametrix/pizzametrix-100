@@ -1,9 +1,37 @@
 
 import React, { useState, useEffect } from "react";
 import { Droplet, Timer, Package, Circle } from "lucide-react";
+import { getLandingAssetsBySection } from "@/services/landingAssetsService";
 
 export const IngredientCalculator = () => {
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>("eau");
+  const [ingredientImages, setIngredientImages] = useState<Record<string, string>>({});
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    const loadCalculatorImages = async () => {
+      try {
+        const assets = await getLandingAssetsBySection('calculator');
+        const imageMap: Record<string, string> = {};
+        
+        assets.forEach(asset => {
+          // L'identifiant est stocké dans l'alt_text (par exemple "eau", "levure", etc.)
+          const ingredientId = asset.alt_text.split('-')[0];
+          if (ingredientId) {
+            imageMap[ingredientId] = asset.url || '';
+          }
+        });
+        
+        setIngredientImages(imageMap);
+      } catch (error) {
+        console.error("Erreur lors du chargement des images de calculateur:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadCalculatorImages();
+  }, []);
   
   const handleIngredientClick = (ingredient: string) => {
     setSelectedIngredient(ingredient === selectedIngredient ? null : ingredient);
@@ -60,16 +88,21 @@ export const IngredientCalculator = () => {
           </div>
           
           <div className="bg-slate-700 rounded-lg overflow-hidden h-80 flex items-center justify-center">
-            {selectedIngredient ? 
+            {selectedIngredient && ingredientImages[selectedIngredient] ? (
               <img 
-                src={`/${selectedIngredient}-placeholder.jpg`} 
+                src={ingredientImages[selectedIngredient]} 
                 alt={`Fonction ${selectedIngredient}`} 
                 className="w-full h-full object-cover" 
-              /> : 
+              />
+            ) : isLoading ? (
+              <div className="text-[#F5E9D7]/60 text-lg">
+                Chargement des images...
+              </div>
+            ) : (
               <div className="text-[#F5E9D7]/60 text-lg">
                 Sélectionnez une fonctionnalité pour voir plus d'informations
               </div>
-            }
+            )}
           </div>
         </div>
       </div>

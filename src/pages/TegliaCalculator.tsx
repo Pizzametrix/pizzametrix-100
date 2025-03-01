@@ -87,6 +87,7 @@ export default function TegliaCalculator() {
         isSugarEnabled={isSugarEnabled}
         handleIncrement={handleIncrement}
         handleDecrement={handleDecrement}
+        maxBallWeight={2400}
       />
 
       <PrefermentSection

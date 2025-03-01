@@ -21,6 +21,7 @@ interface DoughParametersProps {
   isSugarEnabled: boolean;
   handleIncrement: (value: number, setValue: (value: number) => void, max: number, step?: number) => void;
   handleDecrement: (value: number, setValue: (value: number) => void, min: number, step?: number) => void;
+  maxBallWeight?: number;
 }
 
 export function DoughParameters({
@@ -40,7 +41,8 @@ export function DoughParameters({
   isOilEnabled,
   isSugarEnabled,
   handleIncrement,
-  handleDecrement
+  handleDecrement,
+  maxBallWeight = 600
 }: DoughParametersProps) {
   return (
     <Card className="bg-slate border-cream/10">
@@ -105,7 +107,7 @@ export function DoughParameters({
                 variant="ghost"
                 size="icon"
                 className="text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5 shrink-0"
-                onClick={() => handleIncrement(ballWeight, setBallWeight, 600, 5)}
+                onClick={() => handleIncrement(ballWeight, setBallWeight, maxBallWeight, 5)}
               >
                 <Plus className="h-4 w-4" />
               </Button>

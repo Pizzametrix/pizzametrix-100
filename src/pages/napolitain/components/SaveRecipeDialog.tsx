@@ -22,14 +22,14 @@ export function SaveRecipeDialog({ open, onOpenChange, onSave }: SaveRecipeDialo
 
   const handleRecipeNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value.length <= 19) {
+    if (value.length <= 20) {
       setRecipeName(value);
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate border-cream/10 text-cream">
+      <DialogContent className="bg-slate border-cream/10 text-cream translate-y-[-10%]">
         <DialogHeader>
           <DialogTitle className="text-cream">Sauvegarder la recette</DialogTitle>
         </DialogHeader>
@@ -39,10 +39,10 @@ export function SaveRecipeDialog({ open, onOpenChange, onSave }: SaveRecipeDialo
               placeholder="Nom de la recette"
               value={recipeName}
               onChange={handleRecipeNameChange}
-              maxLength={19}
+              maxLength={20}
               className="bg-white/5 border-cream/10 text-cream placeholder:text-cream/50"
             />
-            <p className="text-xs text-cream/50 text-right">{recipeName.length}/19</p>
+            <p className="text-xs text-cream/50 text-right">{recipeName.length}/20</p>
           </div>
           <div className="flex justify-end gap-2">
             <Button

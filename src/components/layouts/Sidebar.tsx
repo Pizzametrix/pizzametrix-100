@@ -1,61 +1,16 @@
 
-import { Menu, LogOut, X, Calculator, Home, Book, User } from "lucide-react";
+import { Menu, LogOut, X, Calculator, Home, Book } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useSidebarStore } from "@/store/useSidebarStore";
-import { useEffect, useState } from "react";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useState } from "react";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { isOpen, toggle, close } = useSidebarStore();
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-  const [pseudonyme, setPseudonyme] = useState<string | null>(null);
-
-  useEffect(() => {
-    getProfile();
-    
-    // Écouter les mises à jour du profil
-    const handleProfileUpdate = () => {
-      getProfile();
-    };
-    
-    window.addEventListener('profile-updated', handleProfileUpdate);
-    
-    return () => {
-      window.removeEventListener('profile-updated', handleProfileUpdate);
-    };
-  }, []);
-
-  const getProfile = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    
-    if (user) {
-      // Get avatar URL if exists
-      const { data: { publicUrl } } = supabase
-        .storage
-        .from('avatars')
-        .getPublicUrl(`${user.id}`);
-
-      if (publicUrl) {
-        setAvatarUrl(publicUrl);
-      }
-
-      // Get pseudonyme
-      const { data } = await supabase
-        .from('utilisateurs')
-        .select('pseudonyme')
-        .eq('id', user.id)
-        .single();
-
-      if (data) {
-        setPseudonyme(data.pseudonyme);
-      }
-    }
-  };
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -73,9 +28,6 @@ export const Sidebar = () => {
   };
 
   const getTitle = () => {
-    if (location.pathname === '/profil') {
-      return "Mon profil";
-    }
     if (location.pathname.includes('/my-recipes/')) {
       return "Ma recette";
     }
@@ -171,14 +123,6 @@ export const Sidebar = () => {
             </nav>
           </div>
           <div className="space-y-2">
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
-              onClick={() => handleNavigation('/profil')}
-            >
-              <User className="mr-2 h-4 w-4" />
-              <span>Mon profil</span>
-            </Button>
             <Button
               variant="ghost"
               className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"

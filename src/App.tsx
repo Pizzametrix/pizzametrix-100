@@ -10,7 +10,6 @@ import TegliaCalculator from "./pages/TegliaCalculator";
 import MyRecipes from "./pages/MyRecipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import NotFound from "./pages/NotFound";
-import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -25,13 +24,13 @@ function App() {
         <Route path="/calculators/teglia" element={<TegliaCalculator />} />
         <Route path="/my-recipes" element={<MyRecipes />} />
         <Route path="/my-recipes/:id" element={<RecipeDetail />} />
-        <Route path="/profil" element={<Profile />} />
         <Route path="/" element={<Home />} />
         
         {/* Redirections des anciennes routes vers les nouvelles */}
         <Route path="/mes-recettes" element={<Navigate to="/my-recipes" replace />} />
         <Route path="/mes-recettes/:id" element={<Navigate to={window.location.pathname.replace('/mes-recettes/', '/my-recipes/')} replace />} />
         <Route path="/calculators/napolitaine" element={<Navigate to="/calculators/neapolitan" replace />} />
+        <Route path="/profil" element={<Navigate to="/home" replace />} />
         
         <Route path="*" element={<NotFound />} />
       </Routes>

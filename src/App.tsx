@@ -12,6 +12,7 @@ import TegliaCalculator from "./pages/TegliaCalculator";
 import MyRecipes from "./pages/MyRecipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import NotFound from "./pages/NotFound";
+import AdminLandingImages from "./pages/AdminLandingImages";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-in" element={<Register />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/admin/images" element={<AdminLandingImages />} />
         
         {/* Routes protégées */}
         <Route path="/home" element={

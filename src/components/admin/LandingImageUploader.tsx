@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2 } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface LandingImageUploaderProps {
@@ -88,16 +88,16 @@ export function LandingImageUploader({ onUploadSuccess }: LandingImageUploaderPr
   };
 
   return (
-    <div className="space-y-4 p-4 border rounded-lg bg-slate-50 dark:bg-slate-800">
-      <h3 className="text-lg font-medium">Upload d'image pour la Landing Page</h3>
+    <div className="space-y-4 p-4 border rounded-lg bg-slate-700 border-slate-600">
+      <h3 className="text-lg font-montserrat font-medium text-[#F5E9D7]">Upload d'image pour la Landing Page</h3>
       
       <div className="grid gap-2">
-        <Label htmlFor="section">Section</Label>
+        <Label htmlFor="section" className="text-[#F5E9D7]">Section</Label>
         <Select value={section} onValueChange={setSection}>
-          <SelectTrigger>
+          <SelectTrigger className="bg-slate-800 text-[#F5E9D7] border-slate-600">
             <SelectValue placeholder="Sélectionner une section" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-slate-800 text-[#F5E9D7] border-slate-600">
             <SelectItem value="hero">Hero</SelectItem>
             <SelectItem value="features">Fonctionnalités</SelectItem>
             <SelectItem value="calculator">Calculateur</SelectItem>
@@ -108,39 +108,52 @@ export function LandingImageUploader({ onUploadSuccess }: LandingImageUploaderPr
       </div>
       
       <div className="grid gap-2">
-        <Label htmlFor="file">Fichier image</Label>
+        <Label htmlFor="file" className="text-[#F5E9D7]">Fichier image</Label>
         <Input 
           id="file" 
           type="file" 
           accept="image/*" 
           onChange={handleFileChange}
+          className="bg-slate-800 text-[#F5E9D7] border-slate-600"
         />
       </div>
       
       <div className="grid gap-2">
-        <Label htmlFor="altText">Texte alternatif</Label>
+        <Label htmlFor="altText" className="text-[#F5E9D7]">Texte alternatif</Label>
         <Input 
           id="altText" 
           value={altText} 
           onChange={(e) => setAltText(e.target.value)}
           placeholder="Description de l'image pour l'accessibilité"
+          className="bg-slate-800 text-[#F5E9D7] border-slate-600"
         />
+        {section === "testimonials" && (
+          <p className="text-sm text-[#77BFA3]">
+            Pour les témoignages, utilisez le format "testimonial-X" où X est le numéro du témoignage
+          </p>
+        )}
+        {section === "calculator" && (
+          <p className="text-sm text-[#77BFA3]">
+            Pour le calculateur, utilisez le nom de l'ingrédient (ex: "eau", "levure", etc.)
+          </p>
+        )}
       </div>
       
       <div className="grid gap-2">
-        <Label htmlFor="dimensions">Dimensions recommandées (optionnel)</Label>
+        <Label htmlFor="dimensions" className="text-[#F5E9D7]">Dimensions recommandées (optionnel)</Label>
         <Input 
           id="dimensions" 
           value={dimensions} 
           onChange={(e) => setDimensions(e.target.value)}
           placeholder="ex: 1200x800"
+          className="bg-slate-800 text-[#F5E9D7] border-slate-600"
         />
       </div>
       
       <Button 
         onClick={handleUpload} 
         disabled={isUploading || !file || !altText}
-        className="w-full"
+        className="w-full bg-[#C53030] hover:bg-[#C53030]/90"
       >
         {isUploading ? (
           <>
@@ -148,7 +161,10 @@ export function LandingImageUploader({ onUploadSuccess }: LandingImageUploaderPr
             Téléchargement...
           </>
         ) : (
-          "Télécharger l'image"
+          <>
+            <Upload className="mr-2 h-4 w-4" />
+            Télécharger l'image
+          </>
         )}
       </Button>
     </div>

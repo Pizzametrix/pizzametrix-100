@@ -42,6 +42,12 @@ export const Header = () => {
           Calculateur
         </button>
         <button 
+          onClick={() => scrollToSection("testimonials")}
+          className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
+        >
+          Témoignages
+        </button>
+        <button 
           onClick={() => scrollToSection("recipes")}
           className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
         >
@@ -94,6 +100,12 @@ export const Header = () => {
             className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
           >
             Calculateur
+          </button>
+          <button 
+            onClick={() => scrollToSection("testimonials")}
+            className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
+          >
+            Témoignages
           </button>
           <button 
             onClick={() => scrollToSection("recipes")}

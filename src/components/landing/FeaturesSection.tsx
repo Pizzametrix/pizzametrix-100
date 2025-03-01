@@ -1,8 +1,41 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { getLandingAssetsBySection } from "@/services/landingAssetsService";
+import type { LandingAsset } from "@/services/landingAssetsService";
 
 export const FeaturesSection = () => {
+  const [images, setImages] = useState<LandingAsset[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        const featuresImages = await getLandingAssetsBySection('features');
+        setImages(featuresImages);
+      } catch (error) {
+        console.error("Erreur lors du chargement des images de features:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadImages();
+  }, []);
+
+  // Image de remplacement au cas où aucune image n'est trouvée dans Supabase
+  const fallbackImages = {
+    napolitaine: "/napolitaine.jpg",
+    teglia: "/teglia.jpg"
+  };
+
+  const getImageUrl = (index: number, type: 'napolitaine' | 'teglia'): string => {
+    if (images && images[index] && images[index].url) {
+      return images[index].url;
+    }
+    return fallbackImages[type];
+  };
+
   return (
     <section className="py-16 px-4 bg-[#2C2C2C]">
       <div className="max-w-6xl mx-auto">
@@ -14,7 +47,7 @@ export const FeaturesSection = () => {
           <Card className="bg-slate-700 border-[#77BFA3] overflow-hidden">
             <div className="h-48 overflow-hidden">
               <img 
-                src="/napolitaine.jpg" 
+                src={getImageUrl(0, 'napolitaine')} 
                 alt="Pizza Napolitaine" 
                 className="w-full h-full object-cover"
               />
@@ -30,7 +63,7 @@ export const FeaturesSection = () => {
           <Card className="bg-slate-700 border-[#C53030] overflow-hidden">
             <div className="h-48 overflow-hidden">
               <img 
-                src="/teglia.jpg" 
+                src={getImageUrl(1, 'teglia')} 
                 alt="Pizza Teglia Romaine" 
                 className="w-full h-full object-cover"
               />

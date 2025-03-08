@@ -1,0 +1,5 @@
+
+# Règles de redirection pour Netlify
+# Redirige toutes les URLs vers index.html pour permettre au React Router de gérer les routes
+/*    /index.html   200
+

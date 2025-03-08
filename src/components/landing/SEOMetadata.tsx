@@ -120,6 +120,6 @@ export const SEOMetadata = () => {
           pizza italia, cuisson pizza, pâte à pizza
         </p>
       </div>
-    </div>
+    </>
   );
 };

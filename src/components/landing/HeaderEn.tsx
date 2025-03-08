@@ -11,7 +11,7 @@ export const Header = () => {
   const scrollToSection = (sectionId: string) => {
     setIsMenuOpen(false);
     const section = document.getElementById(sectionId);
-    const headerOffset = 90; // Hauteur de la navbar + marge
+    const headerOffset = 90; // Header height + margin
     
     if (section) {
       const elementPosition = section.getBoundingClientRect().top;
@@ -23,7 +23,7 @@ export const Header = () => {
       });
     }
   };
-  
+
   const handleLanguageChange = (language: SupportedLanguage) => {
     saveLanguagePreference(language);
   };
@@ -32,37 +32,37 @@ export const Header = () => {
     <header className="w-full p-4 md:p-6 flex justify-between items-center sticky top-0 z-50 bg-[#2C2C2C]/95 backdrop-blur-sm">
       <div className="text-[#F5E9D7] text-2xl font-montserrat font-bold">Pizzametrix</div>
       
-      {/* Navigation desktop */}
+      {/* Desktop navigation */}
       <nav className="hidden md:flex items-center space-x-8 mr-8">
         <button 
           onClick={() => scrollToSection("features")}
           className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
         >
-          Fonctionnalités
+          Features
         </button>
         <button 
           onClick={() => scrollToSection("calculator")}
           className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
         >
-          Calculateur
+          Calculator
         </button>
         <button 
           onClick={() => scrollToSection("testimonials")}
           className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
         >
-          Témoignages
+          Testimonials
         </button>
         <button 
           onClick={() => scrollToSection("recipes")}
           className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
         >
-          Recettes
+          Recipes
         </button>
         <button 
           onClick={() => scrollToSection("platforms")}
           className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
         >
-          Plateformes
+          Platforms
         </button>
         <button 
           onClick={() => scrollToSection("faq")}
@@ -75,25 +75,25 @@ export const Header = () => {
       <div className="flex items-center">
         <Link to="/login" className="hidden md:block">
           <Button variant="outline" className="mr-2 border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10">
-            Connexion
+            Login
           </Button>
         </Link>
         <Link to="/sign-in" className="hidden md:block">
-          <Button>Inscription</Button>
+          <Button>Sign Up</Button>
         </Link>
         
-        {/* Sélecteur de langue */}
+        {/* Language selector */}
         <div className="hidden md:flex mx-4 space-x-2">
-          <Link to="/" className="text-[#F5E9D7]/70 hover:text-[#F5E9D7]" onClick={() => handleLanguageChange('en')}>
+          <Link to="/" className="text-[#F5E9D7] font-medium" onClick={() => handleLanguageChange('en')}>
             EN
           </Link>
           <span className="text-[#F5E9D7]">|</span>
-          <Link to="/fr" className="text-[#F5E9D7] font-medium" onClick={() => handleLanguageChange('fr')}>
+          <Link to="/fr" className="text-[#F5E9D7]/70 hover:text-[#F5E9D7]" onClick={() => handleLanguageChange('fr')}>
             FR
           </Link>
         </div>
         
-        {/* Menu mobile toggle */}
+        {/* Mobile menu toggle */}
         <button 
           className="md:hidden text-[#F5E9D7]"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -109,31 +109,31 @@ export const Header = () => {
             onClick={() => scrollToSection("features")}
             className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
           >
-            Fonctionnalités
+            Features
           </button>
           <button 
             onClick={() => scrollToSection("calculator")}
             className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
           >
-            Calculateur
+            Calculator
           </button>
           <button 
             onClick={() => scrollToSection("testimonials")}
             className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
           >
-            Témoignages
+            Testimonials
           </button>
           <button 
             onClick={() => scrollToSection("recipes")}
             className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
           >
-            Recettes
+            Recipes
           </button>
           <button 
             onClick={() => scrollToSection("platforms")}
             className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
           >
-            Plateformes
+            Platforms
           </button>
           <button 
             onClick={() => scrollToSection("faq")}
@@ -142,12 +142,12 @@ export const Header = () => {
             FAQ
           </button>
           
-          {/* Sélecteur de langue pour mobile */}
+          {/* Language selector for mobile */}
           <div className="flex space-x-4 py-2 border-t border-[#F5E9D7]/10">
-            <Link to="/" className="text-[#F5E9D7]/70 hover:text-[#F5E9D7]" onClick={() => handleLanguageChange('en')}>
+            <Link to="/" className="text-[#F5E9D7] font-medium" onClick={() => handleLanguageChange('en')}>
               English
             </Link>
-            <Link to="/fr" className="text-[#F5E9D7] font-medium" onClick={() => handleLanguageChange('fr')}>
+            <Link to="/fr" className="text-[#F5E9D7]/70 hover:text-[#F5E9D7]" onClick={() => handleLanguageChange('fr')}>
               Français
             </Link>
           </div>
@@ -155,11 +155,11 @@ export const Header = () => {
           <div className="pt-2 flex flex-col space-y-2">
             <Link to="/login" className="w-full">
               <Button variant="outline" className="w-full border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10">
-                Connexion
+                Login
               </Button>
             </Link>
             <Link to="/sign-in" className="w-full">
-              <Button className="w-full">Inscription</Button>
+              <Button className="w-full">Sign Up</Button>
             </Link>
           </div>
         </div>

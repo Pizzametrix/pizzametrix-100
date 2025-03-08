@@ -41,28 +41,10 @@ export const Header = () => {
           Features
         </button>
         <button 
-          onClick={() => scrollToSection("calculator")}
-          className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
-        >
-          Calculator
-        </button>
-        <button 
           onClick={() => scrollToSection("testimonials")}
           className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
         >
           Testimonials
-        </button>
-        <button 
-          onClick={() => scrollToSection("recipes")}
-          className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
-        >
-          Recipes
-        </button>
-        <button 
-          onClick={() => scrollToSection("platforms")}
-          className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors"
-        >
-          Platforms
         </button>
         <button 
           onClick={() => scrollToSection("faq")}
@@ -74,7 +56,10 @@ export const Header = () => {
       
       <div className="flex items-center">
         <Link to="/login" className="hidden md:block">
-          <Button variant="outline" className="mr-2 border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10">
+          <Button 
+            variant="outline" 
+            className="mr-2 bg-[#2C2C2C] border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10"
+          >
             Login
           </Button>
         </Link>
@@ -112,28 +97,10 @@ export const Header = () => {
             Features
           </button>
           <button 
-            onClick={() => scrollToSection("calculator")}
-            className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
-          >
-            Calculator
-          </button>
-          <button 
             onClick={() => scrollToSection("testimonials")}
             className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
           >
             Testimonials
-          </button>
-          <button 
-            onClick={() => scrollToSection("recipes")}
-            className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
-          >
-            Recipes
-          </button>
-          <button 
-            onClick={() => scrollToSection("platforms")}
-            className="text-[#F5E9D7] hover:text-[#77BFA3] transition-colors py-2"
-          >
-            Platforms
           </button>
           <button 
             onClick={() => scrollToSection("faq")}
@@ -154,7 +121,10 @@ export const Header = () => {
           
           <div className="pt-2 flex flex-col space-y-2">
             <Link to="/login" className="w-full">
-              <Button variant="outline" className="w-full border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10">
+              <Button 
+                variant="outline" 
+                className="w-full bg-[#2C2C2C] border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10"
+              >
                 Login
               </Button>
             </Link>

@@ -6,9 +6,9 @@ User-agent: *
 Allow: /
 Allow: /fr
 Allow: /auto
-Disallow: /login
-Disallow: /sign-in
-Disallow: /reset-password
+Allow: /login
+Allow: /sign-in
+Allow: /reset-password
 Disallow: /home
 Disallow: /calculators
 Disallow: /calculators/*

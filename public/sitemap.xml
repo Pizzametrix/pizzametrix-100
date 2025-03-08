@@ -17,6 +17,28 @@
     <priority>1.0</priority>
   </url>
   
+  <!-- Pages d'authentification -->
+  <url>
+    <loc>https://pizzametrix.com/login</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizzametrix.com/sign-in</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizzametrix.com/reset-password</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
   <!-- Redirection automatique de langue -->
   <url>
     <loc>https://pizzametrix.com/auto</loc>

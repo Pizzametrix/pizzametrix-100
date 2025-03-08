@@ -9,6 +9,10 @@ Allow: /auto
 Allow: /login
 Allow: /sign-in
 Allow: /reset-password
+Allow: /terms
+Allow: /privacy
+Allow: /fr/terms
+Allow: /fr/privacy
 Disallow: /home
 Disallow: /calculators
 Disallow: /calculators/*

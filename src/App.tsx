@@ -17,6 +17,10 @@ import TegliaCalculator from "./pages/TegliaCalculator";
 import MyRecipes from "./pages/MyRecipes";
 import RecipeDetail from "./pages/RecipeDetail";
 import NotFound from "./pages/NotFound";
+import TermsEn from "./pages/TermsEn";
+import TermsFr from "./pages/TermsFr";
+import PrivacyEn from "./pages/PrivacyEn";
+import PrivacyFr from "./pages/PrivacyFr";
 
 function App() {
   return (
@@ -30,6 +34,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-in" element={<Register />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        
+        {/* Pages légales */}
+        <Route path="/terms" element={<TermsEn />} />
+        <Route path="/fr/terms" element={<TermsFr />} />
+        <Route path="/privacy" element={<PrivacyEn />} />
+        <Route path="/fr/privacy" element={<PrivacyFr />} />
         
         {/* Routes protégées */}
         <Route path="/home" element={

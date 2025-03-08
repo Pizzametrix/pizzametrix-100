@@ -39,6 +39,36 @@
     <priority>0.5</priority>
   </url>
   
+  <!-- Pages légales en anglais -->
+  <url>
+    <loc>https://pizzametrix.com/terms</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizzametrix.com/privacy</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Pages légales en français -->
+  <url>
+    <loc>https://pizzametrix.com/fr/terms</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizzametrix.com/fr/privacy</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Redirection automatique de langue -->
   <url>
     <loc>https://pizzametrix.com/auto</loc>

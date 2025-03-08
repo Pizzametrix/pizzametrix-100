@@ -1,12 +1,6 @@
-
 <?php
-// Définir l'en-tête comme XML
 header('Content-Type: application/xml; charset=utf-8');
-
-// Obtenir la date courante au format ISO 8601 (YYYY-MM-DD)
 $currentDate = date('Y-m-d');
-
-// Générer le contenu du sitemap - IMPORTANT: pas d'espaces avant cette ligne
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

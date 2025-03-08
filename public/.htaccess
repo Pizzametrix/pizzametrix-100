@@ -1,0 +1,6 @@
+
+# Traiter sitemap.xml avec PHP
+<Files "sitemap.xml">
+    ForceType application/x-httpd-php
+    SetHandler application/x-httpd-php
+</Files>

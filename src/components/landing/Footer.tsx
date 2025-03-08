@@ -10,7 +10,7 @@ export const Footer = () => {
   return (
     <footer className="py-10 px-4 bg-[#2C2C2C] border-t border-[#F5E9D7]/10">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo & Description */}
           <div className="md:col-span-1">
             <div className="text-[#F5E9D7] text-xl font-montserrat font-bold mb-4">
@@ -84,92 +84,6 @@ export const Footer = () => {
               </li>
             </ul>
           </div>
-          
-          {/* Langue */}
-          <div className="md:col-span-1">
-            <h3 className="text-[#F5E9D7] font-medium mb-4">
-              {isFrenchVersion ? "Langue" : "Language"}
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className={`transition-colors text-sm ${isFrenchVersion ? 'text-[#F5E9D7]/70 hover:text-[#77BFA3]' : 'text-[#77BFA3] font-medium'}`}>
-                  English
-                </Link>
-              </li>
-              <li>
-                <Link to="/fr" className={`transition-colors text-sm ${isFrenchVersion ? 'text-[#77BFA3] font-medium' : 'text-[#F5E9D7]/70 hover:text-[#77BFA3]'}`}>
-                  Français
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        {/* Plan du site */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pt-6 border-t border-[#F5E9D7]/10">
-          <div className="md:col-span-1">
-            <h3 className="text-[#F5E9D7] font-medium mb-4">
-              {isFrenchVersion ? "Plan du site" : "Sitemap"}
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to={isFrenchVersion ? "/fr" : "/"} className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
-                  {isFrenchVersion ? "Page d'accueil" : "Home Page"}
-                </Link>
-              </li>
-              <li>
-                <Link to="/login" className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
-                  {isFrenchVersion ? "Page de connexion" : "Login Page"}
-                </Link>
-              </li>
-              <li>
-                <Link to="/sign-in" className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
-                  {isFrenchVersion ? "Page d'inscription" : "Sign Up Page"}
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="md:col-span-1">
-            <h3 className="text-[#F5E9D7] font-medium mb-4">
-              {isFrenchVersion ? "Fonctionnalités" : "Features"}
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <span className="text-[#F5E9D7]/70 text-sm">
-                  {isFrenchVersion ? "Calculateur Napolitain" : "Neapolitan Calculator"}
-                </span>
-              </li>
-              <li>
-                <span className="text-[#F5E9D7]/70 text-sm">
-                  {isFrenchVersion ? "Calculateur Teglia" : "Teglia Calculator"}
-                </span>
-              </li>
-              <li>
-                <span className="text-[#F5E9D7]/70 text-sm">
-                  {isFrenchVersion ? "Gestion des recettes" : "Recipe Management"}
-                </span>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="md:col-span-1">
-            <h3 className="text-[#F5E9D7] font-medium mb-4">
-              {isFrenchVersion ? "Légal" : "Legal"}
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to={isFrenchVersion ? "/fr/terms" : "/terms"} className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
-                  {isFrenchVersion ? "Conditions d'utilisation" : "Terms of Service"}
-                </Link>
-              </li>
-              <li>
-                <Link to={isFrenchVersion ? "/fr/privacy" : "/privacy"} className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
-                  {isFrenchVersion ? "Politique de confidentialité" : "Privacy Policy"}
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
         
         {/* Copyright */}
@@ -177,13 +91,30 @@ export const Footer = () => {
           <div className="text-[#F5E9D7]/60 text-sm">
             © {new Date().getFullYear()} Pizzametrix. {isFrenchVersion ? "Tous droits réservés." : "All rights reserved."}
           </div>
-          <div className="mt-4 md:mt-0 flex space-x-4">
+          <div className="mt-4 md:mt-0 flex space-x-6 flex-wrap justify-center">
+            {/* Sitemap */}
+            <Link to={isFrenchVersion ? "/fr" : "/"} className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors">
+              {isFrenchVersion ? "Plan du site" : "Sitemap"}
+            </Link>
+            
+            {/* Terms & Privacy */}
             <Link to={isFrenchVersion ? "/fr/terms" : "/terms"} className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors">
               {isFrenchVersion ? "Conditions d'utilisation" : "Terms of Service"}
             </Link>
             <Link to={isFrenchVersion ? "/fr/privacy" : "/privacy"} className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors">
               {isFrenchVersion ? "Politique de confidentialité" : "Privacy Policy"}
             </Link>
+            
+            {/* Language Selection */}
+            <div className="flex space-x-3 items-center">
+              <Link to="/" className={`transition-colors text-sm ${isFrenchVersion ? 'text-[#F5E9D7]/60 hover:text-[#77BFA3]' : 'text-[#77BFA3] font-medium'}`}>
+                EN
+              </Link>
+              <span className="text-[#F5E9D7]/30">|</span>
+              <Link to="/fr" className={`transition-colors text-sm ${isFrenchVersion ? 'text-[#77BFA3] font-medium' : 'text-[#F5E9D7]/60 hover:text-[#77BFA3]'}`}>
+                FR
+              </Link>
+            </div>
           </div>
         </div>
       </div>

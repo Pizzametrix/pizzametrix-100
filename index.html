@@ -22,6 +22,20 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Enregistrer le service worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(function(registration) {
+              console.log('Service Worker enregistré avec succès:', registration.scope);
+            })
+            .catch(function(error) {
+              console.log('Échec d\'enregistrement du Service Worker:', error);
+            });
+        });
+      }
+    </script>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>

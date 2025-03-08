@@ -1,5 +1,7 @@
-
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Toaster } from "@/components/ui/toaster";
+import { UpdateNotification } from "@/components/UpdateNotification";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import Home from "./pages/Home";
 import LandingFr from "./pages/LandingFr";
@@ -15,7 +17,8 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
+      <UpdateNotification />
       <Routes>
         {/* Routes publiques */}
         <Route path="/fr" element={<LandingFr />} />
@@ -67,7 +70,8 @@ function App() {
         {/* Route 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+      <Toaster />
+    </Router>
   );
 }
 

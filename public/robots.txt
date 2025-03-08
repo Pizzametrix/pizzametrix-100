@@ -1,8 +1,22 @@
 
+# Pizzametrix Robots.txt
+# Permet l'indexation des pages publiques tout en protégeant les pages privées
+
 User-agent: *
 Allow: /
+Allow: /fr
+Allow: /auto
 Disallow: /login
 Disallow: /sign-in
 Disallow: /reset-password
+Disallow: /home
+Disallow: /calculators
+Disallow: /calculators/*
+Disallow: /my-recipes
+Disallow: /my-recipes/*
+Disallow: /mes-recettes
+Disallow: /mes-recettes/*
+Disallow: /profil
 
+# Plan du site
 Sitemap: https://pizzametrix.com/sitemap.xml

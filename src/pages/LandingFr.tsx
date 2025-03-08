@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Header } from "@/components/landing/Header";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
@@ -57,33 +58,49 @@ export default function LandingFr() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-texture-dark font-inter">
-      <Header />
-      <HeroSection />
-      <div id="features">
-        <FeaturesSection />
+    <>
+      <Helmet>
+        <title>Pizzametrix - Calculateur de recettes de pizza professionnelles</title>
+        <meta name="description" content="Pizzametrix est l'outil ultime pour créer des pizzas parfaites. Notre calculateur vous aide à maîtriser l'hydratation, la fermentation et tous les aspects techniques des recettes de pizza napolitaine et teglia romaine." />
+      </Helmet>
+      
+      <div className="min-h-screen bg-texture-dark font-inter">
+        <Header />
+        <main>
+          <HeroSection />
+          <section id="features" aria-labelledby="features-heading">
+            <h2 id="features-heading" className="sr-only">Fonctionnalités principales</h2>
+            <FeaturesSection />
+          </section>
+          <section id="calculator" aria-labelledby="calculator-heading">
+            <h2 id="calculator-heading" className="sr-only">Calculateur d'ingrédients</h2>
+            <IngredientCalculator />
+          </section>
+          <section id="recipes" aria-labelledby="recipes-heading">
+            <h2 id="recipes-heading" className="sr-only">Sauvegarde de recettes</h2>
+            <RecipeSaving />
+          </section>
+          <section id="platforms" aria-labelledby="platforms-heading">
+            <h2 id="platforms-heading" className="sr-only">Plateformes disponibles</h2>
+            <Platforms />
+          </section>
+          <section id="statistics" aria-labelledby="statistics-heading">
+            <h2 id="statistics-heading" className="sr-only">Statistiques</h2>
+            <StatisticsSection />
+          </section>
+          <section id="faq" aria-labelledby="faq-heading">
+            <h2 id="faq-heading" className="sr-only">Questions fréquentes</h2>
+            <FAQ />
+          </section>
+          <section id="testimonials" aria-labelledby="testimonials-heading">
+            <h2 id="testimonials-heading" className="sr-only">Témoignages</h2>
+            <Testimonials />
+          </section>
+          <CTASection />
+        </main>
+        <Footer />
+        <SEOMetadata />
       </div>
-      <div id="calculator">
-        <IngredientCalculator />
-      </div>
-      <div id="recipes">
-        <RecipeSaving />
-      </div>
-      <div id="platforms">
-        <Platforms />
-      </div>
-      <div id="statistics">
-        <StatisticsSection />
-      </div>
-      <div id="faq">
-        <FAQ />
-      </div>
-      <div id="testimonials">
-        <Testimonials />
-      </div>
-      <CTASection />
-      <Footer />
-      <SEOMetadata />
-    </div>
+    </>
   );
 }

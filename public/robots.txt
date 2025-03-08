@@ -1,0 +1,8 @@
+
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /sign-in
+Disallow: /reset-password
+
+Sitemap: https://pizzametrix.com/sitemap.xml

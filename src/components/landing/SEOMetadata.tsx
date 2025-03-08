@@ -77,9 +77,9 @@ export const SEOMetadata = () => {
         <meta name="twitter:image" content="https://pizzametrix.com/og-image.png" />
         
         {/* Indications de langue */}
-        <link rel="alternate" href="https://pizzametrix.com/fr" hreflang="fr" />
-        <link rel="alternate" href="https://pizzametrix.com/en" hreflang="en" />
-        <link rel="alternate" href="https://pizzametrix.com/it" hreflang="it" />
+        <link rel="alternate" href="https://pizzametrix.com/fr" hrefLang="fr" />
+        <link rel="alternate" href="https://pizzametrix.com/en" hrefLang="en" />
+        <link rel="alternate" href="https://pizzametrix.com/it" hrefLang="it" />
         <link rel="canonical" href="https://pizzametrix.com/fr" />
         
         {/* Intégration des schémas JSON-LD */}

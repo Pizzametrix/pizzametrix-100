@@ -1,4 +1,3 @@
-
 # Pizzametrix Robots.txt
 # Permet l'indexation des pages publiques tout en protégeant les pages privées
 

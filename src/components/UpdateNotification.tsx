@@ -6,11 +6,17 @@ import { RefreshCw } from "lucide-react";
 
 export const UpdateNotification = () => {
   const [isUpdateAvailable, setIsUpdateAvailable] = useState(false);
+  const [registration, setRegistration] = useState<ServiceWorkerRegistration | null>(null);
 
   // Vérifie s'il y a une mise à jour disponible
   useEffect(() => {
     // Enregistrer le service worker
     if ('serviceWorker' in navigator) {
+      // Enregistrer le service worker et stocker l'enregistrement
+      navigator.serviceWorker.ready.then(reg => {
+        setRegistration(reg);
+      });
+
       // Lorsque le service worker est mis à jour
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         // Si nous n'avons pas encore détecté de mise à jour, afficher la notification

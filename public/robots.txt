@@ -24,4 +24,3 @@ Disallow: /profil
 
 # Plan du site
 Sitemap: https://pizzametrix.com/sitemap.xml.php
-

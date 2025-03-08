@@ -1,17 +1,19 @@
 
 import React from "react";
-import { SEOMetadataEn } from "@/components/landing/SEOMetadataEn";
-import { HeaderEn } from "@/components/landing/HeaderEn";
+import { Helmet } from "react-helmet";
+import { Header } from "@/components/landing/HeaderEn";
 import { Footer } from "@/components/landing/Footer";
+import { SEOMetadataEn } from "@/components/landing/SEOMetadataEn";
 
 export default function PrivacyEn() {
   return (
     <div className="min-h-screen flex flex-col bg-[#2C2C2C]">
-      <SEOMetadataEn 
-        title="Privacy Policy - Pizzametrix"
-        description="Privacy Policy for Pizzametrix. Learn how we collect, use and protect your personal information."
-      />
-      <HeaderEn />
+      <Helmet>
+        <title>Privacy Policy - Pizzametrix</title>
+        <meta name="description" content="Privacy Policy for Pizzametrix. Learn how we collect, use and protect your personal information." />
+      </Helmet>
+      <Header />
+      <SEOMetadataEn />
       
       <main className="flex-grow container mx-auto px-4 py-12 max-w-4xl">
         <div className="prose prose-invert max-w-none">

@@ -1,17 +1,18 @@
-
 import React from "react";
-import { SEOMetadataEn } from "@/components/landing/SEOMetadataEn";
-import { HeaderEn } from "@/components/landing/HeaderEn";
+import { Helmet } from "react-helmet";
+import { Header } from "@/components/landing/HeaderEn";
 import { Footer } from "@/components/landing/Footer";
+import { SEOMetadataEn } from "@/components/landing/SEOMetadataEn";
 
 export default function TermsEn() {
   return (
     <div className="min-h-screen flex flex-col bg-[#2C2C2C]">
-      <SEOMetadataEn 
-        title="Terms of Service - Pizzametrix"
-        description="Terms of Service for Pizzametrix. Read our terms and conditions for using our pizza dough calculator application."
-      />
-      <HeaderEn />
+      <Helmet>
+        <title>Terms of Service - Pizzametrix</title>
+        <meta name="description" content="Terms of Service for Pizzametrix. Read our terms and conditions for using our pizza dough calculator application." />
+      </Helmet>
+      <Header />
+      <SEOMetadataEn />
       
       <main className="flex-grow container mx-auto px-4 py-12 max-w-4xl">
         <div className="prose prose-invert max-w-none">

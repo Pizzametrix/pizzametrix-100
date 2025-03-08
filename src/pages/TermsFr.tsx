@@ -1,17 +1,19 @@
 
 import React from "react";
-import { SEOMetadataEn } from "@/components/landing/SEOMetadataEn";
-import { HeaderEn } from "@/components/landing/HeaderEn";
+import { Helmet } from "react-helmet";
+import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
+import { SEOMetadata } from "@/components/landing/SEOMetadata";
 
 export default function TermsFr() {
   return (
     <div className="min-h-screen flex flex-col bg-[#2C2C2C]">
-      <SEOMetadataEn 
-        title="Conditions d'Utilisation - Pizzametrix"
-        description="Conditions d'utilisation de Pizzametrix. Lisez nos termes et conditions pour l'utilisation de notre application de calcul de pâte à pizza."
-      />
-      <HeaderEn />
+      <Helmet>
+        <title>Conditions d'Utilisation - Pizzametrix</title>
+        <meta name="description" content="Conditions d'utilisation de Pizzametrix. Lisez nos termes et conditions pour l'utilisation de notre application de calcul de pâte à pizza." />
+      </Helmet>
+      <Header />
+      <SEOMetadata />
       
       <main className="flex-grow container mx-auto px-4 py-12 max-w-4xl">
         <div className="prose prose-invert max-w-none">

@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { UpdateNotification } from "@/components/UpdateNotification";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
@@ -23,12 +23,24 @@ import PrivacyEn from "./pages/PrivacyEn";
 import PrivacyFr from "./pages/PrivacyFr";
 
 // Composant pour s'assurer que la page se charge en haut
-const ScrollToTop = ({ children }: { children: React.ReactNode }) => {
+function ScrollToTopOnMount() {
+  const { pathname } = useLocation();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [pathname]);
   
-  return <>{children}</>;
+  return null;
+}
+
+// Wrapper pour les pages avec fond sombre pour éviter le flash blanc
+const DarkPageWrapper = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <>
+      <ScrollToTopOnMount />
+      {children}
+    </>
+  );
 };
 
 function App() {
@@ -45,10 +57,10 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         
         {/* Pages légales */}
-        <Route path="/terms" element={<ScrollToTop><TermsEn /></ScrollToTop>} />
-        <Route path="/fr/terms" element={<ScrollToTop><TermsFr /></ScrollToTop>} />
-        <Route path="/privacy" element={<ScrollToTop><PrivacyEn /></ScrollToTop>} />
-        <Route path="/fr/privacy" element={<ScrollToTop><PrivacyFr /></ScrollToTop>} />
+        <Route path="/terms" element={<DarkPageWrapper><TermsEn /></DarkPageWrapper>} />
+        <Route path="/fr/terms" element={<DarkPageWrapper><TermsFr /></DarkPageWrapper>} />
+        <Route path="/privacy" element={<DarkPageWrapper><PrivacyEn /></DarkPageWrapper>} />
+        <Route path="/fr/privacy" element={<DarkPageWrapper><PrivacyFr /></DarkPageWrapper>} />
         
         {/* Routes protégées */}
         <Route path="/home" element={

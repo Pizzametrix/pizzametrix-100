@@ -1,16 +1,29 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
 import { SEOMetadata } from "@/components/landing/SEOMetadata";
 
 export default function PrivacyFr() {
+  // Appliquer immédiatement le fond sombre pour éviter le flash blanc
+  useEffect(() => {
+    document.body.style.backgroundColor = "#2C2C2C";
+    return () => {
+      document.body.style.backgroundColor = "";
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-[#2C2C2C]">
       <Helmet>
         <title>Politique de Confidentialité - Pizzametrix</title>
         <meta name="description" content="Politique de confidentialité de Pizzametrix. Découvrez comment nous collectons, utilisons et protégeons vos informations personnelles." />
+        <style>{`
+          body { 
+            background-color: #2C2C2C !important; 
+          }
+        `}</style>
       </Helmet>
       <Header />
       <SEOMetadata />

@@ -22,6 +22,15 @@ import TermsFr from "./pages/TermsFr";
 import PrivacyEn from "./pages/PrivacyEn";
 import PrivacyFr from "./pages/PrivacyFr";
 
+// Composant pour s'assurer que la page se charge en haut
+const ScrollToTop = ({ children }: { children: React.ReactNode }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  return <>{children}</>;
+};
+
 function App() {
   return (
     <Router>
@@ -36,10 +45,10 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         
         {/* Pages légales */}
-        <Route path="/terms" element={<TermsEn />} />
-        <Route path="/fr/terms" element={<TermsFr />} />
-        <Route path="/privacy" element={<PrivacyEn />} />
-        <Route path="/fr/privacy" element={<PrivacyFr />} />
+        <Route path="/terms" element={<ScrollToTop><TermsEn /></ScrollToTop>} />
+        <Route path="/fr/terms" element={<ScrollToTop><TermsFr /></ScrollToTop>} />
+        <Route path="/privacy" element={<ScrollToTop><PrivacyEn /></ScrollToTop>} />
+        <Route path="/fr/privacy" element={<ScrollToTop><PrivacyFr /></ScrollToTop>} />
         
         {/* Routes protégées */}
         <Route path="/home" element={

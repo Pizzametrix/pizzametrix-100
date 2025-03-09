@@ -45,7 +45,7 @@ export const FeaturesSection = () => {
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card className="bg-slate-700 border-[#77BFA3] overflow-hidden">
+          <Card className="bg-slate-700 border-[#F5E9D7] overflow-hidden">
             <div className="h-48 overflow-hidden">
               <img 
                 src={getImageByPosition(0, 'napolitaine')} 
@@ -62,7 +62,7 @@ export const FeaturesSection = () => {
             </CardContent>
           </Card>
           
-          <Card className="bg-slate-700 border-[#C53030] overflow-hidden">
+          <Card className="bg-slate-700 border-[#F5E9D7] overflow-hidden">
             <div className="h-48 overflow-hidden">
               <img 
                 src={getImageByPosition(1, 'teglia')} 

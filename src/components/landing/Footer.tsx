@@ -92,18 +92,22 @@ export const Footer = () => {
             © {new Date().getFullYear()} Pizzametrix. {isFrenchVersion ? "Tous droits réservés." : "All rights reserved."}
           </div>
           <div className="mt-4 md:mt-0 flex space-x-6 flex-wrap justify-center">
-            {/* Sitemap */}
-            <Link to={isFrenchVersion ? "/fr" : "/"} className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors">
-              {isFrenchVersion ? "Plan du site" : "Sitemap"}
-            </Link>
-            
             {/* Terms & Privacy */}
-            <Link to={isFrenchVersion ? "/fr/terms" : "/terms"} className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors">
+            <a 
+              href={isFrenchVersion ? "/fr/terms" : "/terms"} 
+              className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors"
+              onClick={() => window.scrollTo(0, 0)}
+            >
               {isFrenchVersion ? "Conditions d'utilisation" : "Terms of Service"}
-            </Link>
-            <Link to={isFrenchVersion ? "/fr/privacy" : "/privacy"} className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors">
+            </a>
+            
+            <a 
+              href={isFrenchVersion ? "/fr/privacy" : "/privacy"} 
+              className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors"
+              onClick={() => window.scrollTo(0, 0)}
+            >
               {isFrenchVersion ? "Politique de confidentialité" : "Privacy Policy"}
-            </Link>
+            </a>
             
             {/* Language Selection */}
             <div className="flex space-x-3 items-center">

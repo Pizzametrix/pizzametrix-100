@@ -1,7 +1,9 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <?php
 header('Content-Type: application/xml; charset=utf-8');
-$currentDate = date('Y-m-d');
+// Format de date W3C (ISO 8601) avec fuseau horaire UTC
+$currentDate = date('Y-m-d\TH:i:s\Z');
 ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Pages publiques en anglais -->

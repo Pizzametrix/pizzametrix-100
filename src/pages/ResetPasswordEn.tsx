@@ -48,7 +48,7 @@ export default function ResetPasswordEn() {
           {loading ? "Sending..." : "Send reset instructions"}
         </Button>
         <p className="text-center text-sm text-cream/80">
-          <Link to="/login-en" className="text-basil hover:text-basil/80 transition-colors">
+          <Link to="/login" className="text-basil hover:text-basil/80 transition-colors">
             Back to login
           </Link>
         </p>

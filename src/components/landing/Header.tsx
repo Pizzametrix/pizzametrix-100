@@ -55,7 +55,7 @@ export const Header = () => {
       </nav>
       
       <div className="flex items-center">
-        <Link to="/login" className="hidden md:block">
+        <Link to="/fr/login" className="hidden md:block">
           <Button 
             variant="outline" 
             className="mr-2 bg-[#2C2C2C] border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10"
@@ -63,7 +63,7 @@ export const Header = () => {
             Connexion
           </Button>
         </Link>
-        <Link to="/sign-in" className="hidden md:block">
+        <Link to="/fr/sign-in" className="hidden md:block">
           <Button>Inscription</Button>
         </Link>
         
@@ -120,7 +120,7 @@ export const Header = () => {
           </div>
           
           <div className="pt-2 flex flex-col space-y-2">
-            <Link to="/login" className="w-full">
+            <Link to="/fr/login" className="w-full">
               <Button 
                 variant="outline" 
                 className="w-full bg-[#2C2C2C] border-[#F5E9D7] text-[#F5E9D7] hover:bg-[#F5E9D7]/10"
@@ -128,7 +128,7 @@ export const Header = () => {
                 Connexion
               </Button>
             </Link>
-            <Link to="/sign-in" className="w-full">
+            <Link to="/fr/sign-in" className="w-full">
               <Button className="w-full">Inscription</Button>
             </Link>
           </div>

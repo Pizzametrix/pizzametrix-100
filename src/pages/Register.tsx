@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "@/components/layouts/AuthLayout";
@@ -41,7 +42,7 @@ export default function Register() {
 
       if (data.user) {
         toast.success("Inscription réussie! Vérifiez votre email pour confirmer votre compte.");
-        navigate("/login");
+        navigate("/fr/login");
       }
     } catch (error: any) {
       console.error("Erreur d'inscription:", error);
@@ -100,7 +101,7 @@ export default function Register() {
           </Button>
           <p className="text-center text-sm text-cream/80">
             Déjà un compte ?{" "}
-            <Link to="/login" className="text-basil hover:text-basil/80 transition-colors">
+            <Link to="/fr/login" className="text-basil hover:text-basil/80 transition-colors">
               Se connecter
             </Link>
           </p>

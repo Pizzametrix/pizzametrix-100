@@ -57,12 +57,17 @@ function App() {
         <Route path="/auto" element={<LandingRedirect />} />
         
         {/* Routes d'authentification */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/login-en" element={<LoginEn />} />
-        <Route path="/sign-in" element={<Register />} />
-        <Route path="/sign-in-en" element={<RegisterEn />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/reset-password-en" element={<ResetPasswordEn />} />
+        <Route path="/fr/login" element={<Login />} />
+        <Route path="/login" element={<LoginEn />} />
+        <Route path="/fr/sign-in" element={<Register />} />
+        <Route path="/sign-in" element={<RegisterEn />} />
+        <Route path="/fr/reset-password" element={<ResetPassword />} />
+        <Route path="/reset-password" element={<ResetPasswordEn />} />
+        
+        {/* Redirections des anciennes routes d'authentification */}
+        <Route path="/login-en" element={<Navigate to="/login" replace />} />
+        <Route path="/sign-in-en" element={<Navigate to="/sign-in" replace />} />
+        <Route path="/reset-password-en" element={<Navigate to="/reset-password" replace />} />
         
         {/* Pages légales */}
         <Route path="/terms" element={<DarkPageWrapper><TermsEn /></DarkPageWrapper>} />

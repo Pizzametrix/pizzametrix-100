@@ -42,7 +42,7 @@ export default function RegisterEn() {
 
       if (data.user) {
         toast.success("Registration successful! Check your email to confirm your account.");
-        navigate("/login-en");
+        navigate("/login");
       }
     } catch (error: any) {
       console.error("Registration error:", error);
@@ -101,7 +101,7 @@ export default function RegisterEn() {
           </Button>
           <p className="text-center text-sm text-cream/80">
             Already have an account?{" "}
-            <Link to="/login-en" className="text-basil hover:text-basil/80 transition-colors">
+            <Link to="/login" className="text-basil hover:text-basil/80 transition-colors">
               Log in
             </Link>
           </p>

@@ -67,7 +67,7 @@ export default function LoginEn() {
           />
         </div>
         <div className="flex items-center justify-between text-sm">
-          <Link to="/reset-password-en" className="text-basil hover:text-basil/80 transition-colors">
+          <Link to="/reset-password" className="text-basil hover:text-basil/80 transition-colors">
             Forgot password?
           </Link>
         </div>
@@ -80,7 +80,7 @@ export default function LoginEn() {
         </Button>
         <p className="text-center text-sm text-cream/80">
           Don't have an account yet?{" "}
-          <Link to="/sign-in-en" className="text-basil hover:text-basil/80 transition-colors">
+          <Link to="/sign-in" className="text-basil hover:text-basil/80 transition-colors">
             Sign up
           </Link>
         </p>

@@ -67,7 +67,7 @@ export default function Login() {
           />
         </div>
         <div className="flex items-center justify-between text-sm">
-          <Link to="/reset-password" className="text-basil hover:text-basil/80 transition-colors">
+          <Link to="/fr/reset-password" className="text-basil hover:text-basil/80 transition-colors">
             Mot de passe oublié ?
           </Link>
         </div>
@@ -80,7 +80,7 @@ export default function Login() {
         </Button>
         <p className="text-center text-sm text-cream/80">
           Pas encore de compte ?{" "}
-          <Link to="/sign-in" className="text-basil hover:text-basil/80 transition-colors">
+          <Link to="/fr/sign-in" className="text-basil hover:text-basil/80 transition-colors">
             S'inscrire
           </Link>
         </p>

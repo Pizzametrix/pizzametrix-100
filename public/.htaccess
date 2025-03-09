@@ -8,4 +8,3 @@
 # Rediriger les demandes de sitemap.xml vers sitemap.php
 RewriteEngine On
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
-

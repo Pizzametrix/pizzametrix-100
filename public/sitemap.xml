@@ -2,5 +2,5 @@
 <?php
 // Ce fichier est uniquement présent pour compatibilité
 // La règle de réécriture dans .htaccess redirige vers sitemap.php
-include('sitemap.php');
+include_once('sitemap.php');
 ?>

@@ -3,7 +3,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Footer } from "@/components/landing/Footer";
-import { HeaderEn } from "@/components/landing/HeaderEn";
+import { Header } from "@/components/landing/HeaderEn";
 
 export default function SitemapEn() {
   return (
@@ -14,7 +14,7 @@ export default function SitemapEn() {
       </Helmet>
       
       <div className="min-h-screen bg-[#2C2C2C] text-[#F5E9D7] font-inter">
-        <HeaderEn />
+        <Header />
         
         <main className="py-16 px-4 max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-montserrat font-bold mb-10">Sitemap</h1>

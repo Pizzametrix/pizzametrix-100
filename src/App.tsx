@@ -21,6 +21,8 @@ import TermsEn from "./pages/TermsEn";
 import TermsFr from "./pages/TermsFr";
 import PrivacyEn from "./pages/PrivacyEn";
 import PrivacyFr from "./pages/PrivacyFr";
+import SitemapEn from "./pages/SitemapEn";
+import SitemapFr from "./pages/SitemapFr";
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
         <Route path="/fr/terms" element={<TermsFr />} />
         <Route path="/privacy" element={<PrivacyEn />} />
         <Route path="/fr/privacy" element={<PrivacyFr />} />
+        <Route path="/sitemap" element={<SitemapEn />} />
+        <Route path="/fr/sitemap" element={<SitemapFr />} />
         
         {/* Routes protégées */}
         <Route path="/home" element={

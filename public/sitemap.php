@@ -62,6 +62,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
     <priority>0.7</priority>
   </url>
   
+  <url>
+    <loc>https://pizzametrix.com/sitemap</loc>
+    <lastmod>' . $currentDate . '</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Pages légales en français -->
   <url>
     <loc>https://pizzametrix.com/fr/terms</loc>
@@ -74,6 +81,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
     <loc>https://pizzametrix.com/fr/privacy</loc>
     <lastmod>' . $currentDate . '</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizzametrix.com/fr/sitemap</loc>
+    <lastmod>' . $currentDate . '</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   

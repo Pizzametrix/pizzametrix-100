@@ -93,7 +93,7 @@ export const Footer = () => {
           </div>
           <div className="mt-4 md:mt-0 flex space-x-6 flex-wrap justify-center">
             {/* Sitemap */}
-            <Link to={isFrenchVersion ? "/fr" : "/"} className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors">
+            <Link to={isFrenchVersion ? "/fr/sitemap" : "/sitemap"} className="text-[#F5E9D7]/60 hover:text-[#77BFA3] text-sm transition-colors">
               {isFrenchVersion ? "Plan du site" : "Sitemap"}
             </Link>
             

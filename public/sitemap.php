@@ -25,7 +25,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
     <priority>1.0</priority>
   </url>
   
-  <!-- Pages d\'authentification -->
+  <!-- Pages d\'authentification en français -->
   <url>
     <loc>https://pizzametrix.com/login</loc>
     <lastmod>' . $currentDate . '</lastmod>
@@ -42,6 +42,28 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
   
   <url>
     <loc>https://pizzametrix.com/reset-password</loc>
+    <lastmod>' . $currentDate . '</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Pages d\'authentification en anglais -->
+  <url>
+    <loc>https://pizzametrix.com/login-en</loc>
+    <lastmod>' . $currentDate . '</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizzametrix.com/sign-in-en</loc>
+    <lastmod>' . $currentDate . '</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://pizzametrix.com/reset-password-en</loc>
     <lastmod>' . $currentDate . '</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

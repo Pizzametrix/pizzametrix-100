@@ -9,8 +9,11 @@ import LandingFr from "./pages/LandingFr";
 import LandingEn from "./pages/LandingEn";
 import LandingRedirect from "./pages/LandingRedirect";
 import Login from "./pages/Login";
+import LoginEn from "./pages/LoginEn";
 import Register from "./pages/Register";
+import RegisterEn from "./pages/RegisterEn";
 import ResetPassword from "./pages/ResetPassword";
+import ResetPasswordEn from "./pages/ResetPasswordEn";
 import Calculators from "./pages/Calculators";
 import NapolitainCalculator from "./pages/NapolitainCalculator";
 import TegliaCalculator from "./pages/TegliaCalculator";
@@ -52,9 +55,14 @@ function App() {
         <Route path="/" element={<LandingEn />} />
         <Route path="/fr" element={<LandingFr />} />
         <Route path="/auto" element={<LandingRedirect />} />
+        
+        {/* Routes d'authentification */}
         <Route path="/login" element={<Login />} />
+        <Route path="/login-en" element={<LoginEn />} />
         <Route path="/sign-in" element={<Register />} />
+        <Route path="/sign-in-en" element={<RegisterEn />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/reset-password-en" element={<ResetPasswordEn />} />
         
         {/* Pages légales */}
         <Route path="/terms" element={<DarkPageWrapper><TermsEn /></DarkPageWrapper>} />

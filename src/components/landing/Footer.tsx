@@ -68,17 +68,17 @@ export const Footer = () => {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/login" className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
+                <Link to={isFrenchVersion ? "/login" : "/login-en"} className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
                   {isFrenchVersion ? "Connexion" : "Login"}
                 </Link>
               </li>
               <li>
-                <Link to="/sign-in" className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
+                <Link to={isFrenchVersion ? "/sign-in" : "/sign-in-en"} className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
                   {isFrenchVersion ? "Inscription" : "Sign Up"}
                 </Link>
               </li>
               <li>
-                <Link to="/reset-password" className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
+                <Link to={isFrenchVersion ? "/reset-password" : "/reset-password-en"} className="text-[#F5E9D7]/70 hover:text-[#77BFA3] transition-colors text-sm">
                   {isFrenchVersion ? "Mot de passe oublié" : "Reset Password"}
                 </Link>
               </li>

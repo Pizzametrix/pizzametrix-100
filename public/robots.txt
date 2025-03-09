@@ -7,8 +7,11 @@ Allow: /
 Allow: /fr
 Allow: /auto
 Allow: /login
+Allow: /login-en
 Allow: /sign-in
+Allow: /sign-in-en
 Allow: /reset-password
+Allow: /reset-password-en
 Allow: /terms
 Allow: /privacy
 Allow: /fr/terms

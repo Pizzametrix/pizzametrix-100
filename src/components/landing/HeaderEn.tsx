@@ -32,9 +32,9 @@ export const Header = () => {
     <header className="w-full p-4 md:p-6 flex justify-between items-center sticky top-0 z-50 bg-[#2C2C2C]/95 backdrop-blur-sm">
       <div className="flex items-center">
         <img 
-          src="/lovable-uploads/bbef9e96-a767-4130-af50-1e5e69a54e3d.png" 
+          src="/lovable-uploads/f30c3bb1-e9c7-436b-8566-575f053ae848.png" 
           alt="Pizzametrix Logo" 
-          className="w-8 h-8 mr-2" 
+          className="h-7 mr-2" 
         />
         <div className="text-[#F5E9D7] text-2xl font-montserrat font-bold">Pizzametrix</div>
       </div>

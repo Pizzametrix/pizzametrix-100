@@ -30,7 +30,14 @@ export const Header = () => {
 
   return (
     <header className="w-full p-4 md:p-6 flex justify-between items-center sticky top-0 z-50 bg-[#2C2C2C]/95 backdrop-blur-sm">
-      <div className="text-[#F5E9D7] text-2xl font-montserrat font-bold">Pizzametrix</div>
+      <div className="flex items-center">
+        <img 
+          src="/lovable-uploads/bbef9e96-a767-4130-af50-1e5e69a54e3d.png" 
+          alt="Logo Pizzametrix" 
+          className="w-8 h-8 mr-2" 
+        />
+        <div className="text-[#F5E9D7] text-2xl font-montserrat font-bold">Pizzametrix</div>
+      </div>
       
       {/* Navigation desktop */}
       <nav className="hidden md:flex items-center space-x-8 mr-8">

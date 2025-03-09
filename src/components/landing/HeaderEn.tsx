@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -29,13 +30,7 @@ export const Header = () => {
 
   return (
     <header className="w-full p-4 md:p-6 flex justify-between items-center sticky top-0 z-50 bg-[#2C2C2C]/95 backdrop-blur-sm">
-      <div className="flex items-center">
-        <img 
-          src="/lovable-uploads/1fe5578b-1419-4780-96b6-5af43aa0710c.png" 
-          alt="Pizzametrix Logo" 
-          className="h-10" 
-        />
-      </div>
+      <div className="text-[#F5E9D7] text-2xl font-montserrat font-bold">Pizzametrix</div>
       
       {/* Desktop navigation */}
       <nav className="hidden md:flex items-center space-x-8 mr-8">

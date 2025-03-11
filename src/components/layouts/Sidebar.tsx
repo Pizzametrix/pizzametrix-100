@@ -1,5 +1,5 @@
 
-import { Menu, LogOut, X, Calculator, Home, Book } from "lucide-react";
+import { Menu, LogOut, X, Calculator, Home, Book, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -28,6 +28,9 @@ export const Sidebar = () => {
   };
 
   const getTitle = () => {
+    if (location.pathname === "/profile") {
+      return "Mon Profil";
+    }
     if (location.pathname.includes('/my-recipes/')) {
       return "Ma recette";
     }
@@ -85,6 +88,14 @@ export const Sidebar = () => {
               >
                 <Home className="mr-2 h-4 w-4" />
                 <span>Accueil</span>
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
+                onClick={() => handleNavigation('/profile')}
+              >
+                <UserRound className="mr-2 h-4 w-4" />
+                <span>Mon Profil</span>
               </Button>
               <div className="space-y-1">
                 <Button

@@ -1,11 +1,15 @@
+
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Clock, Droplet, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { RecipeShare } from "./RecipeShare";
+
 interface RecipeHeaderProps {
   recipe: any;
   onDelete: () => void;
 }
+
 export function RecipeHeader({
   recipe,
   onDelete
@@ -13,9 +17,12 @@ export function RecipeHeader({
   return <>
       <div className="flex items-center justify-between mt-16 md:mt-0">
         <h1 className="text-cream text-2xl font-medium mx-px px-[16px]">{recipe.nom}</h1>
-        <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-500/10 shrink-0" onClick={onDelete}>
-          <Trash2 className="h-4 w-4" />
-        </Button>
+        <div className="flex items-center gap-2">
+          <RecipeShare recipe={recipe} />
+          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-500/10 shrink-0" onClick={onDelete}>
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
 
       <div className="space-y-2 px-[16px]">

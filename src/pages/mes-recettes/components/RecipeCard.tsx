@@ -4,6 +4,7 @@ import { fr } from "date-fns/locale";
 import { Card } from "@/components/ui/card";
 import { Clock, Droplet, Camera } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface RecipeCardProps {
   recipe: {
@@ -21,6 +22,8 @@ interface RecipeCardProps {
 
 export function RecipeCard({ recipe }: RecipeCardProps) {
   const navigate = useNavigate();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const getTotalDuration = (phases: any[]) => {
     return phases.reduce((acc, phase) => acc + phase.duration, 0);
@@ -29,6 +32,14 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   const getPrefermentText = () => {
     if (recipe.dough_type === 'direct') return 'Direct';
     return recipe.dough_type.charAt(0).toUpperCase() + recipe.dough_type.slice(1);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
   };
 
   const DefaultImagePlaceholder = () => (
@@ -45,13 +56,24 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
       className="flex h-24 overflow-hidden bg-white/5 border-cream/10 cursor-pointer hover:bg-white/10 transition-colors"
       onClick={() => navigate(`/my-recipes/${recipe.id}`)}
     >
-      <div className="w-[100px] min-w-[100px] h-full">
+      <div className="w-[100px] min-w-[100px] h-full relative">
         {recipe.photos?.[0] ? (
-          <img
-            src={recipe.photos[0]}
-            alt={recipe.nom}
-            className="w-full h-full object-cover"
-          />
+          <>
+            {!imageLoaded && !imageError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white/5">
+                <div className="w-8 h-8 border-2 border-cream/30 border-t-basil rounded-full animate-spin"></div>
+              </div>
+            )}
+            <img
+              src={recipe.photos[0]}
+              alt={recipe.nom}
+              className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+              loading="lazy"
+            />
+            {imageError && <DefaultImagePlaceholder />}
+          </>
         ) : (
           <DefaultImagePlaceholder />
         )}

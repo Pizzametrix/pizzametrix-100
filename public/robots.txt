@@ -16,9 +16,6 @@ Allow: /terms
 Allow: /privacy
 Allow: /fr/terms
 Allow: /fr/privacy
-Disallow: /login-en
-Disallow: /sign-in-en
-Disallow: /reset-password-en
 Disallow: /home
 Disallow: /calculators
 Disallow: /calculators/*

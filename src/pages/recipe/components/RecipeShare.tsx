@@ -1,7 +1,7 @@
 
 import { Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { toast } from "@/hooks/use-toast";
 
 interface RecipeShareProps {
@@ -9,7 +9,7 @@ interface RecipeShareProps {
 }
 
 export function RecipeShare({ recipe }: RecipeShareProps) {
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
 
   const formatRecipeText = () => {
     let text = `🍕 ${recipe.nom}\n\n`;
@@ -80,10 +80,10 @@ export function RecipeShare({ recipe }: RecipeShareProps) {
           title: "Erreur",
           description: "Impossible de copier la recette",
           variant: "destructive",
-        });
+          });
+        }
       }
-    }
-  };
+    };
 
   return (
     <Button 

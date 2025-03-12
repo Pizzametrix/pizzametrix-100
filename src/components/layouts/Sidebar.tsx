@@ -1,4 +1,3 @@
-
 import { Menu, LogOut, X, Calculator, Home, Book, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -49,6 +48,13 @@ export const Sidebar = () => {
     return <>Pizzametri<span className="text-[#77BFA3]">x</span></>;
   };
 
+  const isActiveRoute = (path: string) => {
+    if (path === '/calculators' && location.pathname.includes('/calculators')) {
+      return true;
+    }
+    return location.pathname === path;
+  };
+
   return (
     <>
       <div className="md:hidden w-full bg-slate border-b border-cream/10 p-4 flex justify-between items-center fixed top-0 z-50">
@@ -83,7 +89,9 @@ export const Sidebar = () => {
             <nav className="space-y-2">
               <Button
                 variant="ghost"
-                className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
+                className={`w-full justify-start hover:text-terracotta hover:bg-cream/5 ${
+                  isActiveRoute('/home') ? 'bg-cream/10 text-terracotta' : 'text-[#F5E9D7]'
+                }`}
                 onClick={() => handleNavigation('/home')}
               >
                 <Home className="mr-2 h-4 w-4" />
@@ -91,7 +99,9 @@ export const Sidebar = () => {
               </Button>
               <Button
                 variant="ghost"
-                className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
+                className={`w-full justify-start hover:text-terracotta hover:bg-cream/5 ${
+                  isActiveRoute('/profile') ? 'bg-cream/10 text-terracotta' : 'text-[#F5E9D7]'
+                }`}
                 onClick={() => handleNavigation('/profile')}
               >
                 <UserRound className="mr-2 h-4 w-4" />
@@ -100,7 +110,9 @@ export const Sidebar = () => {
               <div className="space-y-1">
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
+                  className={`w-full justify-start hover:text-terracotta hover:bg-cream/5 ${
+                    isActiveRoute('/calculators') ? 'bg-cream/10 text-terracotta' : 'text-[#F5E9D7]'
+                  }`}
                   onClick={() => handleNavigation('/calculators')}
                 >
                   <Calculator className="mr-2 h-4 w-4" />
@@ -109,14 +121,18 @@ export const Sidebar = () => {
                 <div className="pl-6 space-y-1">
                   <Button
                     variant="ghost"
-                    className="w-full justify-start text-[#F5E9D7]/80 hover:text-terracotta hover:bg-cream/5 text-sm"
+                    className={`w-full justify-start hover:text-terracotta hover:bg-cream/5 ${
+                      location.pathname === '/calculators/neapolitan' ? 'bg-cream/10 text-terracotta' : 'text-[#F5E9D7]/80'
+                    }`}
                     onClick={() => handleNavigation('/calculators/neapolitan')}
                   >
                     <span>Pizza Napolitaine</span>
                   </Button>
                   <Button
                     variant="ghost"
-                    className="w-full justify-start text-[#F5E9D7]/80 hover:text-terracotta hover:bg-cream/5 text-sm"
+                    className={`w-full justify-start hover:text-terracotta hover:bg-cream/5 ${
+                      location.pathname === '/calculators/teglia' ? 'bg-cream/10 text-terracotta' : 'text-[#F5E9D7]/80'
+                    }`}
                     onClick={() => handleNavigation('/calculators/teglia')}
                   >
                     <span>Pizza Teglia</span>
@@ -125,7 +141,9 @@ export const Sidebar = () => {
               </div>
               <Button
                 variant="ghost"
-                className="w-full justify-start text-[#F5E9D7] hover:text-terracotta hover:bg-cream/5"
+                className={`w-full justify-start hover:text-terracotta hover:bg-cream/5 ${
+                  isActiveRoute('/my-recipes') ? 'bg-cream/10 text-terracotta' : 'text-[#F5E9D7]'
+                }`}
                 onClick={() => handleNavigation('/my-recipes')}
               >
                 <Book className="mr-2 h-4 w-4" />

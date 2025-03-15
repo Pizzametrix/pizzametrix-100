@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { UpdateNotification } from "@/components/UpdateNotification";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
@@ -64,11 +64,6 @@ function App() {
         <Route path="/fr/reset-password" element={<ResetPassword />} />
         <Route path="/reset-password" element={<ResetPasswordEn />} />
         
-        {/* Redirections des anciennes routes d'authentification */}
-        <Route path="/login-en" element={<Navigate to="/login" replace />} />
-        <Route path="/sign-in-en" element={<Navigate to="/sign-in" replace />} />
-        <Route path="/reset-password-en" element={<Navigate to="/reset-password" replace />} />
-        
         {/* Pages légales */}
         <Route path="/terms" element={<DarkPageWrapper><TermsEn /></DarkPageWrapper>} />
         <Route path="/fr/terms" element={<DarkPageWrapper><TermsFr /></DarkPageWrapper>} />
@@ -106,13 +101,6 @@ function App() {
             <RecipeDetail />
           </ProtectedRoute>
         } />
-        
-        {/* Redirections des anciennes routes vers les nouvelles */}
-        <Route path="/mes-recettes" element={<Navigate to="/my-recipes" replace />} />
-        <Route path="/mes-recettes/:id" element={<Navigate to={window.location.pathname.replace('/mes-recettes/', '/my-recipes/')} replace />} />
-        <Route path="/calculators/napolitaine" element={<Navigate to="/calculators/neapolitan" replace />} />
-        <Route path="/profil" element={<Navigate to="/home" replace />} />
-        <Route path="/en" element={<Navigate to="/" replace />} />
         
         {/* Route 404 */}
         <Route path="*" element={<NotFound />} />

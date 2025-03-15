@@ -67,6 +67,7 @@ export default function RegisterEn() {
       <AuthLayout 
         title="Create an account" 
         subtitle="Join Pizzametrix to create your recipes"
+        isEnglish={true}
       >
         <form onSubmit={handleSubmit} className="space-y-6 mt-8">
           <div className="space-y-2">

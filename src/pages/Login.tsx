@@ -41,6 +41,7 @@ export default function Login() {
     <AuthLayout 
       title="Pizzametrix" 
       subtitle="Connectez-vous pour gérer vos recettes"
+      isEnglish={false}
     >
       <form onSubmit={handleSubmit} className="space-y-6 mt-8">
         <div className="space-y-2">

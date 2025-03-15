@@ -26,6 +26,7 @@ export default function ResetPassword() {
     <AuthLayout 
       title="Réinitialiser le mot de passe" 
       subtitle="Entrez votre email pour recevoir les instructions"
+      isEnglish={false}
     >
       <form onSubmit={handleSubmit} className="space-y-6 mt-8">
         <div className="space-y-2">

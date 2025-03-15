@@ -35,10 +35,26 @@ export const Header = () => {
   const handleLanguageChange = (language: SupportedLanguage) => {
     saveLanguagePreference(language);
   };
+  
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
   return (
     <header className="w-full p-4 md:p-6 flex justify-between items-center sticky top-0 z-50 bg-[#2C2C2C]/95 backdrop-blur-sm">
-      <Link to="/fr" className="text-[#F5E9D7] text-2xl font-montserrat font-bold hover:text-[#77BFA3] transition-colors">
+      <Link 
+        to="/fr" 
+        className="text-[#F5E9D7] text-2xl font-montserrat font-bold hover:text-[#77BFA3] transition-colors"
+        onClick={(e) => {
+          if (location.pathname === '/fr') {
+            e.preventDefault();
+            scrollToTop();
+          }
+        }}
+      >
         Pizzametrix
       </Link>
       

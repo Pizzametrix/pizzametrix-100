@@ -26,6 +26,7 @@ export default function ResetPasswordEn() {
     <AuthLayout 
       title="Reset password" 
       subtitle="Enter your email to receive instructions"
+      isEnglish={true}
     >
       <form onSubmit={handleSubmit} className="space-y-6 mt-8">
         <div className="space-y-2">

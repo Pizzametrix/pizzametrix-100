@@ -15,14 +15,14 @@ export const AuthLayout = ({ children, title, subtitle, isEnglish = false }: Aut
   return (
     <div className="min-h-screen w-full flex flex-col bg-slate">
       {/* Logo en haut à gauche - aligné exactement comme dans la navbar */}
-      <div className="w-full p-4 md:p-6">
+      <header className="w-full p-4 md:p-6 flex justify-between items-center">
         <Link 
           to={homeLink}
           className="inline-block text-[#F5E9D7] text-2xl font-montserrat font-bold hover:text-[#77BFA3] transition-colors"
         >
           Pizzametrix
         </Link>
-      </div>
+      </header>
 
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-8 animate-fadeIn">

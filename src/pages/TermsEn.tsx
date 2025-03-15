@@ -1,23 +1,11 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import { Header } from "@/components/landing/HeaderEn";
 import { Footer } from "@/components/landing/Footer";
 import { SEOMetadataEn } from "@/components/landing/SEOMetadataEn";
 
 export default function TermsEn() {
-  // Appliquer immédiatement le fond sombre pour éviter le flash blanc
-  useEffect(() => {
-    // Application plus agressive du fond sombre
-    document.documentElement.style.backgroundColor = "#2C2C2C";
-    document.body.style.backgroundColor = "#2C2C2C";
-    
-    return () => {
-      document.documentElement.style.backgroundColor = "";
-      document.body.style.backgroundColor = "";
-    };
-  }, []);
-
   return (
     <div className="min-h-screen flex flex-col bg-[#2C2C2C] animate-fadeIn">
       <Helmet>

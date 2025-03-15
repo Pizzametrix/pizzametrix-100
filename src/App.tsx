@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { UpdateNotification } from "@/components/UpdateNotification";
@@ -29,26 +29,15 @@ import PrivacyFr from "./pages/PrivacyFr";
 function ScrollToTopOnMount() {
   const { pathname } = useLocation();
   
-  useEffect(() => {
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
   
   return null;
 }
 
-// Wrapper amélioré pour les pages avec fond sombre
+// Wrapper modifié pour les pages avec fond sombre (sans le useEffect qui causait le rechargement)
 const DarkPageWrapper = ({ children }: { children: React.ReactNode }) => {
-  // Applique immédiatement le fond sombre au niveau du wrapper
-  useEffect(() => {
-    document.documentElement.style.backgroundColor = "#2C2C2C";
-    document.body.style.backgroundColor = "#2C2C2C";
-    
-    return () => {
-      document.documentElement.style.backgroundColor = "";
-      document.body.style.backgroundColor = "";
-    };
-  }, []);
-  
   return (
     <>
       <ScrollToTopOnMount />
@@ -58,6 +47,24 @@ const DarkPageWrapper = ({ children }: { children: React.ReactNode }) => {
 };
 
 function App() {
+  // Appliquer le fond sombre globalement pour les pages qui en ont besoin
+  React.useEffect(() => {
+    const isDarkPage = window.location.pathname.includes('/terms') || 
+                       window.location.pathname.includes('/privacy');
+                       
+    if (isDarkPage) {
+      document.documentElement.style.backgroundColor = "#2C2C2C";
+      document.body.style.backgroundColor = "#2C2C2C";
+    }
+    
+    return () => {
+      if (isDarkPage) {
+        document.documentElement.style.backgroundColor = "";
+        document.body.style.backgroundColor = "";
+      }
+    };
+  }, []);
+
   return (
     <Router>
       <UpdateNotification />

@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
@@ -9,7 +9,7 @@ export const UpdateNotification = () => {
   const [registration, setRegistration] = useState<ServiceWorkerRegistration | null>(null);
 
   // Vérifie s'il y a une mise à jour disponible
-  useEffect(() => {
+  React.useEffect(() => {
     // Enregistrer le service worker
     if ('serviceWorker' in navigator) {
       // Enregistrer le service worker et stocker l'enregistrement

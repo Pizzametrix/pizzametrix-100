@@ -1,3 +1,4 @@
+
 import { Menu, LogOut, X, Calculator, Home, Book, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -5,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useSidebarStore } from "@/store/useSidebarStore";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -81,10 +83,12 @@ export const Sidebar = () => {
         <div className="flex flex-col h-full justify-between">
           <div>
             <div className="hidden md:block">
-              <h1 className="font-montserrat font-bold text-2xl mb-8">
-                <span className="text-[#F5E9D7]">Pizzametri</span>
-                <span className="text-[#77BFA3]">x</span>
-              </h1>
+              <Link to="/home" className="inline-block">
+                <h1 className="font-montserrat font-bold text-2xl mb-8 hover:text-[#77BFA3] transition-colors">
+                  <span className="text-[#F5E9D7]">Pizzametri</span>
+                  <span className="text-[#77BFA3]">x</span>
+                </h1>
+              </Link>
             </div>
             <nav className="space-y-2">
               <Button

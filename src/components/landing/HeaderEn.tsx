@@ -1,15 +1,23 @@
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { SupportedLanguage, saveLanguagePreference } from "@/services/languageService";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const scrollToSection = (sectionId: string) => {
     setIsMenuOpen(false);
+    
+    // Si nous sommes sur une page différente de la landing page, naviguer d'abord vers la landing
+    if (!location.pathname.match(/^\/$/) && !location.pathname.match(/^\/fr$/)) {
+      window.location.href = "/#" + sectionId;
+      return;
+    }
+    
     const section = document.getElementById(sectionId);
     const headerOffset = 90; // Header height + margin
     
@@ -30,7 +38,9 @@ export const Header = () => {
 
   return (
     <header className="w-full p-4 md:p-6 flex justify-between items-center sticky top-0 z-50 bg-[#2C2C2C]/95 backdrop-blur-sm">
-      <div className="text-[#F5E9D7] text-2xl font-montserrat font-bold">Pizzametrix</div>
+      <Link to="/" className="text-[#F5E9D7] text-2xl font-montserrat font-bold hover:text-[#77BFA3] transition-colors">
+        Pizzametrix
+      </Link>
       
       {/* Desktop navigation */}
       <nav className="hidden md:flex items-center space-x-8 mr-8">

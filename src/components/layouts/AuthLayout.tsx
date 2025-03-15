@@ -13,9 +13,9 @@ export const AuthLayout = ({ children, title, subtitle, isEnglish = false }: Aut
   const homeLink = isEnglish ? "/" : "/fr";
   
   return (
-    <div className="min-h-screen w-full flex flex-col p-4 bg-slate">
-      {/* Logo en haut à gauche */}
-      <div className="w-full">
+    <div className="min-h-screen w-full flex flex-col bg-slate">
+      {/* Logo en haut à gauche - aligné exactement comme dans la navbar */}
+      <div className="w-full p-4 md:p-6">
         <Link 
           to={homeLink}
           className="inline-block text-[#F5E9D7] text-2xl font-montserrat font-bold hover:text-[#77BFA3] transition-colors"
@@ -24,7 +24,7 @@ export const AuthLayout = ({ children, title, subtitle, isEnglish = false }: Aut
         </Link>
       </div>
 
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-8 animate-fadeIn">
           <div className="text-center">
             <h1 className="font-montserrat font-bold text-4xl text-cream mb-2">{title}</h1>

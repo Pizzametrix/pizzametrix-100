@@ -8,20 +8,25 @@ import { SEOMetadataEn } from "@/components/landing/SEOMetadataEn";
 export default function TermsEn() {
   // Appliquer immédiatement le fond sombre pour éviter le flash blanc
   useEffect(() => {
+    // Application plus agressive du fond sombre
+    document.documentElement.style.backgroundColor = "#2C2C2C";
     document.body.style.backgroundColor = "#2C2C2C";
+    
     return () => {
+      document.documentElement.style.backgroundColor = "";
       document.body.style.backgroundColor = "";
     };
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#2C2C2C]">
+    <div className="min-h-screen flex flex-col bg-[#2C2C2C] animate-fadeIn">
       <Helmet>
         <title>Terms of Service - Pizzametrix</title>
         <meta name="description" content="Terms of Service for Pizzametrix. Read our terms and conditions for using our pizza dough calculator application." />
         <style>{`
-          body { 
-            background-color: #2C2C2C !important; 
+          html, body { 
+            background-color: #2C2C2C !important;
+            min-height: 100%; 
           }
         `}</style>
       </Helmet>

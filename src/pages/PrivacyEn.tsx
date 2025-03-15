@@ -8,20 +8,25 @@ import { SEOMetadataEn } from "@/components/landing/SEOMetadataEn";
 export default function PrivacyEn() {
   // Appliquer immédiatement le fond sombre pour éviter le flash blanc
   useEffect(() => {
+    // Application plus agressive du fond sombre
+    document.documentElement.style.backgroundColor = "#2C2C2C";
     document.body.style.backgroundColor = "#2C2C2C";
+    
     return () => {
+      document.documentElement.style.backgroundColor = "";
       document.body.style.backgroundColor = "";
     };
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#2C2C2C]">
+    <div className="min-h-screen flex flex-col bg-[#2C2C2C] animate-fadeIn">
       <Helmet>
         <title>Privacy Policy - Pizzametrix</title>
         <meta name="description" content="Privacy Policy for Pizzametrix. Learn how we collect, use and protect your personal information." />
         <style>{`
-          body { 
-            background-color: #2C2C2C !important; 
+          html, body { 
+            background-color: #2C2C2C !important;
+            min-height: 100%; 
           }
         `}</style>
       </Helmet>

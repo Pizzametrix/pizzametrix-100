@@ -36,8 +36,19 @@ function ScrollToTopOnMount() {
   return null;
 }
 
-// Wrapper pour les pages avec fond sombre pour éviter le flash blanc
+// Wrapper amélioré pour les pages avec fond sombre
 const DarkPageWrapper = ({ children }: { children: React.ReactNode }) => {
+  // Applique immédiatement le fond sombre au niveau du wrapper
+  useEffect(() => {
+    document.documentElement.style.backgroundColor = "#2C2C2C";
+    document.body.style.backgroundColor = "#2C2C2C";
+    
+    return () => {
+      document.documentElement.style.backgroundColor = "";
+      document.body.style.backgroundColor = "";
+    };
+  }, []);
+  
   return (
     <>
       <ScrollToTopOnMount />
